@@ -23,7 +23,7 @@ public class UserRepository {
     }
     @Transactional(readOnly = true)
     public List<User> findItemsPerPage(Long page, Long items){
-        return this.jdbcTemplate.query("Select * From USERS WHERE id between ? and ?",new Object[]{((page-1)*items)+1,(page-1)*items+items},new UserRowMapper());
+        return this.jdbcTemplate.query("Select * From USERS WHERE id LIMIT ? OFFSET ?",new Object[]{items,(page-1)*items},new UserRowMapper());
     }
     @Transactional
     public void save(User user) {
