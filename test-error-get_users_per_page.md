@@ -6,15 +6,12 @@ This can be run with `silk -silk.url="http://localhost:9001"`
 
 Test error when set bad value to parameter
 
-===
-
 * `Status: 500`
+===
 
 ## `GET Uvuvwevwevwe/Onyetenvewve/Ugwemubwem/Osas`
 
 Test error when set bad value to parameter
-
-===
 
 * `Status: 404`
 
