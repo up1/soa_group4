@@ -1,3 +1,0 @@
-Hello World lol
-    1  echo Hello World lol >> hello_thatchakon.txt
-    2  history >> hello_thatchakon.txt 
