@@ -7,4 +7,4 @@ Author :<br>
 57070134 : Mr.Sutthinai Boonyingyongchai <br>
 57070139 : Miss.Achiraya Songput <br>
 \_______________________________________________<br>
-<sub>King Mongkut's Institute of Technology Ladkrabang</sub>
+<h3><sub>King Mongkut's Institute of Technology Ladkrabang</sub></h3>
