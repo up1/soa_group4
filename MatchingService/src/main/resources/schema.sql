@@ -1,12 +1,5 @@
-DROP TABLE IF EXISTS USERS;
-
-CREATE TABLE LIKES
-(
-    like_id int(11) NOT NULL AUTO_INCREMENT,
-    id_user_like int(11) FOREIGN KEY (account_id) REFERENCES account(account_id),
-    id_user_liked int(11) FOREIGN KEY (account_id) REFERENCES account(account_id),
-    PRIMARY KEY (like_id)
-);
+DROP TABLE IF EXISTS LIKES;
+DROP TABLE IF EXISTS ACCOUNTS;
 
 CREATE TABLE ACCOUNTS
 (
@@ -19,8 +12,8 @@ CREATE TABLE ACCOUNTS
     account_age int(3) NOT NULL,
     account_sex varchar(100) NOT NULL,
     account_sexual_taste varchar(100) NOT NULL,
-    account_latitude double(11) NOT NULL,
-    account_longtitude double(11) NOT NULL,
+    account_latitude float(11) NOT NULL,
+    account_longtitude float(11) NOT NULL,
     account_location varchar(100),
     account_img_profile_path varchar(100) NOT NULL,
     account_descriptions varchar(1000),

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="materialize/css/matching_service_css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.0/vue.js"></script>
+      <header>
+        <nav class="top-nav">
+          <div class="container">
+            <div class="nav-wrapper">
+              <a class="page-title">Tindee</a>
+            </div>
+          </div>
+        </nav>
+        <nav class="top-nav">
+          <div class="container">
+            <div class="nav-wrapper">
+              <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="#">Suggestion</a></li>
+                <li><a href="#">Chat</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="container">
+          <div class="row">
+            <div class="col-s12-m9-l10">
+              <!-- Profile Picture -->
+              <div class="slider">
+                <ul class="slides">
+                  <li>
+                    <img src="http://lorempixel.com/580/250/nature/1"> <!-- random image -->
+                    <div class="caption center-align">
+                      <h3>This is our big Tagline!</h3>
+                      <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="http://lorempixel.com/580/250/nature/2"> <!-- random image -->
+                    <div class="caption left-align">
+                      <h3>Left Aligned Caption</h3>
+                      <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="http://lorempixel.com/580/250/nature/3"> <!-- random image -->
+                    <div class="caption right-align">
+                      <h3>Right Aligned Caption</h3>
+                      <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src="http://lorempixel.com/580/250/nature/4"> <!-- random image -->
+                    <div class="caption center-align">
+                      <h3>This is our big Tagline!</h3>
+                      <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- Profile -->
+              <div id="profile" class="Profile">
+                <p>Profile test</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-s12-m9-l10">
+                <!-- Button -->
+                <div class="button center">
+                  <a class="red darken-2 waves-effect waves-light btn">NOPE</a>
+                  <a class="cyan lighten-2 waves-effect waves-light btn">SUPER LIKE</a>
+                  <a class="green accent-2 waves-effect waves-light btn">LIKE</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <script>$(document).ready(function(){
+      $('.slider').slider();
+    });</script>
+    <script>
+      var data = new Vue({
+        el: '#profile',
+
+        data: {
+            getData: []
+        },
+        methods: {
+          getPosts: function() {
+            var that = this
+            $.ajax({
+              url: 'http://127.0.0.1:9001/matching',
+              method: 'GET'
+            }).then(function(data, status, jqxhr) {
+                getData = data;
+               console.log(jqxhr);
+            });
+          }
+        },
+        mounted () {
+          this.getPosts()
+        }
+    });
+    </script>
+    </body>
+  </html>
