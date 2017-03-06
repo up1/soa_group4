@@ -1,4 +1,4 @@
-# Get User By Page and items per page
+# Get List of User By Page and items per page
 
 It can be running with 'silk silk.url="http://localhost:9001"'
 
