@@ -1,4 +1,4 @@
-<h1>Tinder clone project<br>
+<h1>Tinner project<br>
 <sub>Service-Oriented architecture</sub></h1>
 Author :<br>
 57070025 : Mr.Tanawat Kusungnoen <br>
