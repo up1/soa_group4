@@ -1,0 +1,8 @@
+app\soa4\Modal\MatchingRepository.class
+app\soa4\Modal\MatchingNotFoundException.class
+app\soa4\Modal\Matching.class
+app\soa4\MatchingServiceApplication.class
+app\soa4\Controller\MatchingController.class
+app\soa4\config\DatabaseConfiguration.class
+app\soa4\Modal\MatchingRowMapper.class
+app\soa4\Modal\Account.class
