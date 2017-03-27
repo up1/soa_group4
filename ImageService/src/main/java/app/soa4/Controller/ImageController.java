@@ -1,9 +1,6 @@
 package app.soa4.Controller;
 
-import app.soa4.Modal.Image;
-import app.soa4.Modal.ImageCreate;
-import app.soa4.Modal.ImageDelete;
-import app.soa4.Modal.ImageRepository;
+import app.soa4.Modal.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,18 +10,33 @@ public class ImageController {
     @Autowired
     private ImageRepository imageRepository;
 
-    @RequestMapping(value = {"/image/profile/{imageid}", "/image/chat/{imageid}"}, method = RequestMethod.GET)
-    public Image getImage(@PathVariable("imageid") long id){
-        return this.imageRepository.getImageById(id);
+    @RequestMapping(value = {"/image/profile/{imageid}"}, method = RequestMethod.GET)
+    public ProfileImage getProfileImage(@PathVariable("imageid") long id){
+        return this.imageRepository.getProfileImageById(id);
     }
 
-    @RequestMapping(value = {"/image/profile", "/image/chat"}, method = RequestMethod.POST, consumes = "application/json")
-    public String postImage(@RequestBody ImageCreate imageCreate){
-        return this.imageRepository.addImage(imageCreate.getType(),imageCreate.getName(),imageCreate.getPath(),imageCreate.getUid());
+    @RequestMapping(value = {"/image/chat/{imageid}"}, method = RequestMethod.GET)
+    public ChatImage getChatImage(@PathVariable("imageid") long id){
+        return this.imageRepository.getChatImageById(id);
     }
 
-    @RequestMapping(value = "/image/delete", method = RequestMethod.DELETE, consumes = "application/json")
-    public String deleteImage(@RequestBody ImageDelete imageDelete){
-        return this.imageRepository.deleteImage(imageDelete.getId());
+    @RequestMapping(value = {"/image/profile"}, method = RequestMethod.POST, consumes = "application/json")
+    public String postProfileImage(@RequestBody ProfileImageCreate profileImageCreate){
+        return this.imageRepository.addProfileImage(profileImageCreate.getPath(), profileImageCreate.getUid());
     }
+
+    @RequestMapping(value = {"/image/chat"}, method = RequestMethod.POST, consumes = "application/json")
+    public String postChatImage(@RequestBody ChatImageCreate chatImageCreate){
+        return this.imageRepository.addChatImage(chatImageCreate.getPath(), chatImageCreate.getUid_1(), chatImageCreate.getUid_2());
+    }
+
+    @RequestMapping(value = {"/image/profile/delete"}, method = RequestMethod.DELETE, consumes = "application/json")
+    public String deleteProfileImage(@RequestBody ImageDelete imageDelete){
+        return this.imageRepository.deleteProfileImage(imageDelete.getId());
+    }
+//
+//    @RequestMapping(value = {"/image/profile/delete"}, method = RequestMethod.DELETE, consumes = "application/json")
+//    public String deleteChatImage(@RequestBody ImageDelete imageDelete){
+//        return this.imageRepository.deleteChatImage(imageDelete.getId());
+//    }
 }
