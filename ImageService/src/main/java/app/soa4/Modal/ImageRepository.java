@@ -56,27 +56,27 @@ public class ImageRepository {
         }
     }
 
+    //If there are some error or value is not found will return 0, if fine return 1
     @Transactional
-    public String deleteProfileImage(long id){
+    public int deleteProfileImage(long id){
         try {
             String sql = "DELETE FROM profile_image WHERE image_id = ?";
-            System.err.print(this.jdbcTemplate.update(sql, id));
-            return "Delete image complete";
+            return this.jdbcTemplate.update(sql, id);
         }catch (Exception e){
             System.err.println(e.getMessage());
-            return "Cannot delete image there is something wrong.";
+            return 0;
         }
     }
 
+    //If there are some error or value is not found will return 0, if fine return 1
     @Transactional
-    public String deleteChatImage(long id){
+    public int deleteChatImage(long id){
         try {
             String sql = "DELETE FROM chat_image WHERE image_id = ?";
-            this.jdbcTemplate.update(sql, id);
-            return "Delete image complete";
+            return this.jdbcTemplate.update(sql, id);
         }catch (Exception e){
             System.err.print(e.getMessage());
-            return "Cannot delete image there is something wrong.";
+            return 0;
         }
     }
 }
