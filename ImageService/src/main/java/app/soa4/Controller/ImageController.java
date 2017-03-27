@@ -2,6 +2,8 @@ package app.soa4.Controller;
 
 import app.soa4.Modal.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,12 +33,24 @@ public class ImageController {
     }
 
     @RequestMapping(value = {"/image/profile/delete"}, method = RequestMethod.DELETE, consumes = "application/json")
-    public String deleteProfileImage(@RequestBody ImageDelete imageDelete){
-        return this.imageRepository.deleteProfileImage(imageDelete.getId());
+    public ResponseEntity<String> deleteProfileImage(@RequestBody ImageDelete imageDelete){
+        int queryResult;                                                                //result return from .jdbcTemplate.update()
+        queryResult = this.imageRepository.deleteProfileImage(imageDelete.getId());     //0 is fail, 1 is OK
+        if (queryResult == 1){
+            return new ResponseEntity<String>("Image deleted", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Image not found", HttpStatus.NOT_FOUND);
+        }
     }
-//
-//    @RequestMapping(value = {"/image/profile/delete"}, method = RequestMethod.DELETE, consumes = "application/json")
-//    public String deleteChatImage(@RequestBody ImageDelete imageDelete){
-//        return this.imageRepository.deleteChatImage(imageDelete.getId());
-//    }
+
+    @RequestMapping(value = {"/image/chat/delete"}, method = RequestMethod.DELETE, consumes = "application/json")
+    public ResponseEntity<String> deleteChatImage(@RequestBody ImageDelete imageDelete){
+        int queryResult;                                                                //result return from .jdbcTemplate.update()
+        queryResult = this.imageRepository.deleteChatImage(imageDelete.getId());        //0 is fail, 1 is OK
+        if (queryResult == 1){
+            return new ResponseEntity<String>("Image deleted", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Image not found", HttpStatus.NOT_FOUND);
+        }
+    }
 }
