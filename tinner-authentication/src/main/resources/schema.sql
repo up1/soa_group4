@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS ACCOUNTS;
+
+CREATE TABLE ACCOUNTS
+(
+    id int(11) NOT NULL AUTO_INCREMENT,
+    username varchar(100) NOT NULL,
+    password varchar(100) NOT NULL,
+    enable TINYINT NOT NULL DEFAULT 1,
+    role VARCHAR(20) NOT NULL DEFAULT 'user',
+    PRIMARY KEY (id)
+);
