@@ -44,17 +44,20 @@ public class TokenAuthenticationService {
         String token = request.getHeader(HEADER_STRING);
 
         if(token != null) {
-            Jws<Claims> claims = Jwts.parser()
-                    .setSigningKey(SECRET)
-                    .parseClaimsJws(token.replace(TOKEN_PREFIX + " ", ""));
-            // Parse token
-            Claims body = claims.getBody();
+            System.out.println("Token in getToken : " + token);
+            if (!token.isEmpty()){
+                Jws<Claims> claims = Jwts.parser()
+                        .setSigningKey(SECRET)
+                        .parseClaimsJws(token.replace(TOKEN_PREFIX + " ", ""));
+                // Parse token
+                Claims body = claims.getBody();
 
-            String username = body.getSubject();
-            long id = (long) body.get("id");
+                String username = body.getSubject();
+                long id = Integer.toUnsignedLong((int)body.get("id"));
 
-            if(username != null) {
-                return new AuthenticatedUser(username,id);
+                if(username != null) {
+                    return new AuthenticatedUser(username,id);
+                }
             }
         }
 
