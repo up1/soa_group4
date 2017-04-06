@@ -3,6 +3,7 @@ package app.soa4.Controller;
 import app.soa4.Modal.Account;
 import app.soa4.Modal.AccountRepository;
 import app.soa4.Modal.AccountToMatching;
+import app.soa4.Modal.CreateAccount;
 import app.soa4.Modal.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,10 +45,10 @@ public class AccountController {
         return this.accountRepository.editProfile(email,password,name,lastname,age,sex,sextaste,location,des, id);
     }
 
-    @RequestMapping(value = "/regis", method = RequestMethod.POST)
-    public ResponseEntity<?> registerAccount(@RequestParam(value = "username") String username , @RequestParam(value = "password") String password , @RequestParam(value = "email") String email){
-        if(this.registerRepository.checkAccount(username, password, email)){
-            this.registerRepository.createAccount(username, password, email);
+    @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<?> registerAccount(@RequestBody CreateAccount createAccount){
+        if(this.registerRepository.checkAccount(createAccount.getUsername(), createAccount.getPassword(), createAccount.getEmail())){
+            this.registerRepository.createAccount(createAccount.getUsername(), createAccount.getPassword(), createAccount.getEmail());
             return new ResponseEntity<>("Create account complete.", HttpStatus.OK);
         }else{
             return new ResponseEntity<>("You can't create account", HttpStatus.OK);
