@@ -78,7 +78,7 @@ public class AzureBlob {
             // Output the stack trace.
             e.printStackTrace();
         }
-        return "file '" + blobName + "' was deleted, or does not exits";
+        return "file '" + blobName + "' was deleted";
     }
 
     public void downloadBlob(){

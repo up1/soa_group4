@@ -61,22 +61,40 @@ public class ImageRepository {
 
     //If there are some error or value is not found will return 0, if fine return 1
     @Transactional
-    public int deleteProfileImage(long id){
+    public String deleteProfileImage(long id){
         try {
             String sql = "DELETE FROM profile_image WHERE image_id = ?";
-            return this.jdbcTemplate.update(sql, id);
+            ProfileImage profileImage = getProfileImageById(id);
+            this.jdbcTemplate.update(sql, id);
+            return profileImage.getImage_path();
         }catch (Exception e){
             System.err.println(e.getMessage());
-            return 0;
+            return "0";
         }
     }
 
-    //If there are some error or value is not found will return 0, if fine return 1
+    // This delete function will do two step
+    // 1. Get ChatImage by call getImageById store value before deleted
+    // 2. Delete image
+    // Then return Image URL that store in 1. for delete on Azure
     @Transactional
-    public int deleteChatImage(long id){
+    public String deleteChatImage(long id){
         try {
             String sql = "DELETE FROM chat_image WHERE image_id = ?";
-            return this.jdbcTemplate.update(sql, id);
+            ChatImage chatImage = getChatImageById(id);
+            this.jdbcTemplate.update(sql, id);
+            return chatImage.getImage_path();
+        }catch (Exception e){
+            System.err.print(e.getMessage());
+            return "0";
+        }
+    }
+
+    @Transactional
+    public int updateProfileImage(long id, String url){
+        try {
+            String sql = "UPDATE profile_image SET image_path = ? WHERE image_id = ?";
+            return this.jdbcTemplate.update(sql, url, id);
         }catch (Exception e){
             System.err.print(e.getMessage());
             return 0;
