@@ -3,6 +3,7 @@ package app.soa4.filter;
 import app.soa4.authentication.AccountCredentials;
 import app.soa4.authentication.TokenAuthenticationService;
 import app.soa4.model.User;
+import app.soa4.util.Hash;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,17 +30,19 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter{
     private TokenAuthenticationService tokenHelper;
+    private Hash hash;
     @Autowired
     public JWTLoginFilter(String url, AuthenticationManager authenticationManager) {
         super(new AntPathRequestMatcher(url,"POST"));
         setAuthenticationManager(authenticationManager);
-        tokenHelper = new TokenAuthenticationService();
+        this.tokenHelper = new TokenAuthenticationService();
+        this.hash = new Hash();
     }
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
 
         AccountCredentials credentials = new ObjectMapper().readValue(httpServletRequest.getInputStream(), AccountCredentials.class);
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(credentials.getUsername(), this.hash.getSha256(credentials.getPassword()));
         return getAuthenticationManager().authenticate(token);
     }
 
