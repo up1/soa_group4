@@ -1,5 +1,6 @@
 package app.soa4.Modal;
 public class Account {
+    private String account_uid;
     private long account_id;
     private String account_email;
     private String account_username;
@@ -15,6 +16,14 @@ public class Account {
     private String account_img_profile_path;
     private String account_descriptions;
 
+    public String getAccount_uid() {
+        return account_uid;
+    }
+
+    public void setAccount_uid(String account_uid) {
+        this.account_uid = account_uid;
+    }
+    
     public long getAccount_id() {
         return account_id;
     }
