@@ -12,8 +12,6 @@ export default {
 
     context.$http.post(LOGIN_URL, creds).then(data => {
       localStorage.setItem('token', data.body.token)
-      console.log(data.body)
-      console.log(data.body.token)
 
       this.user.authenticated = true
 
@@ -24,7 +22,7 @@ export default {
     }, response =>{
       if (response.body) {
         if (response.body.status === "Bad credentials") {
-          alert("ไอดีหรือรหัสผ่านผิด")
+          Materialize.toast("ชื่อผู้ใช้หรือรหัสผ่านผิด", 2000 ,'red darken-4')
         }
       }
     })
@@ -47,7 +45,7 @@ export default {
 
   getAuthHeader() {
     return {
-      'Authorization': localStorage.getItem('id_token')
+      'Authorization': localStorage.getItem('token')
     }
   }
 }

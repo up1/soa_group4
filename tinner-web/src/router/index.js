@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/page/landing'
-import Login from '@/page/test_login'
+import Home from '@/page/home'
 import auth from '@/auth'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
@@ -15,16 +15,16 @@ var router = new Router({
   mode:'history',
   routes: [
     {
-      path: '/',
+      path: '/landing',
       name: 'Landing',
       component: Landing,
-      meta: { reqAuth: true }
+      meta: { reqAuth: false }
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: { reqAuth: false }
+      path: '/',
+      name: 'Home',
+      component: Home,
+      meta: { reqAuth: true }
     },
     {
       path: '*',
@@ -42,11 +42,11 @@ router.beforeEach((to, from, next) => {
     console.log(to.fullPath);
     console.log(to.query.redirect);
     alert('You not login');
-    next({path: '/login',
+    next({path: '/landing',
         query: {
           redirect: to.fullPath,
         }});
-  }else if(to.name === 'login' && auth.user.authenticated){
+  }else if(to.name === 'Landing' && auth.user.authenticated){
     next({path:'/'})
   }else{
     next();
