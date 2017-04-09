@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Landing from '@/page/landing'
 import Home from '@/page/home'
 import auth from '@/auth'
+import EditProfile from '@/page/editprofile'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 Vue.use(Router)
@@ -24,6 +25,12 @@ var router = new Router({
       path: '/',
       name: 'Home',
       component: Home,
+      meta: { reqAuth: true }
+    },
+    {
+      path:'/profile',
+      name:'EditProfile',
+      component: EditProfile,
       meta: { reqAuth: true }
     },
     {
