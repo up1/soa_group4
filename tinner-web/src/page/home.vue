@@ -18,6 +18,9 @@
     components:{
       Navbar : Navbar,
       Card : ProfileCard
+    },
+    created(){
+      this.$store.dispatch('getProfileInfomation',1)
     }
   }
 </script>
