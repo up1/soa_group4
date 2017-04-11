@@ -6,7 +6,7 @@
 <template>
   <div id="navbar">
     <ul id="menu" class="dropdown-content">
-		<li><a href="#!">Edit Profile</a></li>
+		<li><router-link :to="{ path: 'profile' }">Edit Profile</router-link></li>
 		<li class="divider"></li>
   	<li><a href="#!" v-on:click="logout()">Logout</a></li>
     </ul>
@@ -15,7 +15,7 @@
         <div class="container">
           <ul class="left hide-on-med-and-down">
             <li>
-              <a href="#" class="brand-logo custom-logo">TINNER</a>
+              <router-link :to="{ path: '/' }" class="brand-logo custom-logo">TINNER</router-link>
             </li>
             <li class="active">
               <a href="#">Suggestion</a>
@@ -36,6 +36,7 @@
 </template>
 <script>
   import { mapGetters } from 'vuex'
+  import auth from '@/auth'
   export default{
     name:'navbar',
     data(){
@@ -47,7 +48,7 @@
     },
     methods:{
       logout(){
-        alert('Logout!')
+        auth.logout()
       }
     },
     computed:mapGetters({

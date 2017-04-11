@@ -6,7 +6,7 @@
 <script>
   import GoogleMaps from 'google-maps'
   const GOOGLEMAPCONFIG = {
-    api : 'YOUAPI',
+    api : "AIzaSyDJ4Ues7RjOBgw2-854r4_ux104oYt2T6Y",
     geolocate_url : "https://www.googleapis.com/geolocation/v1/geolocate?key="
   }
   var maps

@@ -5,12 +5,17 @@ import Home from '@/page/home'
 import auth from '@/auth'
 import EditProfile from '@/page/editprofile'
 import VueResource from 'vue-resource'
+import store from '@/vuex'
 Vue.use(VueResource)
 Vue.use(Router)
 
 Vue.http.headers.common['Authorization'] = localStorage.getItem('token');
 
 auth.checkAuth()
+
+if (auth.user.authenticated) {
+  store.dispatch('getProfileInfomation',1)
+}
 
 var router = new Router({
   mode:'history',

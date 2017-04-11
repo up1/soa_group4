@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 const state = {
+  information:false,
   profileInformation:{
     name:'',
     lastname:'',
@@ -47,6 +48,9 @@ const actions = {
 const mutations = {
   setProfileInformation: (state,profileInformation) => {
     state.profileInformation = profileInformation
+  },
+  setInformationStatus: (state,information) => {
+    state.information = information
   }
 }
 
