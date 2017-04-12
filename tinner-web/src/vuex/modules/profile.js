@@ -21,12 +21,20 @@ const state = {
     taste:'',
     maxAge:0,
     maxDistance:0
+  },
+  editInfomation:{
+    Img:[],
+    location:{
+      lat:0,
+      lng:0
+    }
   }
 }
 
 const getters = {
   getProfile: (state) => state.profileInformation,
-  getMatchingInformation: (state) => state.matchingInformation
+  getMatchingInformation: (state) => state.matchingInformation,
+  getEditInfomation: (state) => state.editInfomation
 }
 
 const actions = {
@@ -49,8 +57,24 @@ const mutations = {
   setProfileInformation: (state,profileInformation) => {
     state.profileInformation = profileInformation
   },
-  setInformationStatus: (state,information) => {
-    state.information = information
+  setLocationEditInformation: (state,location) => {
+    state.editInfomation.location = location
+  },
+  setImageEditInformation: (state,value) => {
+    if (state.editInfomation.Img[value.num-1] !== undefined) {
+      state.editInfomation.Img[value.num-1] = value.file
+    }else{
+      state.editInfomation.Img.push(value.file)
+    }
+  },
+  resetEditInformation: (state) => {
+    state.editInfomation = {
+      Img:[],
+      location:{
+        lat:0,
+        lng:0
+      }
+    }
   }
 }
 

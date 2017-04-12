@@ -49,10 +49,10 @@
         setLatLng(latt,lngt){
           this.lat = latt
           this.lng = lngt
-        },
-        getLatLng(){
-          console.log(this.lat);
-          console.log(this.lng);
+          this.$store.commit('setLocationEditInformation',{
+            lat:this.lat,
+            lng:this.lng
+          })
         }
       }
     }
