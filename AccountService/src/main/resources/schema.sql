@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS ACCOUNT;
 CREATE TABLE ACCOUNT
 (
     account_id int(11) NOT NULL AUTO_INCREMENT,
+    account_uid varchar(100) NOT NULL,
     account_email varchar(100) NOT NULL,
     account_username varchar(100) NOT NULL,
     account_password varchar(100) NOT NULL,

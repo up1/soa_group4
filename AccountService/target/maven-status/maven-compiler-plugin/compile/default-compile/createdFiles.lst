@@ -6,5 +6,6 @@ app\soa4\Modal\RegisterRowMapper.class
 app\soa4\config\DatabaseConfiguration.class
 app\soa4\Controller\AccountController.class
 app\soa4\Modal\Account.class
+app\soa4\Modal\Hash.class
 app\soa4\Modal\AccountNotFoundException.class
 app\soa4\Modal\AccountToMatching.class
