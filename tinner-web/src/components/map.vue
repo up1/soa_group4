@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h5>Select Your Location</h5>
     <div id="map"></div>
   </div>
 </template>
@@ -61,5 +62,9 @@
   #map{
     width: 100%;
     height: 300px;
+  }
+  h5{
+  	color: #ff1744;
+    margin-bottom: 30px
   }
 </style>

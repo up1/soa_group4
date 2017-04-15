@@ -36,7 +36,7 @@ var router = new Router({
       path:'/profile',
       name:'EditProfile',
       component: EditProfile,
-      meta: { reqAuth: true }
+      meta: { reqAuth: false }
     },
     {
       path: '*',
