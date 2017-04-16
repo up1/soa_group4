@@ -39,10 +39,17 @@ public class AccountController {
                                 @RequestParam(value = "age") int age,
                                 @RequestParam(value = "sex") String sex,
                                 @RequestParam(value = "sextaste") String sextaste,
+                                @RequestParam(value = "lat") float lat,
+                                @RequestParam(value = "lon") float lon,
                                 @RequestParam(value = "location") String location,
                                 @RequestParam(value = "des") String des,
-                                   @RequestParam(value = "id") int id){
-        return this.accountRepository.editProfile(email,password,name,lastname,age,sex,sextaste,location,des, id);
+                                @RequestParam(value = "id") int id,
+                                @RequestParam(value = "search_sex") String search_sex,
+                                @RequestParam(value = "search_sextaste") String search_sextaste,
+                                @RequestParam(value = "min_age") int min_age,
+                                @RequestParam(value = "max_age") int max_age,
+                                @RequestParam(value = "distance") float distance){
+        return this.accountRepository.editProfile(email,password,name,lastname,age,sex,sextaste,lat,lon,location,des,id,search_sex,search_sextaste,min_age,max_age,distance);
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS SEARCHING;
 DROP TABLE IF EXISTS ACCOUNT;
 
 CREATE TABLE ACCOUNT
@@ -15,7 +16,22 @@ CREATE TABLE ACCOUNT
     account_latitude float(11),
     account_longtitude float(11),
     account_location varchar(100),
-    account_img_profile_path varchar(100),
     account_descriptions varchar(1000),
     PRIMARY KEY (account_id)
+);
+
+CREATE TABLE SEARCHING
+(
+    search_id int(11) NOT NULL AUTO_INCREMENT,
+    search_latitude float(11),
+    search_longtitude float(11),
+    search_age int(3),
+    search_sex varchar(100),
+    search_sexual_taste varchar(100),
+    search_min_age int(3),
+    search_max_age int(3),
+    search_distance float(11),
+    account_id int(11),
+    PRIMARY KEY (search_id),
+    FOREIGN KEY (account_id) REFERENCES ACCOUNT(account_id)
 );
