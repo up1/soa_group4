@@ -11,9 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -34,6 +32,17 @@ public class ImageController {
         } else {
             return new ResponseEntity<String>("Error, wrong URL.", HttpStatus.NOT_FOUND);
         }
+    }
+
+    // Get all profile image url by user id
+    @RequestMapping(value = {"/image/profile-image/{userid}"}, method = GET)
+    public Object getProfileImage(@PathVariable("userid") long userId){
+        List<ProfileImage> profileImages = this.imageRepository.getProfileImageByUserId(userId);
+        ArrayList<String> imageUrl = new ArrayList<String>();
+        for (ProfileImage p : profileImages){
+            imageUrl.add(p.getImage_path());
+        }
+        return imageUrl;
     }
 
     // Add image have 2 step
