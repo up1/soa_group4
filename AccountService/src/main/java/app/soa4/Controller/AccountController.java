@@ -35,9 +35,16 @@ public class AccountController {
                 editdata.getAccount_age(),
                 editdata.getAccount_sex(),
                 editdata.getAccount_sexual_taste(),
+                editdata.getAccount_latitude(),
+                editdata.getAccount_longtitude(),
                 editdata.getAccount_location(),
                 editdata.getAccount_descriptions(),
-                editdata.getAccount_id() ), HttpStatus.OK);
+                editdata.getAccount_id(),
+                editdata.getSearch_sex(),
+                editdata.getSearch_sexual_taste(),
+                editdata.getSearch_min_age(),
+                editdata.getSearch_max_age(),
+                editdata.getSearch_distance()), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
