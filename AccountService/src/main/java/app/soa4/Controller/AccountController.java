@@ -1,23 +1,17 @@
 package app.soa4.Controller;
 
-import app.soa4.Modal.Account;
-import app.soa4.Modal.AccountRepository;
-import app.soa4.Modal.AccountToMatching;
-import app.soa4.Modal.CreateAccount;
-import app.soa4.Modal.RegisterRepository;
+import app.soa4.Modal.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @CrossOrigin(origins = "*")
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
-    @Autowired
     private RegisterRepository registerRepository;
 
     @RequestMapping(value = "/AccountProfile", method = RequestMethod.GET)
@@ -32,24 +26,18 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/EditAccount", method = RequestMethod.PUT)
-    public String updateProfile(@RequestParam(value = "email") String email,
-                                @RequestParam(value = "password") String password,
-                                @RequestParam(value = "name") String name,
-                                @RequestParam(value = "lastname") String lastname,
-                                @RequestParam(value = "age") int age,
-                                @RequestParam(value = "sex") String sex,
-                                @RequestParam(value = "sextaste") String sextaste,
-                                @RequestParam(value = "lat") float lat,
-                                @RequestParam(value = "lon") float lon,
-                                @RequestParam(value = "location") String location,
-                                @RequestParam(value = "des") String des,
-                                @RequestParam(value = "id") int id,
-                                @RequestParam(value = "search_sex") String search_sex,
-                                @RequestParam(value = "search_sextaste") String search_sextaste,
-                                @RequestParam(value = "min_age") int min_age,
-                                @RequestParam(value = "max_age") int max_age,
-                                @RequestParam(value = "distance") float distance){
-        return this.accountRepository.editProfile(email,password,name,lastname,age,sex,sextaste,lat,lon,location,des,id,search_sex,search_sextaste,min_age,max_age,distance);
+    public ResponseEntity<String> updateProfile(@RequestBody Editdata editdata){
+        return new ResponseEntity(this.accountRepository.editProfile(
+                editdata.getAccount_email(),
+                editdata.getAccount_password(),
+                editdata.getAccount_name(),
+                editdata.getAccount_lastname(),
+                editdata.getAccount_age(),
+                editdata.getAccount_sex(),
+                editdata.getAccount_sexual_taste(),
+                editdata.getAccount_location(),
+                editdata.getAccount_descriptions(),
+                editdata.getAccount_id() ), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
@@ -61,5 +49,7 @@ public class AccountController {
             return new ResponseEntity<>("You can't create account", HttpStatus.OK);
         }
     }
+
+
 
 }
