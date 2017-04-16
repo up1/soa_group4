@@ -23,7 +23,7 @@
     },
     created(){
       this.taste = this.value
-      this.selectId = "#"+this.id+""
+      this.selectId = "#"+this.id
     },
     mounted(){
       $('select').material_select()

@@ -10,13 +10,14 @@
                 <h5>Profile Setting</h5>
               </div>
             </div>
-            <div v-for="num in numberOfFileDialog">
+            <div v-for="num in 4">
               <File :number="num"></File>
             </div>
             <div class="row">
               <div class="input-field col s3">
-                <input id="first_name" type="text" v-model="information.firstname">
+                <input v-validate="'required'" id="first_name" type="text" name="firstname" v-model="information.firstname">
                 <label for="first_name">First Name</label>
+                <span v-show="errors.has('firstname')" class="invalid-color">{{ errors.first('firstname') }}</span>
               </div>
               <div class="input-field col s3">
                 <input id="last_name" type="text" v-model="information.lastname">
@@ -42,7 +43,8 @@
             <div class="row">
               <div class="col s3">
                 <label>Birth date</label>
-                <input type="date" class="datepicker">
+                <input type="date" class="datepicker" name="birthdate" v-validate="'required'">
+                <span v-show="errors.has('birthdate')" class="invalid-color">{{ errors.first('birthdate') }}</span>
               </div>
             </div>
             <Gmap></Gmap>
@@ -65,14 +67,14 @@
               <div class="col s6">
                 <div class="p">Maximum distance</div>
                 <p class="range-field">
-                  <input type="range" min="0" max="100" v-model="matching.maxDistance">
+                  <input type="range" min="0" max="1800" v-model="matching.maxDistance">
                 </p>
               </div>
             </div>
             <div class="row">
               <div class="col s12 center">
                 <button class="btn green">SAVE</button>
-                <button class="btn red">CANCEL</button>
+                <router-link :to="{ path: '/' }" :class="['btn', 'red']">CANCEL</router-link>
               </div>
             </div>
           </div>
@@ -87,6 +89,10 @@
   import Gender from '@/components/gender_radio_button.vue'
   import Taste from '@/components/choose_taste'
   import GMap from '@/components/Map'
+  const URL = {
+    UPDATEPROFILE: ""
+  }
+  var picker
   export default{
     name:'EditProfile',
     components:{
@@ -98,13 +104,13 @@
     },
     data(){
       return {
-        numberOfFileDialog : [1,2,3,4],
         information:{
           firstname:'',
           lastname:'',
           email:'',
           description:'',
           gender:'',
+          birthdate:'',
           taste:0
         },
         matching:{
@@ -116,10 +122,45 @@
       }
     },
     mounted(){
-      $('.datepicker').pickadate({
+      this.setEditProfile(this.$store.getters.getProfile)
+      this.setEditMatching(this.$store.getters.getMatchingInformation)
+      let datepicker = $('.datepicker').pickadate({
         selectMonths: true,
-        selectYears: 15
+        selectYears: 50,
+        formatSubmit: 'yyyy-mm-dd',
       })
+      picker = datepicker.pickadate('picker')
+      picker.render()
+      $('.datepicker').change((e)=>{
+          this.birthdate = picker.get('select', 'yyyy/mm/dd')
+          if (true) {
+
+          }
+      })
+    },
+    methods:{
+      setEditProfile(value){
+        this.information.firstname = value.firstname
+        this.information.lastname = value.lastname
+        this.information.email = value.email
+        this.information.descriptions = value.descriptions
+        this.information.gender = value.gender
+      },
+      setEditMatching(value){
+        this.matching = value
+      },
+      submit(){
+        let formData = new FormData()
+        this.http.put(URL.UPDATEPROFILE,formData).then(
+          data => {
+            this.$store.dispatch('getProfileInfomation',1)
+            Materialize.toast("อัพเดทเสร็จสมบูรณ์", 2000)
+          },
+          response => {
+            console.log(response.body)
+          }
+        )
+      }
     }
   }
 </script>

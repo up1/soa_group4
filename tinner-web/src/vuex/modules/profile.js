@@ -3,12 +3,12 @@ import Vue from 'vue'
 const state = {
   information:false,
   profileInformation:{
-    name:'',
+    firstname:'',
     lastname:'',
     email:'',
     descriptions:'',
     gender:'',
-    taste:'',
+    taste:0,
     birthdate:'',
     Img:[],
     location:{
@@ -18,7 +18,7 @@ const state = {
   },
   matchingInformation:{
     gender:'',
-    taste:'',
+    taste:0,
     maxAge:0,
     maxDistance:0
   },

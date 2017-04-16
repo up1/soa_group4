@@ -30,13 +30,13 @@ var router = new Router({
       path: '/',
       name: 'Home',
       component: Home,
-      meta: { reqAuth: true }
+      meta: { reqAuth: false }
     },
     {
       path:'/profile',
       name:'EditProfile',
       component: EditProfile,
-      meta: { reqAuth: true }
+      meta: { reqAuth: false }
     },
     {
       path: '*',
