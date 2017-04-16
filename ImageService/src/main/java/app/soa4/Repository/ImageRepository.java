@@ -9,6 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class ImageRepository {
     
@@ -19,6 +22,16 @@ public class ImageRepository {
     public ProfileImage getProfileImageById(long id) {
         try {
             return (ProfileImage) this.jdbcTemplate.queryForObject("SELECT * FROM profile_image WHERE image_id = ?",
+                    new Object[]{id}, new BeanPropertyRowMapper(ProfileImage.class));
+        }catch (Exception exception) {
+            throw new ImageNotFoundException(id);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProfileImage> getProfileImageByUserId(long id) {
+        try {
+            return this.jdbcTemplate.query("SELECT * FROM profile_image WHERE account_id = ?",
                     new Object[]{id}, new BeanPropertyRowMapper(ProfileImage.class));
         }catch (Exception exception) {
             throw new ImageNotFoundException(id);
