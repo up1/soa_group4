@@ -3,22 +3,16 @@ package app.soa4.Controller;
 import app.soa4.Modal.Account;
 import app.soa4.Modal.AccountRepository;
 import app.soa4.Modal.AccountToMatching;
-import app.soa4.Modal.CreateAccount;
-import app.soa4.Modal.RegisterRepository;
+import app.soa4.Modal.Editdata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
-    @Autowired
-    private RegisterRepository registerRepository;
 
     @RequestMapping(value = "/AccountProfile", method = RequestMethod.GET)
     public Account getAccount(@RequestParam(value="id", defaultValue="2") int id){
@@ -32,17 +26,11 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/EditAccount", method = RequestMethod.PUT)
-    public String updateProfile(@RequestParam(value = "email") String email,
-                                @RequestParam(value = "password") String password,
-                                @RequestParam(value = "name") String name,
-                                @RequestParam(value = "lastname") String lastname,
-                                @RequestParam(value = "age") int age,
-                                @RequestParam(value = "sex") String sex,
-                                @RequestParam(value = "sextaste") String sextaste,
-                                @RequestParam(value = "location") String location,
-                                @RequestParam(value = "des") String des,
-                                   @RequestParam(value = "id") int id){
-        return this.accountRepository.editProfile(email,password,name,lastname,age,sex,sextaste,location,des, id);
+    public String updateProfile(@RequestBody Editdata editdata){
+        return this.accountRepository.editProfile(editdata.getAccount_email(), editdata
+        .getAccount_password(),editdata.getAccount_name(), editdata.getAccount_lastname(),
+                editdata.getAccount_age(), editdata.getAccount_sex(), editdata.getAccount_sexual_taste(),
+                editdata.getAccount_location(), editdata.getAccount_descriptions(), editdata.getAccount_id() );
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
@@ -54,5 +42,7 @@ public class AccountController {
             return new ResponseEntity<>("You can't create account", HttpStatus.OK);
         }
     }
+
+
 
 }
