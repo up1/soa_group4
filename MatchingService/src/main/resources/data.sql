@@ -287,3 +287,212 @@ VALUES ("acc10@testmail.com",
     "path_test",
     "Hi my friends");
 
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.719440,
+    100.783681,
+    12,
+    "Male",
+    "Normal",
+    12,
+    15,
+    20.0,
+    1);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.723086,
+    100.747511,
+    20,
+    "Female",
+    "Normal",
+    20,
+    25,
+    100.0,
+    2);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.770049,
+    100.637720,
+    21,
+    "Male",
+    "Bottom",
+    18,
+    25,
+    200.0,
+    3);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    12.665664,
+    101.044129,
+    18,
+    "Female",
+    "Bottom",
+    18,
+    30,
+    15.0,
+    4);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    8.018046,
+    98.832868,
+    30,
+    "Male",
+    "Bottom",
+    20,
+    40,
+    500.0,
+    5);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    19.901495,
+    99.830037,
+    50,
+    "Female",
+    "Top",
+    40,
+    50,
+    5.0,
+    6);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    14.006763,
+    101.706298,
+    25,
+    "Male",
+    "Bottom",
+    25,
+    25,
+    20.0,
+    7);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.377876,
+    99.992981,
+    22,
+    "Female",
+    "Top",
+    22,
+    25,
+    20.0,
+    8);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.751848,
+    100.500593,
+    19,
+    "Female",
+    "Normal",
+    18,
+    25,
+    320.0,
+    9);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    16.433940,
+    103.505526,
+    26,
+    "Male",
+    "Normal",
+    25,
+    30,
+    150.0,
+    10);
