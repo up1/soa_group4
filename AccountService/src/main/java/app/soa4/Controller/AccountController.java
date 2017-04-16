@@ -1,10 +1,9 @@
 package app.soa4.Controller;
 
-import app.soa4.Modal.Account;
-import app.soa4.Modal.AccountRepository;
-import app.soa4.Modal.AccountToMatching;
-import app.soa4.Modal.Editdata;
+import app.soa4.Modal.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
+    private RegisterRepository registerRepository;
 
     @RequestMapping(value = "/AccountProfile", method = RequestMethod.GET)
     public Account getAccount(@RequestParam(value="id", defaultValue="2") int id){
@@ -26,11 +26,18 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/EditAccount", method = RequestMethod.PUT)
-    public String updateProfile(@RequestBody Editdata editdata){
-        return this.accountRepository.editProfile(editdata.getAccount_email(), editdata
-        .getAccount_password(),editdata.getAccount_name(), editdata.getAccount_lastname(),
-                editdata.getAccount_age(), editdata.getAccount_sex(), editdata.getAccount_sexual_taste(),
-                editdata.getAccount_location(), editdata.getAccount_descriptions(), editdata.getAccount_id() );
+    public ResponseEntity<String> updateProfile(@RequestBody Editdata editdata){
+        return new ResponseEntity(this.accountRepository.editProfile(
+                editdata.getAccount_email(),
+                editdata.getAccount_password(),
+                editdata.getAccount_name(),
+                editdata.getAccount_lastname(),
+                editdata.getAccount_age(),
+                editdata.getAccount_sex(),
+                editdata.getAccount_sexual_taste(),
+                editdata.getAccount_location(),
+                editdata.getAccount_descriptions(),
+                editdata.getAccount_id() ), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
