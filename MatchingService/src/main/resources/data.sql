@@ -7,7 +7,8 @@
  * Author:  ARMY
  * Created: Mar 7, 2017
  */
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -19,11 +20,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc1@testmail.com",
+VALUES ("43974e65dd9a44e211979bdd35c98e20cc1c46545bb5d2e5f9382b6d775a8ed4",
+    "acc1@testmail.com",
     "account1",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Sara",
     "Hara",
     12,
@@ -32,10 +33,10 @@ VALUES ("acc1@testmail.com",
     13.719440,
     100.783681,
     "Bangkok",
-    "path_test",
     "Hello World!");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -47,11 +48,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc2@testmail.com",
+VALUES ("f3c9c3d5d9728d8e8efb7c33a928caeb212e655ba9fdd9122cf14532d1482bff",
+    "acc2@testmail.com",
     "account2",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Kalvin",
     "regnard",
     20,
@@ -60,10 +61,10 @@ VALUES ("acc2@testmail.com",
     13.723086,
     100.747511,
     "Bangkok",
-    "path_test",
     "Pls chat to me.");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -75,11 +76,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc3@testmail.com",
+VALUES ("7e52bb9e551eaaf996e983564ed3f369cca3ba8c8a87abea6f3fba2e5afa32cf",
+    "acc3@testmail.com",
     "account3",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Kalli",
     "Yusong",
     21,
@@ -88,10 +89,10 @@ VALUES ("acc3@testmail.com",
     13.770049,
     100.637720,
     "Bangkapi",
-    "path_test",
     "I'm gay nice to see you :D");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -103,11 +104,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc4@testmail.com",
+VALUES ("9f44c4a6d3c83f289d4d00273ce09ef030270d74bdf76d1d6b5ae975b9146f13",
+    "acc4@testmail.com",
     "account4",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Cara",
     "Atuditu",
     18,
@@ -116,10 +117,10 @@ VALUES ("acc4@testmail.com",
     12.665664,
     101.044129,
     "Rayong",
-    "path_test",
     "Love sea & sky");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -131,11 +132,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc5@testmail.com",
+VALUES ("f4f2466abb24b0787a90d99feb31e4da290d1ee60893ba14cb8d9f9c6d545e02",
+    "acc5@testmail.com",
     "account5",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Kornasak",
     "Watunnakul",
     30,
@@ -144,10 +145,10 @@ VALUES ("acc5@testmail.com",
     8.018046,
     98.832868,
     "Krabi",
-    "path_test",
     "South Asia XD");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -159,11 +160,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc6@testmail.com",
+VALUES ("a5448c6621b824cb626d05032e58de835bd95e6bedf6e842198a9e521fd4db51",
+    "acc6@testmail.com",
     "account6",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Dyran",
     "Yermata",
     50,
@@ -172,10 +173,10 @@ VALUES ("acc6@testmail.com",
     19.901495,
     99.830037,
     "Chiang Rai",
-    "path_test",
     "Looking for relationship");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -187,11 +188,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc7@testmail.com",
+VALUES ("e8cf62879f50651dacf3493f5650e7d73dc0fec97fb5b71c4a930ab45e2db246",
+    "acc7@testmail.com",
     "account7",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Harry",
     "Pottrait",
     25,
@@ -200,10 +201,10 @@ VALUES ("acc7@testmail.com",
     14.006763,
     101.706298,
     "Prachin Buri",
-    "path_test",
     "Nice guy :)");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -215,11 +216,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc8@testmail.com",
+VALUES ("578cd4a7459ba6e92f70a2b410c022e40e7f8e89f81082a64fa0219570dacbca",
+    "acc8@testmail.com",
     "account8",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Siri",
     "Sophomore",
     22,
@@ -228,10 +229,10 @@ VALUES ("acc8@testmail.com",
     13.377876,
     99.992981,
     "Samut Songkhram",
-    "path_test",
     "Match me!!!");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -243,11 +244,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc9@testmail.com",
+VALUES ("09be7473cb6217ce385c723b141b3278ea332586f50ac70984bf8339a691eaf6",
+    "acc9@testmail.com",
     "account9",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Harit",
     "Burapa",
     19,
@@ -256,10 +257,10 @@ VALUES ("acc9@testmail.com",
     13.751848,
     100.500593,
     "Bangkok",
-    "path_test",
     "Hello World!");
 
-INSERT INTO ACCOUNTS (
+INSERT INTO ACCOUNT (
+    account_uid,
     account_email,
     account_username,
     account_password,
@@ -271,11 +272,11 @@ INSERT INTO ACCOUNTS (
     account_latitude,
     account_longtitude,
     account_location,
-    account_img_profile_path,
     account_descriptions)
-VALUES ("acc10@testmail.com",
+VALUES ("6bb01dda212603cef5594e8f8f94ca9c13c5e458f373f1a9bfacb65a0cdc47c0",
+    "acc10@testmail.com",
     "account10",
-    "123456",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "Araya",
     "Sweethome",
     26,
@@ -284,6 +285,214 @@ VALUES ("acc10@testmail.com",
     16.433940,
     103.505526,
     "Kalasin",
-    "path_test",
     "Hi my friends");
 
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.719440,
+    100.783681,
+    12,
+    "Male",
+    "Normal",
+    12,
+    15,
+    20.0,
+    1);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.723086,
+    100.747511,
+    20,
+    "Female",
+    "Normal",
+    20,
+    25,
+    100.0,
+    2);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.770049,
+    100.637720,
+    21,
+    "Male",
+    "Bottom",
+    18,
+    25,
+    200.0,
+    3);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    12.665664,
+    101.044129,
+    18,
+    "Female",
+    "Bottom",
+    18,
+    30,
+    15.0,
+    4);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    8.018046,
+    98.832868,
+    30,
+    "Male",
+    "Bottom",
+    20,
+    40,
+    500.0,
+    5);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    19.901495,
+    99.830037,
+    50,
+    "Female",
+    "Top",
+    40,
+    50,
+    5.0,
+    6);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    14.006763,
+    101.706298,
+    25,
+    "Male",
+    "Bottom",
+    25,
+    25,
+    20.0,
+    7);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.377876,
+    99.992981,
+    22,
+    "Female",
+    "Top",
+    22,
+    25,
+    20.0,
+    8);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    13.751848,
+    100.500593,
+    19,
+    "Female",
+    "Normal",
+    18,
+    25,
+    320.0,
+    9);
+
+INSERT INTO SEARCHING (
+    search_latitude,
+    search_longtitude,
+    search_age,
+    search_sex,
+    search_sexual_taste,
+    search_min_age,
+    search_max_age,
+    search_distance,
+    account_id)
+VALUES (
+    16.433940,
+    103.505526,
+    26,
+    "Male",
+    "Normal",
+    25,
+    30,
+    150.0,
+    10);

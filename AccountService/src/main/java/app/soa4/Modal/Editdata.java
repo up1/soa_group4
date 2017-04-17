@@ -1,34 +1,29 @@
 package app.soa4.Modal;
-public class Account {
-    private String account_uid;
-    private long account_id;
+
+public class Editdata {
+    private Integer account_id;
     private String account_email;
-    private String account_username;
     private String account_password;
     private String account_name;
     private String account_lastname;
     private Integer account_age;
     private String account_sex;
     private String account_sexual_taste;
-    private float account_latitude;
-    private float account_longtitude;
+    private Float account_latitude;
+    private Float account_longtitude;
     private String account_location;
-    private String account_img_profile_path;
     private String account_descriptions;
+    private String search_sex;
+    private String search_sexual_taste;
+    private Integer search_min_age;
+    private Integer search_max_age;
+    private Float search_distance;
 
-    public String getAccount_uid() {
-        return account_uid;
-    }
-
-    public void setAccount_uid(String account_uid) {
-        this.account_uid = account_uid;
-    }
-    
-    public long getAccount_id() {
+    public int getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(long account_id) {
+    public void setAccount_id(int account_id) {
         this.account_id = account_id;
     }
 
@@ -38,14 +33,6 @@ public class Account {
 
     public void setAccount_email(String account_email) {
         this.account_email = account_email;
-    }
-
-    public String getAccount_username() {
-        return account_username;
-    }
-
-    public void setAccount_username(String account_username) {
-        this.account_username = account_username;
     }
 
     public String getAccount_password() {
@@ -92,23 +79,23 @@ public class Account {
         return account_sexual_taste;
     }
 
-    public void setAccount_sexual_taste(String account_sextual_taste) {
-        this.account_sexual_taste = account_sextual_taste;
+    public void setAccount_sexual_taste(String account_sexual_taste) {
+        this.account_sexual_taste = account_sexual_taste;
     }
 
-    public float getAccount_latitude() {
+    public Float getAccount_latitude() {
         return account_latitude;
     }
 
-    public void setAccount_latitude(float account_latitude) {
+    public void setAccount_latitude(Float account_latitude) {
         this.account_latitude = account_latitude;
     }
 
-    public float getAccount_longtitude() {
+    public Float getAccount_longtitude() {
         return account_longtitude;
     }
 
-    public void setAccount_longtitude(float account_longtitude) {
+    public void setAccount_longtitude(Float account_longtitude) {
         this.account_longtitude = account_longtitude;
     }
 
@@ -120,19 +107,51 @@ public class Account {
         this.account_location = account_location;
     }
 
-    public String getAccount_img_profile_path() {
-        return account_img_profile_path;
-    }
-
-    public void setAccount_img_profile_path(String account_img_profile_path) {
-        this.account_img_profile_path = account_img_profile_path;
-    }
-
     public String getAccount_descriptions() {
         return account_descriptions;
     }
 
     public void setAccount_descriptions(String account_descriptions) {
         this.account_descriptions = account_descriptions;
+    }
+
+    public String getSearch_sex() {
+        return search_sex;
+    }
+
+    public void setSearch_sex(String search_sex) {
+        this.search_sex = search_sex;
+    }
+
+    public String getSearch_sexual_taste() {
+        return search_sexual_taste;
+    }
+
+    public void setSearch_sexual_taste(String search_sexual_taste) {
+        this.search_sexual_taste = search_sexual_taste;
+    }
+
+    public Integer getSearch_min_age() {
+        return search_min_age;
+    }
+
+    public void setSearch_min_age(Integer search_min_age) {
+        this.search_min_age = search_min_age;
+    }
+
+    public Integer getSearch_max_age() {
+        return search_max_age;
+    }
+
+    public void setSearch_max_age(Integer search_max_age) {
+        this.search_max_age = search_max_age;
+    }
+
+    public Float getSearch_distance() {
+        return search_distance;
+    }
+
+    public void setSearch_distance(Float search_distance) {
+        this.search_distance = search_distance;
     }
 }
