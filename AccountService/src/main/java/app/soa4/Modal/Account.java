@@ -10,14 +10,15 @@ public class Account {
     private String account_password;
     private String account_name;
     private String account_lastname;
-    private Integer account_age;
+    private long account_birthday;
     private String account_sex;
     private String account_sexual_taste;
-    private float account_latitude;
-    private float account_longtitude;
+    private double account_latitude;
+    private double account_longtitude;
     private String account_location;
     private String account_descriptions;
     private ArrayList<String> account_imgsprofile;
+    private int age;
 
     public ArrayList<String> getAccount_imgsprofile() {
         return account_imgsprofile;
@@ -25,6 +26,14 @@ public class Account {
 
     public void setAccount_imgsprofile(ArrayList<String> account_imgsprofile) {
         this.account_imgsprofile = account_imgsprofile;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getAccount_uid() {
@@ -83,14 +92,13 @@ public class Account {
         this.account_lastname = account_lastname;
     }
 
-    public Integer getAccount_age() {
-        return account_age;
+    public long getAccount_birthday() {
+        return account_birthday;
     }
 
-    public void setAccount_age(Integer account_age) {
-        this.account_age = account_age;
+    public void setAccount_birthday(long account_birthday) {
+        this.account_birthday = account_birthday;
     }
-
     public String getAccount_sex() {
         return account_sex;
     }
@@ -107,19 +115,19 @@ public class Account {
         this.account_sexual_taste = account_sextual_taste;
     }
 
-    public float getAccount_latitude() {
+    public double getAccount_latitude() {
         return account_latitude;
     }
 
-    public void setAccount_latitude(float account_latitude) {
+    public void setAccount_latitude(double account_latitude) {
         this.account_latitude = account_latitude;
     }
 
-    public float getAccount_longtitude() {
+    public double getAccount_longtitude() {
         return account_longtitude;
     }
 
-    public void setAccount_longtitude(float account_longtitude) {
+    public void setAccount_longtitude(double account_longtitude) {
         this.account_longtitude = account_longtitude;
     }
 

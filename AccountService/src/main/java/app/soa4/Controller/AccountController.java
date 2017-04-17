@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 @RestController
@@ -18,13 +19,14 @@ public class AccountController {
 
     private RegisterRepository registerRepository;
     private RestTemplate restTemplate = new RestTemplate();
-    private String imageServiceUrl = "http://localhost:9004/image/profile-image/";
+    private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
 
     @RequestMapping(value = "/AccountProfile/{userId}", method = RequestMethod.GET)
     public Account getAccount(@PathVariable long userId){
         Account account = this.accountRepository.accountProfile(userId);
         account.setAccount_imgsprofile(restTemplate.getForObject(imageServiceUrl+userId, ArrayList.class));
         return account;
+
     }
 
     @RequestMapping(value = "/AccountToMatching", method = RequestMethod.GET)
@@ -40,7 +42,7 @@ public class AccountController {
                 editdata.getAccount_password(),
                 editdata.getAccount_name(),
                 editdata.getAccount_lastname(),
-                editdata.getAccount_age(),
+                editdata.getAccount_birthday(),
                 editdata.getAccount_sex(),
                 editdata.getAccount_sexual_taste(),
                 editdata.getAccount_latitude(),
