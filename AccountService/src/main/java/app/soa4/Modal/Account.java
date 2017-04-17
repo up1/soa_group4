@@ -1,4 +1,7 @@
 package app.soa4.Modal;
+
+import java.util.ArrayList;
+
 public class Account {
     private String account_uid;
     private long account_id;
@@ -13,8 +16,16 @@ public class Account {
     private float account_latitude;
     private float account_longtitude;
     private String account_location;
-    private String account_img_profile_path;
     private String account_descriptions;
+    private ArrayList<String> account_imgsprofile;
+
+    public ArrayList<String> getAccount_imgsprofile() {
+        return account_imgsprofile;
+    }
+
+    public void setAccount_imgsprofile(ArrayList<String> account_imgsprofile) {
+        this.account_imgsprofile = account_imgsprofile;
+    }
 
     public String getAccount_uid() {
         return account_uid;
@@ -120,13 +131,6 @@ public class Account {
         this.account_location = account_location;
     }
 
-    public String getAccount_img_profile_path() {
-        return account_img_profile_path;
-    }
-
-    public void setAccount_img_profile_path(String account_img_profile_path) {
-        this.account_img_profile_path = account_img_profile_path;
-    }
 
     public String getAccount_descriptions() {
         return account_descriptions;

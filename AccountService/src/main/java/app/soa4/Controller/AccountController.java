@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
 
 
 @RestController
@@ -12,11 +15,16 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
-    private RegisterRepository registerRepository;
 
-    @RequestMapping(value = "/AccountProfile", method = RequestMethod.GET)
-    public Account getAccount(@RequestParam(value="id", defaultValue="2") int id){
-        return this.accountRepository.accountProfile((long) id);
+    private RegisterRepository registerRepository;
+    private RestTemplate restTemplate = new RestTemplate();
+    private String imageServiceUrl = "http://localhost:9004/image/profile-image/";
+
+    @RequestMapping(value = "/AccountProfile/{userId}", method = RequestMethod.GET)
+    public Account getAccount(@PathVariable long userId){
+        Account account = this.accountRepository.accountProfile(userId);
+        account.setAccount_imgsprofile(restTemplate.getForObject(imageServiceUrl+userId, ArrayList.class));
+        return account;
     }
 
     @RequestMapping(value = "/AccountToMatching", method = RequestMethod.GET)
@@ -35,9 +43,16 @@ public class AccountController {
                 editdata.getAccount_age(),
                 editdata.getAccount_sex(),
                 editdata.getAccount_sexual_taste(),
+                editdata.getAccount_latitude(),
+                editdata.getAccount_longtitude(),
                 editdata.getAccount_location(),
                 editdata.getAccount_descriptions(),
-                editdata.getAccount_id() ), HttpStatus.OK);
+                editdata.getAccount_id(),
+                editdata.getSearch_sex(),
+                editdata.getSearch_sexual_taste(),
+                editdata.getSearch_min_age(),
+                editdata.getSearch_max_age(),
+                editdata.getSearch_distance()), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
