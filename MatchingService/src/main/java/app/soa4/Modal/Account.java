@@ -10,10 +10,9 @@ public class Account {
     private Integer account_age;
     private String account_sex;
     private String account_sexual_taste;
-    private float account_latitude;
-    private float account_longtitude;
+    private Double account_latitude;
+    private Double account_longtitude;
     private String account_location;
-    private String account_img_profile_path;
     private String account_descriptions;
 
     public String getAccount_uid() {
@@ -96,19 +95,19 @@ public class Account {
         this.account_sexual_taste = account_sextual_taste;
     }
 
-    public float getAccount_latitude() {
+    public Double getAccount_latitude() {
         return account_latitude;
     }
 
-    public void setAccount_latitude(float account_latitude) {
+    public void setAccount_latitude(Double account_latitude) {
         this.account_latitude = account_latitude;
     }
 
-    public float getAccount_longtitude() {
+    public Double getAccount_longtitude() {
         return account_longtitude;
     }
 
-    public void setAccount_longtitude(float account_longtitude) {
+    public void setAccount_longtitude(Double account_longtitude) {
         this.account_longtitude = account_longtitude;
     }
 
@@ -118,14 +117,6 @@ public class Account {
 
     public void setAccount_location(String account_location) {
         this.account_location = account_location;
-    }
-
-    public String getAccount_img_profile_path() {
-        return account_img_profile_path;
-    }
-
-    public void setAccount_img_profile_path(String account_img_profile_path) {
-        this.account_img_profile_path = account_img_profile_path;
     }
 
     public String getAccount_descriptions() {

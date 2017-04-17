@@ -13,14 +13,14 @@ public class SearchingRowMapper implements RowMapper<Searching>{
     public Searching mapRow(ResultSet resultSet, int i) throws SQLException {
         Searching searching = new Searching();
         searching.setId(resultSet.getInt("search_id"));
-        searching.setLat(resultSet.getFloat("search_latitude"));
-        searching.setLon(resultSet.getFloat("search_longtitude"));
+        searching.setLat(resultSet.getDouble("search_latitude"));
+        searching.setLon(resultSet.getDouble("search_longtitude"));
         searching.setAge(resultSet.getInt("search_age"));
         searching.setSex(resultSet.getString("search_sex"));
         searching.setSexual_taste(resultSet.getString("search_sexual_taste"));
         searching.setMin_age(resultSet.getInt("search_min_age"));
         searching.setMax_age(resultSet.getInt("search_max_age"));
-        searching.setDistance(resultSet.getFloat("search_distance"));
+        searching.setDistance(resultSet.getDouble("search_distance"));
         return searching;
     }
 }

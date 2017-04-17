@@ -6,14 +6,14 @@ package app.soa4.Modal;
 public class Searching {
 
     private Integer id;
-    private Float lat;
-    private Float lon;
+    private Double lat;
+    private Double lon;
     private Integer age;
     private String sex;
     private String sexual_taste;
     private Integer min_age;
     private Integer max_age;
-    private Float distance;
+    private Double distance;
 
     public Integer getId() {
         return id;
@@ -23,19 +23,19 @@ public class Searching {
         this.id = id;
     }
 
-    public Float getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(Float lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public Float getLon() {
+    public Double getLon() {
         return lon;
     }
 
-    public void setLon(Float lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 
@@ -79,11 +79,11 @@ public class Searching {
         this.max_age = max_age;
     }
 
-    public Float getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(Float distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 }
