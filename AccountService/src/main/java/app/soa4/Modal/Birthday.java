@@ -1,13 +1,13 @@
 package app.soa4.Modal;
 
 public class Birthday {
-    private long birthday;
+    private long account_birthday;
 
-    public long getBirthday() {
-        return birthday;
+    public long getAccount_birthday() {
+        return account_birthday;
     }
 
-    public void setBirthday(long birthday) {
-        this.birthday = birthday;
+    public void setAccount_birthday(long account_birthday) {
+        this.account_birthday = account_birthday;
     }
 }
