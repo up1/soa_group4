@@ -1,4 +1,5 @@
 package app.soa4.Controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import app.soa4.Modal.*;
@@ -6,28 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class MatchingController {
     @Autowired
     private MatchingRepository matchingRepository;
+
+    private RestTemplate restTemplate = new RestTemplate();
+    private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
     
     @RequestMapping("/matching")
     public List<Matching> getAccount(@RequestParam(value="id", defaultValue="1") int id){
 
         Searching searchingData = this.matchingRepository.getSearchingData(id);
 
-        return this.matchingRepository.listMatching(
-                id,
+        List<Matching> matchingList = this.matchingRepository.listMatching(id,
                 searchingData.getLat(),
                 searchingData.getLon(),
-                searchingData.getAge(),
                 searchingData.getSex(),
                 searchingData.getSexual_taste(),
                 searchingData.getMin_age(),
                 searchingData.getMax_age(),
                 searchingData.getDistance());
+        for (Matching matching: matchingList) {
+            matching.setImgProfile(restTemplate.getForObject(imageServiceUrl+matching.getId(), ArrayList.class));
+        }
+        return  matchingList;
     }
 
     @RequestMapping(value = "/matching/status", method = RequestMethod.POST, consumes = "application/json")

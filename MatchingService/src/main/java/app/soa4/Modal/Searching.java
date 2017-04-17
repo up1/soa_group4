@@ -8,7 +8,6 @@ public class Searching {
     private Integer id;
     private Double lat;
     private Double lon;
-    private Integer age;
     private String sex;
     private String sexual_taste;
     private Integer min_age;
@@ -37,14 +36,6 @@ public class Searching {
 
     public void setLon(Double lon) {
         this.lon = lon;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public String getSexual_taste() {
