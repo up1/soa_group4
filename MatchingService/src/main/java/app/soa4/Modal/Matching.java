@@ -1,14 +1,23 @@
 package app.soa4.Modal;
 
 public class Matching {
+    private Integer id;
     private String username;
     private String name;
     private String lastname;
     private String locationName;
     private Integer age;
-    private Integer distance;
+    private Double distance;
     private String description;
     private String sexTaste;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -50,12 +59,12 @@ public class Matching {
         this.age = age;
     }
 
-    public Integer getDistance() {
-        return distance;
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 
-    public void setDistance(Integer distance) {
-        this.distance = distance;
+    public Double getDistance() {
+        return distance;
     }
 
     public String getDescription() {

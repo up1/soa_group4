@@ -13,19 +13,17 @@ public class MatchingRepository {
     private JdbcTemplate jdbcTemplate;  
     
     @Transactional(readOnly = true)
-    public List<Matching> listMatching(int id, float lat, float lon, int age, String sex, String sexual_taste, int min_age, int max_age, float distance) {
+    public List<Matching> listMatching(int id, double lat, double lon, int age, String sex, String sexual_taste, int min_age, int max_age, double distance) {
         final double P = 0.017453292519943295;
         try {
-            return this.jdbcTemplate.query("SELECT account_username, " +
-                    "account_name, account_lastname, account_age, " +
-                    "account_location, account_descriptions, account_sexual_taste, " +
+            return this.jdbcTemplate.query("SELECT account_id, account_username, account_name, account_lastname, account_age, account_location, account_descriptions, account_sexual_taste, " +
                     "(12742 * ASIN(SQRT(0.5 - COS((? - account_latitude) * ?)/2 + COS(account_latitude * ?) * COS(? * ?) * (1 - COS((? - account_longtitude) * ?))/2))) AS account_distance " +
-                    "FROM ACCOUNTS " +
+                    "FROM ACCOUNT " +
                     "WHERE account_id != ?" +
-                    "AND (12742 * ASIN(SQRT(0.5 - COS((? - account_latitude) * ?)/2 + COS(account_latitude * ?) * COS(? * ?) * (1 - COS((? - account_longtitude) * ?))/2))) <= ?" +
-                    "AND account_sex = ?" +
-                    "AND account_sexual_taste = ?" +
-                    "AND ? <= account_age <= ?", new Object[]{lat,P,P,lat,P,lon,P,id,lat,P,P,lat,P,lon,P,distance,sex,sexual_taste,min_age,max_age}, new MatchingRowMapper());
+                    " AND (12742 * ASIN(SQRT(0.5 - COS((? - account_latitude) * ?)/2 + COS(account_latitude * ?) * COS(? * ?) * (1 - COS((? - account_longtitude) * ?))/2))) <= ?" +
+                    " AND account_sex = ?" +
+                    " AND account_sexual_taste = ?" +
+                    " AND ? <= account_age <= ?", new Object[]{lat,P,P,lat,P,lon,P,id,lat,P,P,lat,P,lon,P,distance,sex,sexual_taste,min_age,max_age}, new MatchingRowMapper());
         }catch (Exception exception) {
             throw new MatchingNotFoundException(id);
         }
