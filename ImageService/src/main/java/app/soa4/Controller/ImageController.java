@@ -36,7 +36,7 @@ public class ImageController {
 
     // Get all profile image url by user id
     @RequestMapping(value = {"/image/profile-image/{userid}"}, method = GET)
-    public Object getProfileImage(@PathVariable("userid") long userId){
+    public List<String> getProfileImage(@PathVariable("userid") long userId){
         List<ProfileImage> profileImages = this.imageRepository.getProfileImageByUserId(userId);
         ArrayList<String> imageUrl = new ArrayList<String>();
         for (ProfileImage p : profileImages){
