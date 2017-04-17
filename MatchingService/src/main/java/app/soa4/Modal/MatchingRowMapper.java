@@ -13,7 +13,7 @@ public class MatchingRowMapper implements RowMapper<Matching> {
         matching.setUsername(resultSet.getString("account_username"));
         matching.setName(resultSet.getString("account_name"));
         matching.setLastname(resultSet.getString("account_lastname"));
-        matching.setAge(resultSet.getInt("account_age"));
+        matching.setAge(resultSet.getLong("account_age"));
         matching.setLocationName(resultSet.getString("account_location"));
         matching.setDistance(resultSet.getDouble("account_distance"));
         matching.setDescription(resultSet.getString("account_descriptions"));

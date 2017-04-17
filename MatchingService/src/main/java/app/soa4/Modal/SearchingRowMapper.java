@@ -15,7 +15,6 @@ public class SearchingRowMapper implements RowMapper<Searching>{
         searching.setId(resultSet.getInt("search_id"));
         searching.setLat(resultSet.getDouble("search_latitude"));
         searching.setLon(resultSet.getDouble("search_longtitude"));
-        searching.setAge(resultSet.getInt("search_age"));
         searching.setSex(resultSet.getString("search_sex"));
         searching.setSexual_taste(resultSet.getString("search_sexual_taste"));
         searching.setMin_age(resultSet.getInt("search_min_age"));

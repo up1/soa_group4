@@ -1,15 +1,26 @@
 package app.soa4.Modal;
 
+import java.util.ArrayList;
+
 public class Matching {
     private Integer id;
     private String username;
     private String name;
     private String lastname;
     private String locationName;
-    private Integer age;
+    private Long age;
     private Double distance;
     private String description;
     private String sexTaste;
+    private ArrayList<String> imgProfile;
+
+    public ArrayList<String> getImgProfile() {
+        return imgProfile;
+    }
+
+    public void setImgProfile(ArrayList<String> imgProfile) {
+        this.imgProfile = imgProfile;
+    }
 
     public Integer getId() {
         return id;
@@ -51,11 +62,11 @@ public class Matching {
         this.locationName = locationName;
     }
 
-    public Integer getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
