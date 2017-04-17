@@ -16,7 +16,7 @@ import java.util.Date;
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
-
+    @Autowired
     private RegisterRepository registerRepository;
     private RestTemplate restTemplate = new RestTemplate();
     private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
