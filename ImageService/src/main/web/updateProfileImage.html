@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Profile Image</title>
+  </head>
+  <body>
+
+    <form id="imageUpload" action="http://localhost:9004/image/profile" method="post" enctype="multipart/form-data">
+      <input id="name"type="hidden" name="imagename" />
+      Change profile image <br><br>
+      Old image ID <input id="id" type="text" name="id"> <br><br>
+      <input id="filee" type="file" name="file"/>
+      <input type="submit" name="upload" value="upload">
+    </form>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        console.log($('#idid').value);
+        $('#imageUpload').submit(function(event) {
+            $('#name').attr("value",$('#filee')[0].files[0].name)
+        })
+    </script>
+  </body>
+</html>

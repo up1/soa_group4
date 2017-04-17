@@ -6,7 +6,7 @@ public class Editdata {
     private String account_password;
     private String account_name;
     private String account_lastname;
-    private Integer account_age;
+    private long account_birthday;
     private String account_sex;
     private String account_sexual_taste;
     private Float account_latitude;
@@ -59,12 +59,12 @@ public class Editdata {
         this.account_lastname = account_lastname;
     }
 
-    public Integer getAccount_age() {
-        return account_age;
+    public long getAccount_birthday() {
+        return account_birthday;
     }
 
-    public void setAccount_age(Integer account_age) {
-        this.account_age = account_age;
+    public void setAccount_birthday(long account_birthday) {
+        this.account_birthday = account_birthday;
     }
 
     public String getAccount_sex() {
