@@ -17,18 +17,14 @@ public class MatchingRepository {
     public List<Matching> listMatching(int id, double lat, double lon, String sex, String sexual_taste, int min_age, int max_age, double distance) {
         final double P = 0.017453292519943295;
         long dateInMillis = new Date().getTime();
-        try {
-            return this.jdbcTemplate.query("SELECT account_id, account_username, account_name, account_lastname, ((? - account_birthdate)/(24*3600000))/365 AS account_age, account_location, account_descriptions, account_sexual_taste, " +
+            return this.jdbcTemplate.query("SELECT account_id, account_username, account_name, account_lastname, ((? - account_birthday)/(24*3600000))/365 AS account_age, account_location, account_descriptions, account_sexual_taste, " +
                     "(12742 * ASIN(SQRT(0.5 - COS((? - account_latitude) * ?)/2 + COS(account_latitude * ?) * COS(? * ?) * (1 - COS((? - account_longtitude) * ?))/2))) AS account_distance " +
                     "FROM ACCOUNT " +
                     "WHERE account_id != ?" +
                     " AND (12742 * ASIN(SQRT(0.5 - COS((? - account_latitude) * ?)/2 + COS(account_latitude * ?) * COS(? * ?) * (1 - COS((? - account_longtitude) * ?))/2))) <= ?" +
                     " AND account_sex = ?" +
                     " AND account_sexual_taste = ?" +
-                    " AND ? <= ((? - account_birthdate)/(24*3600000))/365 <= ?", new Object[]{lat,P,P,lat,P,lon,P,id,lat,P,P,lat,P,lon,P,distance,sex,sexual_taste,min_age,dateInMillis,max_age}, new MatchingRowMapper());
-        }catch (Exception exception) {
-            throw new MatchingNotFoundException(id);
-        }
+                    " AND ? <= ((? - account_birthday)/(24*3600000))/365 <= ?", new Object[]{dateInMillis,lat,P,P,lat,P,lon,P,id,lat,P,P,lat,P,lon,P,distance,sex,sexual_taste,min_age,dateInMillis,max_age}, new MatchingRowMapper());
     }
 
     @Transactional
