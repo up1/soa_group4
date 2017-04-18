@@ -1,18 +1,19 @@
 <template>
-  <div>
-    <h1>Tinner Project</h1>
-    <h1>Powered By Vue.js | Spring Boot</h1>
+  <div id="landing">
+    <navbar></navbar>
+    <regisBox></regisBox>
   </div>
 </template>
 <script>
+  import navbar from '@/components/navbar_login'
+  import regisBox from '@/components/register_dialog'
   export default{
     name:'landing',
     components:{
+      navbar,
+      regisBox
     }
   }
 </script>
-<style scope>
-  h1{
-    font-family: 'Josefin Sans', sans-serif;
-  }
+<style src="../assets/css/landing.css" scoped>
 </style>

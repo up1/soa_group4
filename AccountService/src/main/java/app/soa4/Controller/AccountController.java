@@ -1,22 +1,32 @@
 package app.soa4.Controller;
 
-import app.soa4.Modal.Account;
-import app.soa4.Modal.AccountRepository;
-import app.soa4.Modal.AccountToMatching;
+import app.soa4.Modal.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
+
 
 @RestController
 @CrossOrigin(origins = "*")
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private RegisterRepository registerRepository;
+    private RestTemplate restTemplate = new RestTemplate();
+    private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
 
-    @RequestMapping(value = "/AccountProfile", method = RequestMethod.GET)
-    public Account getAccount(@RequestParam(value="id", defaultValue="2") int id){
-        return this.accountRepository.accountProfile((long) id);
+    @RequestMapping(value = "/AccountProfile/{userId}", method = RequestMethod.GET)
+    public Account getAccount(@PathVariable long userId){
+        Account account = this.accountRepository.accountProfile(userId);
+        account.setAccount_imgsprofile(restTemplate.getForObject(imageServiceUrl+userId, ArrayList.class));
+        return account;
+
     }
 
     @RequestMapping(value = "/AccountToMatching", method = RequestMethod.GET)
@@ -26,18 +36,37 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/EditAccount", method = RequestMethod.PUT)
-    public String updateProfile(@RequestParam(value = "email") String email,
-                                @RequestParam(value = "password") String password,
-                                @RequestParam(value = "name") String name,
-                                @RequestParam(value = "lastname") String lastname,
-                                @RequestParam(value = "age") int age,
-                                @RequestParam(value = "sex") String sex,
-                                @RequestParam(value = "sextaste") String sextaste,
-                                @RequestParam(value = "location") String location,
-                                @RequestParam(value = "des") String des,
-                                   @RequestParam(value = "id") int id){
-        return this.accountRepository.editProfile(email,password,name,lastname,age,sex,sextaste,location,des, id);
+    public ResponseEntity<String> updateProfile(@RequestBody Editdata editdata){
+        return new ResponseEntity(this.accountRepository.editProfile(
+                editdata.getAccount_email(),
+                editdata.getAccount_password(),
+                editdata.getAccount_name(),
+                editdata.getAccount_lastname(),
+                editdata.getAccount_birthday(),
+                editdata.getAccount_sex(),
+                editdata.getAccount_sexual_taste(),
+                editdata.getAccount_latitude(),
+                editdata.getAccount_longtitude(),
+                editdata.getAccount_location(),
+                editdata.getAccount_descriptions(),
+                editdata.getAccount_id(),
+                editdata.getSearch_sex(),
+                editdata.getSearch_sexual_taste(),
+                editdata.getSearch_min_age(),
+                editdata.getSearch_max_age(),
+                editdata.getSearch_distance()), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<?> registerAccount(@RequestBody CreateAccount createAccount){
+        if(this.registerRepository.checkAccount(createAccount.getUsername(), createAccount.getPassword(), createAccount.getEmail())){
+            this.registerRepository.createAccount(createAccount.getUsername(), createAccount.getPassword(), createAccount.getEmail());
+            return new ResponseEntity<>("Create account complete.", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("You can't create account", HttpStatus.OK);
+        }
+    }
+
 
 
 }
