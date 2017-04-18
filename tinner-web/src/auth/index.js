@@ -12,7 +12,7 @@ export default {
 
     context.$http.post(LOGIN_URL, creds).then(data => {
       localStorage.setItem('token', data.body.token)
-
+      localStorage.setItem('user', JSON.stringify(data.body.user))
       this.user.authenticated = true
 
       if(redirect) {
@@ -29,6 +29,7 @@ export default {
   },
   logout() {
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     this.user.authenticated = false
   },
 

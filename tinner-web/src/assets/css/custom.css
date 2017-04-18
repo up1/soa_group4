@@ -62,3 +62,9 @@ input[type=range]::-ms-thumb {
 input[type=range] + .thumb {
   background-color: #ff1744 !important;
 }
+.invalid-color{
+  color: #ff1744;
+}
+.slider .indicators .indicator-item.active {
+  background-color: #ff1744 !important;
+}

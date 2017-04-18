@@ -10,30 +10,40 @@
                 <h5>Profile Setting</h5>
               </div>
             </div>
+            <div class="slider">
+              <ul class="slides">
+                <li v-for="image in information.images">
+                  <img :src="image">
+                </li>
+              </ul>
+            </div>
             <div v-for="num in 4">
               <File :number="num"></File>
             </div>
             <div class="row">
               <div class="input-field col s3">
-                <input v-validate="'required'" id="first_name" type="text" name="firstname" v-model="information.firstname">
+                <input v-validate="'required'" id="first_name" type="text" data-vv-name="firstname" v-model="information.firstname">
                 <label for="first_name">First Name</label>
                 <span v-show="errors.has('firstname')" class="invalid-color">{{ errors.first('firstname') }}</span>
               </div>
               <div class="input-field col s3">
-                <input id="last_name" type="text" v-model="information.lastname">
+                <input v-validate="'required'" id="last_name" type="text" data-vv-name="lastname" v-model="information.lastname">
                 <label for="last_name">Last Name</label>
+                <span v-show="errors.has('lastname')" class="invalid-color">{{ errors.first('lastname') }}</span>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s6">
-                <input id="email" type="email" v-model="information.email">
+                <input v-validate="'required|email'" id="email" type="email" data-vv-name="email" v-model="information.email">
                 <label for="email">E-mail</label>
+                <span v-show="errors.has('email')" class="invalid-color">{{ errors.first('email') }}</span>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s6">
-                <textarea id="description" class="materialize-textarea" v-model="information.description"></textarea>
+                <textarea v-validate="'required'" data-vv-name="description" id="description" class="materialize-textarea" v-model="information.descriptions"></textarea>
                 <label for="description">Description</label>
+                <span v-show="errors.has('description')" class="invalid-color">{{ errors.first('description') }}</span>
               </div>
             </div>
             <div class="row">
@@ -43,8 +53,7 @@
             <div class="row">
               <div class="col s3">
                 <label>Birth date</label>
-                <input type="date" class="datepicker" name="birthdate" v-validate="'required'">
-                <span v-show="errors.has('birthdate')" class="invalid-color">{{ errors.first('birthdate') }}</span>
+                <input type="date" class="datepicker" name="birthdate" >
               </div>
             </div>
             <Gmap></Gmap>
@@ -59,8 +68,14 @@
             </div>
             <div class="row">
               <div class="input-field col s3">
-                <input id="age" type="text"  v-model="matching.maxAge">
+                <input id="minAge" type="text" data-vv-name="Minimun Age" v-validate="'required|numeric|min_value:15|max_value:120'" v-model="matching.minAge">
+                <label for="age">Minimum age</label>
+                <span v-show="errors.has('Minimun Age')" class="invalid-color">{{ errors.first('Minimun Age') }}</span>
+              </div>
+              <div class="input-field col s3">
+                <input id="maxAge" type="text" data-vv-name="Maximun Age" v-validate="'required|numeric|min_value:15|max_value:120'" v-model="matching.maxAge">
                 <label for="age">Maximum age</label>
+                <span v-show="errors.has('Maximun Age')" class="invalid-color">{{ errors.first('Maximun Age') }}</span>
               </div>
             </div>
             <div class="row">
@@ -89,6 +104,7 @@
   import Gender from '@/components/gender_radio_button.vue'
   import Taste from '@/components/choose_taste'
   import GMap from '@/components/Map'
+  import { mapGetters } from 'vuex'
   const URL = {
     UPDATEPROFILE: ""
   }
@@ -101,41 +117,43 @@
       'File' : FileDialog,
       'Gender' : Gender,
       'Taste': Taste
+    },created(){
+      this.setEditProfile(this.profile)
+      this.setEditMatching(this.$store.getters.getMatchingInformation)
     },
     data(){
       return {
+        count:0,
         information:{
           firstname:'',
           lastname:'',
           email:'',
-          description:'',
+          descriptions:'',
           gender:'',
           birthdate:'',
-          taste:0
+          taste:0,
+          images:[]
         },
         matching:{
           gender:'',
           taste:0,
+          minAge:0,
           maxAge:0,
           maxDistance:0
         }
       }
     },
     mounted(){
-      this.setEditProfile(this.$store.getters.getProfile)
-      this.setEditMatching(this.$store.getters.getMatchingInformation)
       let datepicker = $('.datepicker').pickadate({
         selectMonths: true,
         selectYears: 50,
-        formatSubmit: 'yyyy-mm-dd',
+        formatSubmit: 'yyyy-mm-dd'
       })
       picker = datepicker.pickadate('picker')
       picker.render()
+      picker.set('select', this.information.birthdate)
       $('.datepicker').change((e)=>{
           this.birthdate = picker.get('select', 'yyyy/mm/dd')
-          if (true) {
-
-          }
       })
     },
     methods:{
@@ -145,6 +163,9 @@
         this.information.email = value.email
         this.information.descriptions = value.descriptions
         this.information.gender = value.gender
+        this.information.birthdate = value.birthdate
+        this.information.taste = value.taste
+        this.information.images = value.Img
       },
       setEditMatching(value){
         this.matching = value
@@ -160,6 +181,17 @@
             console.log(response.body)
           }
         )
+      }
+    },computed:mapGetters({
+      profile: 'getProfile'
+    }),
+    updated() {
+      $(".slider").slider()
+    },
+    watch:{
+      'profile': function() {
+        this.setEditProfile(this.profile)
+        picker.set('select', this.information.birthdate)
       }
     }
   }

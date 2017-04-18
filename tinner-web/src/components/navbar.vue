@@ -26,7 +26,7 @@
           </ul>
           <ul class="right hide-on-med-and-down">
             <li>
-              <a class="dropdown-button" href="#!" data-beloworigin="true" data-alignment="right" data-activates="menu"><i class="material-icons left">assignment_ind</i>{{profile.name}} {{profile.lastname}}<i class="material-icons right">arrow_drop_down</i></a>
+              <a class="dropdown-button" href="#!" data-beloworigin="true" data-alignment="right" data-activates="menu"><i class="material-icons left">assignment_ind</i>{{profile.firstname}} {{profile.lastname}}<i class="material-icons right">arrow_drop_down</i></a>
             </li>
           </ul>
         </div>

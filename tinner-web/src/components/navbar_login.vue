@@ -16,7 +16,6 @@
     </div>
   </nav>
 </template>
-
 <script>
   import auth from '@/auth'
   export default {

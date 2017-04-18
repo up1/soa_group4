@@ -27,6 +27,7 @@
     },
     mounted(){
       $('select').material_select()
+      $(this.selectId).val(this.taste)
       $(this.selectId).change((e)=>{
         this.taste = e.currentTarget.value
       })
