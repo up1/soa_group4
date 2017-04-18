@@ -27,7 +27,7 @@ public class TokenAuthenticationService {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
-        request.setAttribute("token", TOKEN_PREFIX + " " + JWT);
+        request.setAttribute("token", JWT);
     }
     public void genToken(HttpServletResponse response, User user) {
         Claims claims = Jwts.claims().setSubject(user.getUsername());
@@ -35,23 +35,21 @@ public class TokenAuthenticationService {
         // generate a token .
         String JWT = Jwts.builder()
                 .setClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
+                .setExpiration(new Date(System.currentTimeMillis()+ EXPIRATIONTIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
-        response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
+        response.addHeader(HEADER_STRING, JWT);
     }
     public Authentication getToken(HttpServletRequest request){
         String token = request.getHeader(HEADER_STRING);
 
         if(token != null) {
-            System.out.println("Token in getToken : " + token);
             if (!token.isEmpty()){
                 Jws<Claims> claims = Jwts.parser()
                         .setSigningKey(SECRET)
                         .parseClaimsJws(token.replace(TOKEN_PREFIX + " ", ""));
                 // Parse token
                 Claims body = claims.getBody();
-
                 String username = body.getSubject();
                 long id = Integer.toUnsignedLong((int)body.get("id"));
 

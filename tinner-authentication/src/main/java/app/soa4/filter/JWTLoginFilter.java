@@ -3,9 +3,11 @@ package app.soa4.filter;
 import app.soa4.authentication.AccountCredentials;
 import app.soa4.authentication.TokenAuthenticationService;
 import app.soa4.model.User;
+import app.soa4.repository.UserRepository;
 import app.soa4.util.Hash;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,12 +33,14 @@ import java.util.List;
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter{
     private TokenAuthenticationService tokenHelper;
     private Hash hash;
+    private UserRepository userRepository;
     @Autowired
-    public JWTLoginFilter(String url, AuthenticationManager authenticationManager) {
+    public JWTLoginFilter(String url, AuthenticationManager authenticationManager, JdbcTemplate jdbcTemplate) {
         super(new AntPathRequestMatcher(url,"POST"));
         setAuthenticationManager(authenticationManager);
         this.tokenHelper = new TokenAuthenticationService();
         this.hash = new Hash();
+        this.userRepository = new UserRepository(jdbcTemplate);
     }
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
@@ -48,12 +52,9 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter{
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-
-        User user = new User();
-        user.setUsername(authResult.getName());
-        user.setId((long)1);
+        User user = this.userRepository.accountInformation(authResult.getName());
         tokenHelper.genToken(request,user);
-
+        request.setAttribute("information",user);
         chain.doFilter(request,response);
     }
     @Override

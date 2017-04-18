@@ -4,9 +4,9 @@ package app.soa4.model;
  * Created by DSJIN on 27/3/2560.
  */
 public class User {
-    private String Username;
+    private String username;
     private Long id;
-
+    private String uid;
 
     public Long getId() {
         return id;
@@ -17,10 +17,18 @@ public class User {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
