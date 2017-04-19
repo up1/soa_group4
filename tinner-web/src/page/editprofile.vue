@@ -10,6 +10,14 @@
                 <h5>Profile Setting</h5>
               </div>
             </div>
+            <div class="row">
+              <div class="col s12" v-if="this.test < 4">
+                <a class="btn-floating right waves-effect red-button" v-on:click="addImageDialog()"><i class="material-icons">add</i></a>
+              </div>
+              <div class="col s12" v-else>
+                <a class="btn-floating right disabled"><i class="material-icons">add</i></a>
+              </div>
+            </div>
             <div class="slider">
               <ul class="slides">
                 <li v-for="image in information.images">
@@ -17,8 +25,10 @@
                 </li>
               </ul>
             </div>
-            <div v-for="num in 4">
-              <File :number="num"></File>
+            <div class="row">
+              <div v-for="num in this.imageCounter">
+                  <File :number="num"></File>
+              </div>
             </div>
             <div class="row">
               <div class="input-field col s3">
@@ -120,6 +130,9 @@
     },created(){
       this.setEditProfile(this.profile)
       this.setEditMatching(this.$store.getters.getMatchingInformation)
+      if (this.information.images.length != 0) {
+        this.imageCounter = this.information.images.length
+      }
     },
     data(){
       return {
@@ -140,7 +153,8 @@
           minAge:0,
           maxAge:0,
           maxDistance:0
-        }
+        },
+        imageCounter:1
       }
     },
     mounted(){
@@ -174,24 +188,34 @@
         let formData = new FormData()
         this.http.put(URL.UPDATEPROFILE,formData).then(
           data => {
-            this.$store.dispatch('getProfileInfomation',1)
+            this.$store.dispatch('getProfileInfomation',JSON.parse(this.$localStorage.get('user')).id)
             Materialize.toast("อัพเดทเสร็จสมบูรณ์", 2000)
           },
           response => {
             console.log(response.body)
           }
         )
+      },
+      addImageDialog(){
+        this.imageCounter++
       }
     },computed:mapGetters({
       profile: 'getProfile'
     }),
     updated() {
-      $(".slider").slider()
+      if (this.information.images.length > 0 && !this.count) {
+        $(".slider").slider()
+        this.count++
+      }
+      $('label').addClass('active')
     },
     watch:{
       'profile': function() {
         this.setEditProfile(this.profile)
         picker.set('select', this.information.birthdate)
+        if (this.information.images.length != 0) {
+          this.imageCounter = this.information.images.length
+        }
       }
     }
   }

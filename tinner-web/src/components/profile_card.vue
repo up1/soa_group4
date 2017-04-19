@@ -9,7 +9,7 @@
       <div class="card card-container-padding">
         <div class="card">
           <div class="card-image">
-            <div class="slider">
+            <div :id="this.sliderId" class="slider">
               <ul class="slides" >
                 <li v-for="image in this.images">
                   <img :src="image">
@@ -18,10 +18,10 @@
             </div>
           </div>
           <div class="card-content">
-            <span class="name-header card-title activator" v-on:click="openOrClose()"><i class="material-icons right">more_vert</i>{{matching.name}}</span>
+            <span class="name-header card-title activator" v-on:click="openOrClose()"><i class="material-icons right">more_vert</i>{{matching.name}} , {{matching.age}}</span>
             <ul>
               <li class="data-list"><i class="left material-icons">my_location</i>{{matching.location}}</li>
-              <li class="data-list"><i class="left material-icons">room</i>{{matching.distance}} km away</li>
+              <li class="data-list"><i class="left material-icons">room</i>{{matching.distance.toFixed(1)}} km away</li>
             </ul>
           </div>
           <transition name="fade">
@@ -48,9 +48,10 @@
 <script>
   export default{
     name:'profile_card',
-    props:['profile','matching'],
+    props:['profile','matching','sliderId'],
     data(){
       return{
+        render:0,
         images:[]
       }
     },
@@ -69,7 +70,9 @@
       }
     },
     updated() {
-      $(".slider").slider()
+      if (!this.render++) {
+        $("#"+this.sliderId).slider()
+      }
     },
     watch:{
       'matching':function(){
@@ -99,7 +102,7 @@
     font-size: 20px;
   }
   .fade-enter-active, .fade-leave-active {
-  transition: opacity .3s
+    transition: opacity .2s
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
     opacity: 0

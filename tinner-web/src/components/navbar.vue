@@ -18,7 +18,7 @@
               <router-link :to="{ path: '/' }" class="brand-logo custom-logo">TINNER</router-link>
             </li>
             <li class="active">
-              <a href="#">Suggestion</a>
+              <router-link :to="{ path: '/' }">Suggestion</router-link>
             </li>
             <li>
               <a href="#">Chat</a>

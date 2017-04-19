@@ -6,7 +6,7 @@
   <div id="home">
     <Navbar></Navbar>
     <div class="container">
-      <Card :matching="match" :profile="showProfile" @value="showProfile = $event"></Card>
+      <Card :matching="match" sliderId="slider1" :profile="showProfile" @value="showProfile = $event"></Card>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@
           lastname:'',
           age:0,
           location:'',
-          distance:'',
+          distance:0,
           descriptions:'',
           taste:'',
           images:[]

@@ -68,3 +68,6 @@ input[type=range] + .thumb {
 .slider .indicators .indicator-item.active {
   background-color: #ff1744 !important;
 }
+.red-button{
+  background-color: #ff1744 !important;
+}

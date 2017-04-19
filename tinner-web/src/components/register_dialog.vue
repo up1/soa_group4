@@ -54,7 +54,7 @@
                 username: this.credentials.registerUsername,
                 password: this.credentials.registerPassword
               };
-              auth.login(this, credentials, "/");
+              auth.login(this, credentials, "/profile");
             },
             response => {
               console.log(response);
