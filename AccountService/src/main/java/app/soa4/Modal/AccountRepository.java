@@ -26,13 +26,20 @@ public class AccountRepository {
                 "account_longtitude, account_location, account_descriptions FROM ACCOUNT WHERE account_id = ?";
 
         String sql2 = "SELECT account_birthday FROM ACCOUNT WHERE account_id = ?";
+
+        String sql3 = "SELECT search_sex,search_sexual_taste, search_min_age, search_max_age, search_distance  from  SEARCHING WHERE account_id = ?";
+
+
+
         Birthday birthday = (Birthday)this.jdbcTemplate.queryForObject(sql2, new Object[] {account_id} , new BeanPropertyRowMapper(Birthday.class));
-        System.err.print(birthday.getAccount_birthday());
         long ageInMillis = new Date().getTime() - birthday.getAccount_birthday();
         String ageInString = (((ageInMillis / (24 * 60 * 60 * 1000) ) /365))+"";
         Integer age = Integer.parseInt(ageInString);
+
         Account account = (Account)this.jdbcTemplate.queryForObject(sql, new Object[] { account_id }, new BeanPropertyRowMapper(Account.class));
         account.setAge(age);
+        account = (Account)this.jdbcTemplate.queryForObject(sql3, new Object[] { account_id }, new BeanPropertyRowMapper(Account.class));
+
         return account;
     }
 

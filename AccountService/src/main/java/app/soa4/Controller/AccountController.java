@@ -19,7 +19,7 @@ public class AccountController {
     @Autowired
     private RegisterRepository registerRepository;
     private RestTemplate restTemplate = new RestTemplate();
-    private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
+    private String imageServiceUrl = "http://localhost:9004/image/profile-image/";
 
     @RequestMapping(value = "/AccountProfile/{userId}", method = RequestMethod.GET)
     public Account getAccount(@PathVariable long userId){
