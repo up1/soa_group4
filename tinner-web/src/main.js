@@ -3,11 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VeeValidate from 'vee-validate'
 import '!script-loader!jquery'
 import '!style-loader!css-loader!materialize-css/bin/materialize.css'
+import '!style-loader!css-loader!./assets/css/custom.css'
 import '!script-loader!materialize-css/bin/materialize.js'
 
 Vue.config.productionTip = false
+Vue.use(VeeValidate)
 
 /* eslint-disable no-new */
 new Vue({

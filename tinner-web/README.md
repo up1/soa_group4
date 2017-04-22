@@ -5,7 +5,8 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# install dependencies -- Do every clone
+# Always install google-maps , materialize-css if clone new repo
 npm install
 
 # serve with hot reload at localhost:8080
