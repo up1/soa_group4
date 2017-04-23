@@ -68,7 +68,7 @@ public class ImageController {
         AzureBlob azureBlob = new AzureBlob(containerName);
         String imageUrl = azureBlob.uploadToAzureBlob(
                 file.getInputStream(),
-                uid1 + "," + uid2 + "-" + timeStamp + "." + part[part.length-1], //image format is : uid1,uid2_timestamp.filetype""
+                uid1 + "-" + uid2 + "_" + timeStamp + "." + part[part.length-1], //image format is : uid1,uid2_timestamp.filetype""
                 (int)file.getSize());
 
         //add image that already uploaded to Azure into MySQL DB
@@ -89,11 +89,19 @@ public class ImageController {
     // 2. Delete current image on Azure
     // 3. Upload new image to Azure
     // 4. Update new image url into MySQL DB
-    @RequestMapping(value = {"/image/profile"}, method = POST)
-    public ResponseEntity<String> updateProfileImage(@RequestParam("id") long id,
+    @RequestMapping(value = {"/image/profile/{selector}"}, method = POST)
+    public ResponseEntity<String> updateProfileImage(@RequestParam("identify") String id,
                                                      @RequestParam("file") MultipartFile file,
-                                                     @RequestParam("imagename") String newImageName){
-        ProfileImage profileImage = this.imageRepository.getProfileImageById(id);
+                                                     @RequestParam("imagename") String newImageName,
+                                                     @PathVariable("selector") String selector){
+        ProfileImage profileImage = null;
+        if (selector.equals("id")){
+            profileImage = this.imageRepository.getProfileImageById(Integer.parseInt(id));
+        } else if (selector.equals("url")){
+            profileImage = this.imageRepository.getProfileImageByUrl(id);
+        } else {
+            return new ResponseEntity<>("Error, image not update", HttpStatus.OK);
+        }
         String[] part = profileImage.getImage_path().split("/");
         String imageName = part[part.length-1];
 
@@ -109,7 +117,7 @@ public class ImageController {
         try {
             imageUrl = azureBlob.uploadToAzureBlob(
                     file.getInputStream(),
-                    profileImage.getAccount_id() + "," + "0" + "-" + timeStamp + "." + newNamePart[1], //image format is : uid1,uid2_timestamp.filetype""
+                    profileImage.getAccount_id() + "-" + "0" + "_" + timeStamp + "." + newNamePart[1], //image format is : uid1,uid2_timestamp.filetype""
                     (int)file.getSize());
         } catch (IOException e) {
             e.printStackTrace();
