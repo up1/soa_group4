@@ -38,8 +38,12 @@ public class AccountRepository {
 
         Account account = (Account)this.jdbcTemplate.queryForObject(sql, new Object[] { account_id }, new BeanPropertyRowMapper(Account.class));
         account.setAge(age);
-        account = (Account)this.jdbcTemplate.queryForObject(sql3, new Object[] { account_id }, new BeanPropertyRowMapper(Account.class));
-
+        Searching searching = (Searching)this.jdbcTemplate.queryForObject(sql3, new Object[] { account_id }, new BeanPropertyRowMapper(Searching.class));
+        account.setSearch_distance(searching.getSearch_distance());
+        account.setSearch_max_age(searching.getSearch_max_age());
+        account.setSearch_min_age(searching.getSearch_min_age());
+        account.setSearch_sex(searching.getSearch_sex());
+        account.setSearch_sexual_taste(searching.getSearch_sexual_taste());
         return account;
     }
 
