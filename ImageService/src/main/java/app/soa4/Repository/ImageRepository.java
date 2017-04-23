@@ -29,6 +29,16 @@ public class ImageRepository {
     }
 
     @Transactional(readOnly = true)
+    public ProfileImage getProfileImageByUrl(String url) {
+        try {
+            return (ProfileImage) this.jdbcTemplate.queryForObject("SELECT * FROM profile_image WHERE image_path = ?",
+                    new Object[]{url}, new BeanPropertyRowMapper(ProfileImage.class));
+        }catch (Exception exception) {
+            throw new ImageNotFoundException((long)0);
+        }
+    }
+
+    @Transactional(readOnly = true)
     public List<ProfileImage> getProfileImageByUserId(long id) {
         try {
             return this.jdbcTemplate.query("SELECT * FROM profile_image WHERE account_id = ?",

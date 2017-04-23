@@ -8,10 +8,10 @@
   </head>
   <body>
 
-    <form id="imageUpload" action="http://localhost:9004/image/profile" method="post" enctype="multipart/form-data">
+    <form id="imageUpload" action="http://localhost:9004/image/profile/url" method="post" enctype="multipart/form-data">
       <input id="name"type="hidden" name="imagename" />
       Change profile image <br><br>
-      Old image ID <input id="id" type="text" name="id"> <br><br>
+      Old image ID/URL <input id="identify" type="text" name="identify"> <br><br>
       <input id="filee" type="file" name="file"/>
       <input type="submit" name="upload" value="upload">
     </form>
