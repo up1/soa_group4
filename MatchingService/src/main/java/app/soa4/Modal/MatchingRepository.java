@@ -24,7 +24,9 @@ public class MatchingRepository {
                     " AND (12742 * ASIN(SQRT(0.5 - COS((? - account_latitude) * ?)/2 + COS(account_latitude * ?) * COS(? * ?) * (1 - COS((? - account_longtitude) * ?))/2))) <= ?" +
                     " AND account_sex = ?" +
                     " AND account_sexual_taste = ?" +
-                    " AND ? <= ((? - account_birthday)/(24*3600000))/365 <= ?", new Object[]{dateInMillis,lat,P,P,lat,P,lon,P,id,lat,P,P,lat,P,lon,P,distance,sex,sexual_taste,min_age,dateInMillis,max_age}, new MatchingRowMapper());
+                    " AND ? <= ((? - account_birthday)/(24*3600000))/365 <= ?" +
+                    " AND account_id NOT IN (SELECT matching_account_done " +
+                    "FROM MATCHING WHERE matching_account_do = ?)", new Object[]{dateInMillis,lat,P,P,lat,P,lon,P,id,lat,P,P,lat,P,lon,P,distance,sex,sexual_taste,min_age,dateInMillis,max_age,id}, new MatchingRowMapper());
     }
 
     @Transactional
