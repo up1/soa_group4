@@ -12,9 +12,7 @@ export default {
 
     context.$http.post(LOGIN_URL, creds).then(data => {
       localStorage.setItem('token', data.body.token)
-      console.log(data.body)
-      console.log(data.body.token)
-
+      localStorage.setItem('user', JSON.stringify(data.body.user))
       this.user.authenticated = true
 
       if(redirect) {
@@ -24,13 +22,14 @@ export default {
     }, response =>{
       if (response.body) {
         if (response.body.status === "Bad credentials") {
-          alert("ไอดีหรือรหัสผ่านผิด")
+          Materialize.toast("ชื่อผู้ใช้หรือรหัสผ่านผิด", 2000 ,'red darken-4')
         }
       }
     })
   },
   logout() {
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     this.user.authenticated = false
   },
 
@@ -47,7 +46,7 @@ export default {
 
   getAuthHeader() {
     return {
-      'Authorization': localStorage.getItem('id_token')
+      'Authorization': localStorage.getItem('token')
     }
   }
 }

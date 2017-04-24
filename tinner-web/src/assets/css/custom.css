@@ -1,0 +1,70 @@
+input[type=range] + .thumb.active {
+  margin-left: -6px !important;
+}
+.dropdown-content li>a, .dropdown-content li>span {
+  color: #ff1744 !important;
+}
+/* label color */
+.input-field label {
+  color: #9e9e9e !important;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label, textarea.materialize-textarea:focus:not([readonly]) + label, .input-field input[type=email]:focus + label{
+  color: #ff1744 !important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus, textarea.materialize-textarea:focus:not([readonly]){
+  border-bottom: 1px solid #ff1744 !important;
+  box-shadow: 0 1px 0 0 #ff1744 !important;
+}
+/* valid color */
+.input-field input[type=text].valid, .input-field input[type=email]:focus:not([readonly]) {
+  border-bottom: 1px solid #ff1744 !important;
+  box-shadow: 0 1px 0 0 #ff1744 !important;
+}
+/* invalid color */
+.input-field input[type=text].invalid{
+  border-bottom: 1px solid #9e9e9e !important;
+  box-shadow: 0 1px 0 0 #9e9e9e !important;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #ff1744 !important;
+}
+
+[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
+  border: 2px solid #ff1744 !important;
+}
+
+[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
+  background-color: #ff1744 !important;
+}
+.picker__weekday-display {
+    background-color: #d41439 !important;
+}
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected , .picker__date-display{
+  background-color: #ff1744 !important;
+}
+
+.picker__close, .picker__today , .picker__day.picker__day--today {
+  color: #ff1744 !important;
+}
+/* Slider */
+input[type=range]::-webkit-slider-thumb {
+  background-color: #ff1744 !important;
+}
+input[type=range]::-moz-range-thumb {
+  background-color: #ff1744 !important;
+}
+input[type=range]::-ms-thumb {
+  background-color: #ff1744 !important;
+}
+input[type=range] + .thumb {
+  background-color: #ff1744 !important;
+}
+.invalid-color{
+  color: #ff1744;
+}
+.slider .indicators .indicator-item.active {
+  background-color: #ff1744 !important;
+}
