@@ -1,5 +1,7 @@
 package app.soa4.Modal;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,6 @@ public class MatchingRepository {
 
     @Transactional
     public List<CreateNotification> makeStatus(int account_do , int account_done, int status){
-        List<CreateNotification> createNotifications;
         String sql = "INSERT INTO MATCHING(matching_account_do, matching_account_done, matching_status) values (?,?,?)";
         this.jdbcTemplate.update(sql, account_do, account_done, status);
 
@@ -50,6 +51,12 @@ public class MatchingRepository {
     public void unmatchUpdate(int account_do , int account_done, int status){
         String sql = "UPDATE MATCHING SET matching_status = ? WHERE matching_account_do = ?, matching_account_done = ?";
         this.jdbcTemplate.update(sql,status,account_do,account_done);
+    }
+
+    @Transactional
+    public List<SuperlikeCheck> checkSuperlike(int account_do, int account_done){
+        String sql = "SELECT matching_status FROM MATCHING WHERE matching_account_do = ? AND matching_account_done = ? AND matching_status = 1";
+        return this.jdbcTemplate.query(sql, new Object[]{account_do, account_done}, new SuperlikeCheckRowMapper());
     }
 
 }
