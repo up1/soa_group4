@@ -3,7 +3,6 @@ package app.soa4.Modal;
 public class Editdata {
     private Integer account_id;
     private String account_email;
-    private String account_password;
     private String account_name;
     private String account_lastname;
     private long account_birthday;
@@ -33,14 +32,6 @@ public class Editdata {
 
     public void setAccount_email(String account_email) {
         this.account_email = account_email;
-    }
-
-    public String getAccount_password() {
-        return account_password;
-    }
-
-    public void setAccount_password(String account_password) {
-        this.account_password = account_password;
     }
 
     public String getAccount_name() {

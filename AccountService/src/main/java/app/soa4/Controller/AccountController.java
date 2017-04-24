@@ -29,17 +29,11 @@ public class AccountController {
 
     }
 
-    @RequestMapping(value = "/AccountToMatching", method = RequestMethod.GET)
-    public AccountToMatching sentToMatching(@RequestParam(value="id", defaultValue="1") int id){
-        System.err.print(id);
-        return this.accountRepository.accountToMatching((long) id);
-    }
 
     @RequestMapping(value = "/EditAccount", method = RequestMethod.PUT)
     public ResponseEntity<String> updateProfile(@RequestBody Editdata editdata){
         return new ResponseEntity(this.accountRepository.editProfile(
                 editdata.getAccount_email(),
-                editdata.getAccount_password(),
                 editdata.getAccount_name(),
                 editdata.getAccount_lastname(),
                 editdata.getAccount_birthday(),
@@ -55,6 +49,14 @@ public class AccountController {
                 editdata.getSearch_min_age(),
                 editdata.getSearch_max_age(),
                 editdata.getSearch_distance()), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/EditPassword", method = RequestMethod.PUT)
+    public ResponseEntity<String> updatePassword(@RequestBody EditPassword editpassword){
+        return new ResponseEntity(this.accountRepository.editPassword(
+                editpassword.getAccount_password(),
+                editpassword.getAccount_id())
+                , HttpStatus.OK);
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
