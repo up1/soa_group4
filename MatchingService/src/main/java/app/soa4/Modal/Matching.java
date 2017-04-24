@@ -13,6 +13,7 @@ public class Matching {
     private String description;
     private String sexTaste;
     private ArrayList<String> imgProfile;
+    private int superlike_status;
 
     public ArrayList<String> getImgProfile() {
         return imgProfile;
@@ -92,5 +93,13 @@ public class Matching {
 
     public void setSexTaste(String sexTaste) {
         this.sexTaste = sexTaste;
+    }
+
+    public int getSuperlike_status() {
+        return superlike_status;
+    }
+
+    public void setSuperlike_status(int superlike_status) {
+        this.superlike_status = superlike_status;
     }
 }
