@@ -16,7 +16,7 @@ public class MatchingController {
     private MatchingRepository matchingRepository;
 
     private RestTemplate restTemplate = new RestTemplate();
-    private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
+    private String imageServiceUrl = "http://192.168.1.7:9004/image/profile-image/";
     private String noficationServiceUrl = "http://128.199.211.151:9005/notification/matching";
     
     @RequestMapping("/matching")
@@ -34,6 +34,12 @@ public class MatchingController {
                 searchingData.getDistance());
         for (Matching matching: matchingList) {
             matching.setImgProfile(restTemplate.getForObject(imageServiceUrl+matching.getId(), ArrayList.class));
+            List<SuperlikeCheck> checkList = this.matchingRepository.checkSuperlike(matching.getId(), id);
+            if (!checkList.isEmpty()){
+                matching.setSuperlike_status(1);
+            }else{
+                matching.setSuperlike_status(0);
+            }
         }
         return  matchingList;
     }
@@ -54,8 +60,4 @@ public class MatchingController {
         return new ResponseEntity<>("Unmatch user complete.", HttpStatus.OK);
     }
 
-    @RequestMapping("/matching/superlike-check")
-    public List<SuperlikeCheck> superlikeCheck(@RequestParam(value = "account_id1") int account_id1, @RequestParam(value = "account_id2") int account_id2){
-        return this.matchingRepository.checkSuperlike(account_id1, account_id2);
-    }
 }
