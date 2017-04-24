@@ -7,7 +7,6 @@ public class Account {
     private long account_id;
     private String account_email;
     private String account_username;
-    private String account_password;
     private String account_name;
     private String account_lastname;
     private long account_birthday;
@@ -111,14 +110,6 @@ public class Account {
 
     public void setAccount_username(String account_username) {
         this.account_username = account_username;
-    }
-
-    public String getAccount_password() {
-        return account_password;
-    }
-
-    public void setAccount_password(String account_password) {
-        this.account_password = account_password;
     }
 
     public String getAccount_name() {
