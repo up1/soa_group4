@@ -54,4 +54,8 @@ public class MatchingController {
         return new ResponseEntity<>("Unmatch user complete.", HttpStatus.OK);
     }
 
+    @RequestMapping("/matching/superlike-check")
+    public List<SuperlikeCheck> superlikeCheck(@RequestParam(value = "account_id1") int account_id1, @RequestParam(value = "account_id2") int account_id2){
+        return this.matchingRepository.checkSuperlike(account_id1, account_id2);
+    }
 }
