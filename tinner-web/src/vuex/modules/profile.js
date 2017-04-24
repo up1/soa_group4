@@ -7,8 +7,8 @@ const state = {
     lastname:'',
     email:'',
     descriptions:'',
-    gender:'',
-    taste:0,
+    gender:'undefined',
+    taste:'undefined',
     birthdate:'',
     Img:[],
     location:{
@@ -17,8 +17,8 @@ const state = {
     }
   },
   matchingInformation:{
-    gender:'',
-    taste:0,
+    gender:'undefined',
+    taste:'undefined',
     minAge:0,
     maxAge:0,
     maxDistance:0
@@ -34,13 +34,13 @@ const state = {
 
 const getters = {
   getProfile: (state) => state.profileInformation,
-  getMatchingInformation: (state) => state.matchingInformation,
+  getMatching: (state) => state.matchingInformation,
   getEditInfomation: (state) => state.editInfomation
 }
 
 const actions = {
   getProfileInfomation: ({commit},id) => {
-    Vue.http.get('http://128.199.211.151:9008/AccountProfile/'+id).then(
+    Vue.http.get('http://139.59.231.62:9008/AccountProfile/'+id).then(
       (response) => {
         let taste_list = {'Normal':1,'Top':2,'Bottom':3}
         commit('setProfileInformation',{
@@ -57,6 +57,13 @@ const actions = {
             lng:response.data.account_longtitude
           }
         })
+        commit('setMatchingInformation',{
+          gender:response.data.search_sex,
+          taste:taste_list[response.data.search_sexual_taste],
+          minAge:response.data.search_min_age,
+          maxAge:response.data.search_max_age,
+          maxDistance:response.data.search_distance
+        })
        }
     )
   }
@@ -65,6 +72,9 @@ const actions = {
 const mutations = {
   setProfileInformation: (state,profileInformation) => {
     state.profileInformation = profileInformation
+  },
+  setMatchingInformation: (state,matchingInformation) => {
+    state.matchingInformation = matchingInformation
   },
   setLocationEditInformation: (state,location) => {
     state.editInfomation.location = location

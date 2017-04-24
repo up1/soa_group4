@@ -26,11 +26,11 @@
       this.selectId = "#"+this.id
     },
     mounted(){
-      $('select').material_select()
       $(this.selectId).val(this.taste)
       $(this.selectId).change((e)=>{
         this.taste = e.currentTarget.value
       })
+      $('select').material_select()
     },
     watch:{
       taste: function　(val) {

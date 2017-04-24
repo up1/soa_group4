@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Profile from './modules/profile.js'
+import matching from './modules/matching.js'
 Vue.use(Vuex)
 
 var store = new Vuex.Store({
@@ -9,7 +10,8 @@ var store = new Vuex.Store({
   getters: {},
   actions: {},
   modules: {
-    Profile
+    Profile,
+    matching
   }
 })
 

@@ -11,7 +11,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col s12" v-if="this.test < 4">
+              <div class="col s12" v-if="this.imageCounter < 4">
                 <a class="btn-floating right waves-effect red-button" v-on:click="addImageDialog()"><i class="material-icons">add</i></a>
               </div>
               <div class="col s12" v-else>
@@ -57,8 +57,8 @@
               </div>
             </div>
             <div class="row">
-              <Gender :value="information.gender" @value="information.gender = $event" name="genderProfile" idMale="maleProfile" idFemale="femaleProfile"></Gender>
-              <Taste id="tasteProfile" :value="information.taste" @value="information.taste = $event"></Taste>
+              <Gender :value="information.gender" @value="information.gender = $event" name="genderProfile" idMale="maleProfile" idFemale="femaleProfile" v-if="information.gender != 'undefined'"></Gender>
+              <Taste id="tasteProfile" :value="information.taste" @value="information.taste = $event" v-if="information.taste != 'undefined'"></Taste>
             </div>
             <div class="row">
               <div class="col s3">
@@ -73,8 +73,8 @@
               </div>
             </div>
             <div class="row">
-              <Gender :value="matching.gender" @value="matching.gender = $event" name="genderMatching" idMale="maleMatching" idFemale="femaleMatching"></Gender>
-              <Taste id="tasteMatching" :value="matching.taste" @value="matching.taste = $event"></Taste>
+              <Gender :value="matching.gender" @value="matching.gender = $event" name="genderMatching" idMale="maleMatching" idFemale="femaleMatching" v-if="matching.gender != 'undefined'"></Gender>
+              <Taste id="tasteMatching" :value="matching.taste" @value="matching.taste = $event" v-if="matching.taste != 'undefined'"></Taste>
             </div>
             <div class="row">
               <div class="input-field col s3">
@@ -90,7 +90,7 @@
             </div>
             <div class="row">
               <div class="col s6">
-                <div class="p">Maximum distance</div>
+                <div class="p">Maximum distance : {{matching.maxDistance}} KM</div>
                 <p class="range-field">
                   <input type="range" min="0" max="1800" v-model="matching.maxDistance">
                 </p>
@@ -129,7 +129,7 @@
       'Taste': Taste
     },created(){
       this.setEditProfile(this.profile)
-      this.setEditMatching(this.$store.getters.getMatchingInformation)
+      this.setEditMatching(this.searching)
       if (this.information.images.length != 0) {
         this.imageCounter = this.information.images.length
       }
@@ -144,12 +144,12 @@
           descriptions:'',
           gender:'',
           birthdate:'',
-          taste:0,
+          taste:'',
           images:[]
         },
         matching:{
           gender:'',
-          taste:0,
+          taste:'',
           minAge:0,
           maxAge:0,
           maxDistance:0
@@ -186,6 +186,23 @@
       },
       submit(){
         let formData = new FormData()
+        formData.append('account_email', this.information.email)
+        formData.append('account_password', this.information.password)
+        formData.append('account_name', this.information.firstname)
+        formData.append('account_lastname', this.information.lastname)
+        formData.append('account_birthday', this.information.birthdate)
+        formData.append('account_birthday', this.information.gender)
+        formData.append('account_sexual_taste', this.information.taste)
+        formData.append('account_latitude', this.edit.location.lat)
+        formData.append('account_longtitude', this.edit.location.lng)
+        formData.append('account_descriptions', this.information.descriptions)
+        formData.append('account_id', JSON.parse(this.$localStorage.get('user')).id)
+        formData.append('search_sex', this.matching.gender)
+        formData.append('search_sexual_taste', this.matching.taste)
+        formData.append('search_min_age', this.matching.minAge)
+        formData.append('search_max_age', this.matching.maxAge)
+        formData.append('search_distance', this.matching.distance)
+
         this.http.put(URL.UPDATEPROFILE,formData).then(
           data => {
             this.$store.dispatch('getProfileInfomation',JSON.parse(this.$localStorage.get('user')).id)
@@ -200,7 +217,9 @@
         this.imageCounter++
       }
     },computed:mapGetters({
-      profile: 'getProfile'
+      profile: 'getProfile',
+      searching: 'getMatching',
+      edit:'getEditInfomation'
     }),
     updated() {
       if (this.information.images.length > 0 && !this.count) {
@@ -216,6 +235,10 @@
         if (this.information.images.length != 0) {
           this.imageCounter = this.information.images.length
         }
+      },
+      'searching':function(){
+        this.setEditMatching(this.searching)
+        console.log(this.searching);
       }
     }
   }

@@ -5,56 +5,66 @@
 <template>
   <div id="home">
     <Navbar></Navbar>
-    <div class="container">
-      <Card :matching="match" sliderId="slider1" :profile="showProfile" @value="showProfile = $event"></Card>
+    <div class="container" v-for="(item, index) in this.matchs">
+      <Card :matching="item" :sliderId="index" :profile="showProfile" @value="showProfile = $event" v-if="shows[index]"></Card>
+    </div>
+    <div class="container" v-if="shows[shows.length-1]">
+      <h1>Hello</h1>
+    </div>
+    <div class="container" v-if="matchs.length === 0">
+      <NotFound></NotFound>
     </div>
   </div>
 </template>
 <script>
   import Navbar from '@/components/navbar'
   import ProfileCard from '@/components/profile_card'
+  import NotFound from '@/components/notfound'
+  import { mapGetters } from 'vuex'
   export default{
     name:'home',
     data(){
       return {
         showProfile:false,
-        match:{
-          id:'',
-          username:'',
-          name:'',
-          lastname:'',
-          age:0,
-          location:'',
-          distance:0,
-          descriptions:'',
-          taste:'',
-          images:[]
-
-        }
+        matchs:[],
+        notMatching:true
       }
     },
     components:{
       Navbar : Navbar,
-      Card : ProfileCard
+      Card : ProfileCard,
+      NotFound : NotFound
     },
     created(){
-      this.$http.get('http://128.199.211.151:9001/matching?id='+JSON.parse(this.$localStorage.get('user')).id).then(
+      this.$http.get('http://128.199.111.93:9001/matching?id='+JSON.parse(this.$localStorage.get('user')).id).then(
         (response) => {
-          this.match = {
-            id:response.data[0].id,
-            username:response.data[0].username,
-            name:response.data[0].name,
-            lastname:response.data[0].lastname,
-            age:response.data[0].age,
-            location:response.data[0].locationName,
-            distance:response.data[0].distance,
-            descriptions:response.data[0].description,
-            taste:response.data[0].sexTaste,
-            images:response.data[0].imgProfile
+          for (var index = 0; index < response.data.length; ++index) {
+              this.matchs.push({
+                index:index,
+                id:response.data[index].id,
+                username:response.data[index].username,
+                name:response.data[index].name,
+                lastname:response.data[index].lastname,
+                age:response.data[index].age,
+                location:response.data[index].locationName,
+                distance:response.data[index].distance,
+                descriptions:response.data[index].description,
+                taste:response.data[index].sexTaste,
+                images:response.data[index].imgProfile
+              })
+              if (index === 0) {
+                this.$store.commit('initMatching',true)
+              }else{
+                this.$store.commit('initMatching',false)
+              }
           }
+          this.$store.commit('initMatching',false)
         }
       )
-    }
+    },
+    computed:mapGetters({
+      shows: 'getShows'
+    })
   }
 </script>
 <style src="../assets/css/home.css" scoped>

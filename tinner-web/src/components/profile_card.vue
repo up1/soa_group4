@@ -55,23 +55,47 @@
         images:[]
       }
     },
+    created(){
+      this.images = this.matching.images
+    },
+    mounted(){
+      $("#"+this.sliderId).slider()
+    },
     methods:{
       nope(){
-        alert("nope!")
+        this.comfirm(3)
       },
       sLike(){
-        alert("Super Like!")
+        this.comfirm(1)
       },
       like(){
-        alert("Like!")
+        this.comfirm(2)
       },
       openOrClose(){
         this.$emit('value', !this.profile)
-      }
-    },
-    updated() {
-      if (!this.render++) {
-        $("#"+this.sliderId).slider()
+      },
+      comfirm(code){
+        let data = {
+          account_do : JSON.parse(this.$localStorage.get('user')).id,
+          account_done : this.matching.id,
+          status : code
+        }
+        this.$http.post('http://128.199.111.93:9001/matching/status',data).then(
+          response => {
+            this.setShow()
+            console.log("Hello");
+          }
+        )
+      },
+      setShow(){
+        this.$store.commit('editShowMatching',{
+          index : this.matching.index,
+          action : false
+        })
+        this.$store.commit('editShowMatching',{
+          index : this.matching.index + 1,
+          action : true
+        })
       }
     },
     watch:{
