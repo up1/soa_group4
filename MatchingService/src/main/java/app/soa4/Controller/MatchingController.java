@@ -17,6 +17,7 @@ public class MatchingController {
 
     private RestTemplate restTemplate = new RestTemplate();
     private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
+    private String noficationServiceUrl = "http://128.199.211.151:9005/notification/matching";
     
     @RequestMapping("/matching")
     public List<Matching> getAccount(@RequestParam(value="id", defaultValue="1") int id){
@@ -39,7 +40,11 @@ public class MatchingController {
 
     @RequestMapping(value = "/matching/status", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<?> createMatchingStatus(@RequestBody CreateMatching createMatching){
-        this.matchingRepository.makeStatus(createMatching.getAccount_do(), createMatching.getAccount_done(), createMatching.getStatus());
+        List<CreateNotification> createNotifications;
+        createNotifications = this.matchingRepository.makeStatus(createMatching.getAccount_do(), createMatching.getAccount_done(), createMatching.getStatus());
+        if(!createNotifications.isEmpty()) {
+            restTemplate.postForObject(noficationServiceUrl, createNotifications.get(0), String.class);
+        };
         return new ResponseEntity<>("Create status complete.", HttpStatus.OK);
     }
 
