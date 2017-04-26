@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS SEARCHING;
+DROP TABLE IF EXISTS MATCHING;
 DROP TABLE IF EXISTS ACCOUNT;
+
 
 CREATE TABLE ACCOUNT
 (
@@ -38,4 +40,13 @@ CREATE TABLE SEARCHING
     account_id int(11),
     PRIMARY KEY (search_id),
     FOREIGN KEY (account_id) REFERENCES ACCOUNT(account_id)
+);
+
+CREATE TABLE MATCHING
+(
+    matching_id int(11) NOT NULL AUTO_INCREMENT,
+    matching_account_do int(11),
+    matching_account_done int(11),
+    matching_status int(1),
+    PRIMARY KEY (matching_id)
 );
