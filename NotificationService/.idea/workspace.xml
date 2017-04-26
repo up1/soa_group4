@@ -14,7 +14,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="CreateNotification.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
               <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
@@ -27,7 +27,7 @@
         </entry>
       </file>
       <file leaf-file-name="Notification.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="42">
               <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
@@ -40,13 +40,13 @@
         </entry>
       </file>
       <file leaf-file-name="NotificationRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="42">
               <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+                <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
               </folding>
             </state>
           </provider>
@@ -89,7 +89,7 @@
         </entry>
       </file>
       <file leaf-file-name="NotificationRowMapper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
               <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
@@ -302,7 +302,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Modal" />
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -807,7 +807,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12286000" />
+    <option name="totallyTimeSpent" value="12356000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -860,7 +860,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
@@ -871,7 +871,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="40" column="5" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
@@ -882,13 +882,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="18" column="122" lean-forward="false" selection-start-line="18" selection-start-column="98" selection-end-line="18" selection-end-column="123" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+            <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
           </folding>
         </state>
       </provider>
@@ -915,7 +915,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
@@ -943,7 +943,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
@@ -954,7 +954,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="40" column="5" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
@@ -965,13 +965,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="18" column="122" lean-forward="false" selection-start-line="18" selection-start-column="98" selection-end-line="18" selection-end-column="123" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+            <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
           </folding>
         </state>
       </provider>
@@ -988,7 +988,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
@@ -1026,7 +1026,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
@@ -1037,7 +1037,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="40" column="5" lean-forward="false" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
@@ -1048,13 +1048,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="18" column="122" lean-forward="false" selection-start-line="18" selection-start-column="98" selection-end-line="18" selection-end-column="123" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+            <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
           </folding>
         </state>
       </provider>
@@ -1071,7 +1071,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
@@ -1109,7 +1109,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
@@ -1120,7 +1120,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
@@ -1131,18 +1131,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="20" column="58" lean-forward="false" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+            <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
@@ -1150,7 +1150,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
@@ -1161,7 +1161,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
@@ -1172,18 +1172,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="20" column="58" lean-forward="false" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+            <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="11" column="47" lean-forward="false" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
@@ -1191,7 +1191,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
@@ -1202,7 +1202,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
@@ -1213,18 +1213,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="20" column="58" lean-forward="false" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+            <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="11" column="47" lean-forward="false" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
@@ -1261,7 +1261,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRowMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRowMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
@@ -1269,18 +1269,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/NotificationRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/NotificationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1493216226444" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
+            <marker date="1493217328751" expanded="true" signature="494:611" ph="INSERT INTO NOTIFICATION... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/Notification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
@@ -1291,7 +1291,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/Modal/CreateNotification.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/soa4/model/CreateNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />

@@ -2,7 +2,7 @@ package app.soa4.controller;
 
 
 
-import app.soa4.Modal.*;
+import app.soa4.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
