@@ -1,7 +1,6 @@
 package app.soa4.controller;
 
 
-
 import app.soa4.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class NotificationController {
     @Autowired
     private NotificationRepository notificationRepository;
-    
 
     @RequestMapping(value = "/notification/matching", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<?> createNotificationMatching(@RequestBody CreateNotification createNotification){
