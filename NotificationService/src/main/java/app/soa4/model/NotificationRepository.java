@@ -1,7 +1,6 @@
-package app.soa4.Modal;
+package app.soa4.model;
 
-import java.util.Date;
-import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package app.soa4.Modal;
+package app.soa4.model;
 
 import org.springframework.jdbc.core.RowMapper;
 
