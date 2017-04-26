@@ -5,15 +5,14 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class NotificationRowMapper implements RowMapper<Notification> {
+public class NotificationRowMapper implements RowMapper<CreateNotification> {
     @Override
-    public Notification mapRow(ResultSet resultSet, int i) throws SQLException {
-        Notification notification = new Notification();
-        notification.setNoti_id(resultSet.getInt("Noti_id"));
-        notification.setAccountId_1(resultSet.getInt("accountId_1"));
-        notification.setAccountId_2(resultSet.getInt("accountId_2"));
-        notification.setChat_id(resultSet.getInt("chat_id"));
+    public CreateNotification mapRow(ResultSet resultSet, int i) throws SQLException {
+        CreateNotification createNotification = new CreateNotification();
+        createNotification.setAccount_id1(resultSet.getInt("notification_account_id1"));
+        createNotification.setAccount_id2(resultSet.getInt("notification_account_id2"));
+        createNotification.setRead_status(resultSet.getInt("notification_read_status"));
 
-        return notification;
+        return createNotification;
     }
 }
