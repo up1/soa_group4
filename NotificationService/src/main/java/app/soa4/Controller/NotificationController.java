@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -21,10 +23,8 @@ public class  NotificationController {
     }
 
     @RequestMapping(value = "/notification/{userId}", method = RequestMethod.GET)
-    public CreateNotification getAccount_id1(@PathVariable int account_id1){
-        CreateNotification createNotification = (CreateNotification) this.notificationRepository.selectNotification(account_id1);
-        return createNotification;
-
+    public List<CreateNotification> getAccount_id1(@PathVariable("userId") int account_id1){
+        return this.notificationRepository.selectNotification(account_id1);
     }
 
 
