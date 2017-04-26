@@ -1,4 +1,4 @@
-package app.soa4.Controller;
+package app.soa4.controller;
 
 
 
