@@ -5,10 +5,7 @@
  */
 package app.soa4.Modal;
 
-/**
- *
- * @author ARMY
- */
+
 public class CreateAccount {
     
     private String username;
