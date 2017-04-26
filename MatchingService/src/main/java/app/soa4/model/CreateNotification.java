@@ -1,4 +1,4 @@
-package app.soa4.Modal;
+package app.soa4.model;
 
 /**
  * Created by ARMY on 4/24/2017.

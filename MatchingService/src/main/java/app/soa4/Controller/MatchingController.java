@@ -1,8 +1,8 @@
-package app.soa4.Controller;
+package app.soa4.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.soa4.Modal.*;
+import app.soa4.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class MatchingController {
     private MatchingRepository matchingRepository;
 
     private RestTemplate restTemplate = new RestTemplate();
-    private String imageServiceUrl = "http://192.168.1.7:9004/image/profile-image/";
+    private String imageServiceUrl = "http://161.246.143.204:9004/image/profile-image/";
     private String noficationServiceUrl = "http://128.199.211.151:9005/notification/matching";
     
     @RequestMapping("/matching")

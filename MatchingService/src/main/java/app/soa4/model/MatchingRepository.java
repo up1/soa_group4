@@ -1,14 +1,11 @@
-package app.soa4.Modal;
+package app.soa4.model;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Repository
 public class MatchingRepository {
