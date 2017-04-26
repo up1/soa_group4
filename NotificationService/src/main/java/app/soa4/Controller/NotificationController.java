@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class NotificationController {
+public class  NotificationController {
     @Autowired
     private NotificationRepository notificationRepository;
 
@@ -18,6 +18,13 @@ public class NotificationController {
     public ResponseEntity<?> createNotificationMatching(@RequestBody CreateNotification createNotification){
         this.notificationRepository.makeNewMatchingNotification(createNotification.getAccount_id1(), createNotification.getAccount_id2());
         return new ResponseEntity<>("Create notification complete.", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/notification/{userId}", method = RequestMethod.GET)
+    public CreateNotification getAccount_id1(@PathVariable int account_id1){
+        CreateNotification createNotification = (CreateNotification) this.notificationRepository.selectNotification(account_id1);
+        return createNotification;
+
     }
 
 
