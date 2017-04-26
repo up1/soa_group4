@@ -1,6 +1,6 @@
 package app.soa4.Modal;
 
-import java.util.ArrayList;
+
 
 public class Notification {
     private Integer noti_id;
