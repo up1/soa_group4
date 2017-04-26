@@ -53,11 +53,11 @@ public class AccountRepository {
     }
 
     @Transactional
-    public String editProfile(String email,String name,String lastname,long birthday,String sex,String sextaste,float lat,float lon,String location,String des,long id,String search_sex,String search_sextaste,int min_age,int max_age,float distance){
+    public String editProfile(String email,String name,String lastname,long birthday,String sex,String sextaste,float lat,float lon,String des,long id,String search_sex,String search_sextaste,int min_age,int max_age,float distance){
         try {
-            String sql = "UPDATE ACCOUNT SET account_email = ?,account_name = ?,account_lastname = ?,account_age = ?, account_birthday = ?, account_sexual_taste = ?,account_latitude = ?,account_longtitude = ?,account_location = ?,account_descriptions = ? WHERE account_id = ?";
+            String sql = "UPDATE ACCOUNT SET account_email = ?,account_name = ?,account_lastname = ?, account_birthday = ?, account_sex = ?, account_sexual_taste = ?,account_latitude = ?,account_longtitude = ?,account_descriptions = ? WHERE account_id = ?";
             String sql2 = "UPDATE SEARCHING SET search_latitude = ?,search_longtitude = ?,search_birthday = ?,search_sex = ?,search_sexual_taste = ?,search_min_age = ?,search_max_age = ?,search_distance = ? WHERE account_id = ?";
-            this.jdbcTemplate.update(sql,email,name,lastname,birthday,sex,sextaste,lat,lon,location,des,id);
+            this.jdbcTemplate.update(sql,email,name,lastname,birthday,sex,sextaste,lat,lon,des,id);
             this.jdbcTemplate.update(sql2,lat,lon,birthday,search_sex,search_sextaste,min_age,max_age,distance,id);
             return "Edit complete";
         }catch (Exception e){

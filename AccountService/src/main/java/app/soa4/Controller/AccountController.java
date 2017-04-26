@@ -19,7 +19,7 @@ public class AccountController {
     @Autowired
     private RegisterRepository registerRepository;
     private RestTemplate restTemplate = new RestTemplate();
-    private String imageServiceUrl = "http://128.199.111.93:9004/image/profile-image/";
+    private String imageServiceUrl = "http://139.59.117.28:9004/image/profile-image/";
 
     @RequestMapping(value = "/AccountProfile/{userId}", method = RequestMethod.GET)
     public Account getAccount(@PathVariable long userId){
@@ -41,7 +41,6 @@ public class AccountController {
                 editdata.getAccount_sexual_taste(),
                 editdata.getAccount_latitude(),
                 editdata.getAccount_longtitude(),
-                editdata.getAccount_location(),
                 editdata.getAccount_descriptions(),
                 editdata.getAccount_id(),
                 editdata.getSearch_sex(),
