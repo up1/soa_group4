@@ -1,5 +1,6 @@
 package app.soa4.Modal;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,15 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.Math.floor;
-
+import org.springframework.web.client.RestTemplate;
 @Repository
 public class AccountRepository {
     
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    private final RestTemplate restTemplate = new RestTemplate();
     @Transactional(readOnly = true)
     public Account accountProfile(long account_id){
         String sql = "SELECT account_uid, account_id, account_email, " +
@@ -29,7 +31,6 @@ public class AccountRepository {
         long ageInMillis = new Date().getTime() - birthday.getAccount_birthday();
         String ageInString = (((ageInMillis / (24 * 60 * 60 * 1000) ) /365))+"";
         Integer age = Integer.parseInt(ageInString);
-
         Account account = (Account)this.jdbcTemplate.queryForObject(sql, new Object[] { account_id }, new BeanPropertyRowMapper(Account.class));
         account.setAge(age);
         Searching searching = (Searching)this.jdbcTemplate.queryForObject(sql3, new Object[] { account_id }, new BeanPropertyRowMapper(Searching.class));
@@ -56,10 +57,19 @@ public class AccountRepository {
     @Transactional
     public String editProfile(String email,String name,String lastname,long birthday,String sex,String sextaste,float lat,float lon,String des,long id,String search_sex,String search_sextaste,int min_age,int max_age,float distance){
         try {
-            String sql = "UPDATE ACCOUNT SET account_email = ?,account_name = ?,account_lastname = ?, account_birthday = ?, account_sex = ?, account_sexual_taste = ?,account_latitude = ?,account_longtitude = ?,account_descriptions = ? WHERE account_id = ?";
+            Map<String,Object> maps = restTemplate.getForObject("http://maps.googleapis.com/maps/api/geocode/json?latlng=13.179440,100.79361",Map.class);
+            JSONObject json = new JSONObject(maps);
+            String location = (json.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(2).getString("long_name")+", "+json.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(3).getString("long_name"));
+
+            String sql = "UPDATE ACCOUNT SET account_email = ?,account_name = ?,account_lastname = ?, account_birthday = ?, account_sex = ?, account_sexual_taste = ?, account_location = ?, account_latitude = ?,account_longtitude = ?,account_descriptions = ? WHERE account_id = ?";
             String sql2 = "UPDATE SEARCHING SET search_latitude = ?,search_longtitude = ?,search_birthday = ?,search_sex = ?,search_sexual_taste = ?,search_min_age = ?,search_max_age = ?,search_distance = ? WHERE account_id = ?";
-            this.jdbcTemplate.update(sql,email,name,lastname,birthday,sex,sextaste,lat,lon,des,id);
+            this.jdbcTemplate.update(sql,email,name,lastname,birthday,sex,sextaste, location,lat,lon,des,id);
             this.jdbcTemplate.update(sql2,lat,lon,birthday,search_sex,search_sextaste,min_age,max_age,distance,id);
+
+
+
+
+
             return "Edit complete";
         }catch (Exception e){
             System.err.print(e.getMessage());
