@@ -8,10 +8,6 @@ package app.soa4.Modal;
 import java.security.MessageDigest;
 import org.springframework.context.annotation.*;
 
-/**
- *
- * @author ARMY
- */
 public class Hash {
     
     public String getSha256(String value) {
