@@ -48,13 +48,13 @@
           password:this.credentials.registerPassword
         }
         if (!this.errors.any()) {
-          this.$http.post("http://128.199.211.151:9008/regis",data).then(
+          this.$http.post(this.$URL.PROFILE+"/regis",data).then(
             data => {
               var credentials = {
                 username: this.credentials.registerUsername,
                 password: this.credentials.registerPassword
               };
-              auth.login(this, credentials, "/profile");
+              auth.login(this, credentials, "profile");
             },
             response => {
               console.log(response);

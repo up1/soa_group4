@@ -14,11 +14,9 @@ export default {
       localStorage.setItem('token', data.body.token)
       localStorage.setItem('user', JSON.stringify(data.body.user))
       this.user.authenticated = true
-
       if(redirect) {
         router.go(redirect)
       }
-
     }, response =>{
       if (response.body) {
         if (response.body.status === "Bad credentials") {

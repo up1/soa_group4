@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import URL from '../../assets/url'
 
 const state = {
   information:false,
@@ -24,7 +25,7 @@ const state = {
     maxDistance:0
   },
   editInfomation:{
-    Img:[],
+    Img:[undefined,undefined,undefined,undefined],
     location:{
       lat:0,
       lng:0
@@ -40,7 +41,7 @@ const getters = {
 
 const actions = {
   getProfileInfomation: ({commit},id) => {
-    Vue.http.get('http://139.59.231.62:9008/AccountProfile/'+id).then(
+    Vue.http.get(URL.PROFILE+'/AccountProfile/'+id).then(
       (response) => {
         let taste_list = {'Normal':1,'Top':2,'Bottom':3}
         commit('setProfileInformation',{
@@ -80,11 +81,10 @@ const mutations = {
     state.editInfomation.location = location
   },
   setImageEditInformation: (state,value) => {
-    if (state.editInfomation.Img[value.num-1] !== undefined) {
-      state.editInfomation.Img[value.num-1] = value.file
-    }else{
-      state.editInfomation.Img.push(value.file)
-    }
+    Vue.set(state.editInfomation.Img,value.num,value.file)
+  },
+  setImageProfileInformation: (state,value) => {
+    Vue.set(state.profileInformation.Img,value.num,value.path)
   },
   resetEditInformation: (state) => {
     state.editInfomation = {
@@ -93,6 +93,32 @@ const mutations = {
         lat:0,
         lng:0
       }
+    }
+  },
+  resetImageEdit: (state) =>{
+    state.editInfomation.Img = [undefined,undefined,undefined,undefined]
+  },
+  resetProfile: (state) => {
+    state.profileInformation = {
+      firstname:'',
+      lastname:'',
+      email:'',
+      descriptions:'',
+      gender:'undefined',
+      taste:'undefined',
+      birthdate:'',
+      Img:[],
+      location:{
+        lat:0,
+        lng:0
+      }
+    }
+    state.matchingInformation = {
+      gender:'undefined',
+      taste:'undefined',
+      minAge:0,
+      maxAge:0,
+      maxDistance:0
     }
   }
 }

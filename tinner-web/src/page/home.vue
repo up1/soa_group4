@@ -1,25 +1,32 @@
-<!--
-  page : Home
-  vue.js coding : Thatchakon 57070053
--->
 <template>
   <div id="home">
     <Navbar></Navbar>
-    <div class="container" v-for="(item, index) in this.matchs">
-      <Card :matching="item" :sliderId="index" :profile="showProfile" @value="showProfile = $event" v-if="shows[index]"></Card>
-    </div>
-    <div class="container" v-if="shows[shows.length-1]">
-      <h1>Hello</h1>
-    </div>
-    <div class="container" v-if="matchs.length === 0">
-      <NotFound></NotFound>
-    </div>
+    <transition name="fade" mode="out-in">
+      <div class="container" v-for="(item, index) in this.matchs">
+        <Card :matching="item" :sliderId="index" :profile="showProfile" @value="showProfile = $event" v-if="shows[index]"></Card>
+      </div>
+      <div class="container" v-if="shows[shows.length-1]">
+        <NotFound></NotFound>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div class="container" v-show="matchs.length === 0 && !loading">
+        <NotFound></NotFound>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div class="container" v-show="this.loading">
+        <Loading></Loading>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
   import Navbar from '@/components/navbar'
   import ProfileCard from '@/components/profile_card'
   import NotFound from '@/components/notfound'
+  import Loading from '@/components/loading'
+  import URL from '@/assets/url'
   import { mapGetters } from 'vuex'
   export default{
     name:'home',
@@ -27,17 +34,20 @@
       return {
         showProfile:false,
         matchs:[],
-        notMatching:true
+        notMatching:true,
+        loading:true
       }
     },
     components:{
       Navbar : Navbar,
       Card : ProfileCard,
-      NotFound : NotFound
+      NotFound : NotFound,
+      Loading : Loading
     },
     created(){
-      this.$http.get('http://128.199.111.93:9001/matching?id='+JSON.parse(this.$localStorage.get('user')).id).then(
+      this.$http.get(this.$URL.MATCHING+'/matching?id='+JSON.parse(this.$localStorage.get('user')).id).then(
         (response) => {
+          this.loading = true
           for (var index = 0; index < response.data.length; ++index) {
               this.matchs.push({
                 index:index,
@@ -50,7 +60,8 @@
                 distance:response.data[index].distance,
                 descriptions:response.data[index].description,
                 taste:response.data[index].sexTaste,
-                images:response.data[index].imgProfile
+                images:response.data[index].imgProfile,
+                status:response.data[index].superlike_status
               })
               if (index === 0) {
                 this.$store.commit('initMatching',true)
@@ -59,6 +70,7 @@
               }
           }
           this.$store.commit('initMatching',false)
+          this.loading = false
         }
       )
     },

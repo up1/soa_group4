@@ -28,7 +28,7 @@
         let file = this.$refs.file.files;
         var value = {
           file : file[0],
-          num : this.num
+          num : this.num-1
         }
         this.$store.commit('setImageEditInformation',value)
       }

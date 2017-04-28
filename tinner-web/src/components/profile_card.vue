@@ -1,8 +1,3 @@
-<!--
-  component : profile card for matching list
-  original html code & design : Tanawat 57070025
-  vue.js coding : Thatchakon 57070052
--->
 <template>
   <div class="row">
     <div class="section col l12 m9 l10">
@@ -18,7 +13,7 @@
             </div>
           </div>
           <div class="card-content">
-            <span class="name-header card-title activator" v-on:click="openOrClose()"><i class="material-icons right">more_vert</i>{{matching.name}} , {{matching.age}}</span>
+            <span class="name-header card-title activator" v-on:click="openOrClose()"><i class="material-icons right">more_vert</i>{{matching.name}} , {{matching.age}} <i class="material-icons" v-show="matching.status === 1">star</i></span>
             <ul>
               <li class="data-list"><i class="left material-icons">my_location</i>{{matching.location}}</li>
               <li class="data-list"><i class="left material-icons">room</i>{{matching.distance.toFixed(1)}} km away</li>
@@ -80,7 +75,7 @@
           account_done : this.matching.id,
           status : code
         }
-        this.$http.post('http://128.199.111.93:9001/matching/status',data).then(
+        this.$http.post(this.$URL.MATCHING+'/matching/status',data).then(
           response => {
             this.setShow()
             console.log("Hello");
@@ -124,11 +119,5 @@
   .description-subheader {
     font-weight: bold;
     font-size: 20px;
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-    opacity: 0
   }
 </style>
