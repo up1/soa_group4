@@ -1,17 +1,21 @@
 package app.soa4.Modal;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Repository
 public class MatchingRepository {
     
     @Autowired
-    private JdbcTemplate jdbcTemplate;  
+    private JdbcTemplate jdbcTemplate;
+
     
     @Transactional(readOnly = true)
     public List<Matching> listMatching(int id, double lat, double lon, String sex, String sexual_taste, int min_age, int max_age, double distance) {
@@ -35,15 +39,24 @@ public class MatchingRepository {
     }
 
     @Transactional
-    public void makeStatus(int account_do , int account_done, int status){
+    public List<CreateNotification> makeStatus(int account_do , int account_done, int status){
         String sql = "INSERT INTO MATCHING(matching_account_do, matching_account_done, matching_status) values (?,?,?)";
         this.jdbcTemplate.update(sql, account_do, account_done, status);
+
+        String sql_check = "SELECT matching_account_do, matching_account_done FROM MATCHING WHERE matching_account_do = ? AND matching_account_done = ? AND matching_status != 3";
+        return this.jdbcTemplate.query(sql_check, new Object[]{account_done, account_do}, new NotificationRowMapper());
     }
 
     @Transactional
     public void unmatchUpdate(int account_do , int account_done, int status){
         String sql = "UPDATE MATCHING SET matching_status = ? WHERE matching_account_do = ?, matching_account_done = ?";
         this.jdbcTemplate.update(sql,status,account_do,account_done);
+    }
+
+    @Transactional
+    public List<SuperlikeCheck> checkSuperlike(int account_do, int account_done){
+        String sql = "SELECT matching_status FROM MATCHING WHERE matching_account_do = ? AND matching_account_done = ? AND matching_status = 1";
+        return this.jdbcTemplate.query(sql, new Object[]{account_do, account_done}, new SuperlikeCheckRowMapper());
     }
 
 }

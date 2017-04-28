@@ -16,7 +16,8 @@ public class MatchingController {
     private MatchingRepository matchingRepository;
 
     private RestTemplate restTemplate = new RestTemplate();
-    private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
+    private String imageServiceUrl = "http://192.168.1.7:9004/image/profile-image/";
+    private String noficationServiceUrl = "http://128.199.211.151:9005/notification/matching";
     
     @RequestMapping("/matching")
     public List<Matching> getAccount(@RequestParam(value="id", defaultValue="1") int id){
@@ -33,13 +34,23 @@ public class MatchingController {
                 searchingData.getDistance());
         for (Matching matching: matchingList) {
             matching.setImgProfile(restTemplate.getForObject(imageServiceUrl+matching.getId(), ArrayList.class));
+            List<SuperlikeCheck> checkList = this.matchingRepository.checkSuperlike(matching.getId(), id);
+            if (!checkList.isEmpty()){
+                matching.setSuperlike_status(1);
+            }else{
+                matching.setSuperlike_status(0);
+            }
         }
         return  matchingList;
     }
 
     @RequestMapping(value = "/matching/status", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<?> createMatchingStatus(@RequestBody CreateMatching createMatching){
-        this.matchingRepository.makeStatus(createMatching.getAccount_do(), createMatching.getAccount_done(), createMatching.getStatus());
+        List<CreateNotification> createNotifications;
+        createNotifications = this.matchingRepository.makeStatus(createMatching.getAccount_do(), createMatching.getAccount_done(), createMatching.getStatus());
+        if(!createNotifications.isEmpty()) {
+            restTemplate.postForObject(noficationServiceUrl, createNotifications.get(0), String.class);
+        };
         return new ResponseEntity<>("Create status complete.", HttpStatus.OK);
     }
 
