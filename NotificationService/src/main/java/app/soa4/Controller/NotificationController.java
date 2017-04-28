@@ -27,5 +27,11 @@ public class  NotificationController {
         return this.notificationRepository.selectNotification(account_id1);
     }
 
-
+    @RequestMapping(value = "/notification/update", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateNotification(@RequestBody UpdateNotification updateNotification){
+        return new ResponseEntity(this.notificationRepository.updateNotificationDB(
+                updateNotification.getAccount_id1(),
+                updateNotification.getAccount_id2())
+                , HttpStatus.OK);
+    }
 }
