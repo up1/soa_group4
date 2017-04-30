@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 import VeeValidate from 'vee-validate'
 import URL from './assets/url'
+import VueSocketio from 'vue-socket.io';
 import '!script-loader!jquery'
 import '!style-loader!css-loader!materialize-css/bin/materialize.css'
 import '!style-loader!css-loader!./assets/css/custom.css'
@@ -10,6 +11,7 @@ import '!script-loader!materialize-css/bin/materialize.js'
 
 Vue.config.productionTip = false
 Vue.use(VeeValidate)
+Vue.use(VueSocketio, 'http://localhost:9012')
 Vue.prototype.$URL = URL
 
 new Vue({

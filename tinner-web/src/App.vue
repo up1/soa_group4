@@ -8,7 +8,12 @@
   import store from './vuex'
   export default {
     name: 'app',
-    store
+    store,
+    sockets:{
+      connect: function(){
+        console.log('socket connected')
+      }
+    }
   }
 </script>
 

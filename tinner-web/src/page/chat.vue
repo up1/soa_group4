@@ -14,8 +14,8 @@
   								<div class="row">
   									<div class="col s12 center">
                       <transition name="fade" mode="out-in">
-                        <div class="collection fixbox" v-for="(item, index) in this.chatList">
-                          <ListBox :chat="item"></ListBox>
+                        <div id="chat-list" class="collection fixbox" v-for="(item, index) in this.chatList">
+                          <ListBox :chat="item" ></ListBox>
                         </div>
                       </transition>
                     </div>

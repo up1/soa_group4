@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'Chatroom', params: { room: chat.channel } }" class="collection-item" v-bind:class="{active : this.room}">
+  <router-link :to="{ name: 'Chatroom', params: { room: chat.channel } }" class="collection-item" v-bind:class="{active : this.room}" :id="chat.channel">
     <div class="row chat-list">
       <div class="col s5">
         <i class="medium material-icons left">person_pin</i>
@@ -18,9 +18,21 @@
       return {
       }
     },
+    mounted(){
+      if (this.room) {
+        this.activeChat()
+      }
+    },
     computed:{
       room: function(){
         return this.$route.params.room === this.chat.channel
+      }
+    },
+    methods:{
+      'activeChat': ()=>{
+        $('#chatList').animate({
+          scrollTop: $("#"+this.chat.channel).position().top},
+          'fast','swing');
       }
     }
   }
