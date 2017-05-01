@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.soa4.model.*;
+import app.soa4.repository.MatchingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -30,13 +31,18 @@ public class MatchingController {
     @Value("${myapp.service.chat.port}")
     private String chatServicePort;
 
+    @Value("${myapp.service.notification.url}")
+    private String notificationServiceUrl;
+
+    @Value("${myapp.service.notification.port}")
+    private String notificationServicePort;
+
     private RestTemplate restTemplate = new RestTemplate();
-    private String noficationServiceUrl = "http://localhost:9005/notification/matching";
 
     @RequestMapping("/matching")
     public List<Matching> getAccount(@RequestParam(value="id", defaultValue="1") int id){
 
-        String imageServicePath  = "http://" + imageServiceUrl + ":" + imageServicePort + "/image/profile-image/";
+        String imageServicePath  = imageServiceUrl + imageServicePort + "/image/profile-image/";
 
         Searching searchingData = this.matchingRepository.getSearchingData(id);
 
@@ -56,20 +62,19 @@ public class MatchingController {
     @RequestMapping(value = "/matching/status", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<String> createMatchingStatus(@RequestBody CreateMatching createMatching){
         List<CreateNotification> createNotifications;
-        String chatServicePath = "http://" + chatServiceUrl + ":" + chatServicePort + "/chat";
+        String notificationServicePath = notificationServiceUrl + notificationServicePort + "/notification/matching";
+        String chatServicePath = chatServiceUrl + chatServicePort + "/chat";
         createNotifications = this.matchingRepository.makeStatus(createMatching.getAccount_do(), createMatching.getAccount_done(), createMatching.getStatus());
-        System.out.println(createNotifications.get(0).getAccount_id1() + " " + createNotifications.get(0).getAccount_id2());
         if(!createNotifications.isEmpty()) {
-            restTemplate.postForObject(noficationServiceUrl, createNotifications.get(0), String.class);
-            String tester = restTemplate.postForObject(chatServicePath, createNotifications.get(0), String.class);
-            System.out.println(tester);
+            restTemplate.postForObject(notificationServicePath, createNotifications.get(0), String.class);
+            restTemplate.postForObject(chatServicePath, createNotifications.get(0), String.class);
         }
         return new ResponseEntity<>("Create status complete.", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/matching/unmatch", method = RequestMethod.PUT)
     public ResponseEntity<String> unmatchUser(@RequestBody CreateMatching createMatching){
-        String chatServicePath = "http://" + chatServiceUrl + ":" + chatServicePort + "/chat";
+        String chatServicePath = chatServiceUrl + chatServicePort + "/chat";
         this.matchingRepository.unmatchUpdate(createMatching.getAccount_do(), createMatching.getAccount_done(), createMatching.getStatus());
         HttpEntity<CreateMatching> httpEntity = new HttpEntity<>(createMatching);
         restTemplate.exchange(chatServicePath, HttpMethod.DELETE, httpEntity, String.class);

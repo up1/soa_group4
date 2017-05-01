@@ -1,7 +1,16 @@
-package app.soa4.model;
+package app.soa4.repository;
 
 import java.util.Date;
 import java.util.List;
+
+import app.soa4.model.CreateNotification;
+import app.soa4.model.Matching;
+import app.soa4.model.Searching;
+import app.soa4.model.SuperlikeCheck;
+import app.soa4.repository.MatchingRowMapper;
+import app.soa4.repository.NotificationRowMapper;
+import app.soa4.repository.SearchingRowMapper;
+import app.soa4.repository.SuperlikeCheckRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
