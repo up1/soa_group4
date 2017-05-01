@@ -13,7 +13,7 @@ import app.soa4.model.User;
 
 
 public class TokenAuthenticationService {
-    private long EXPIRATIONTIME = 1000 * 60 * 60 * 24 * 10; // 10 days
+    private long EXPIRATIONTIME = 1000L * 60 * 60 * 24 * 10; // 10 days
     private String SECRET = "mbogoviN";
     public static final String TOKEN_PREFIX = "Bearer";
     public static final String HEADER_STRING = "Authorization";
@@ -43,8 +43,7 @@ public class TokenAuthenticationService {
     public Authentication getToken(HttpServletRequest request){
         String token = request.getHeader(HEADER_STRING);
 
-        if(token != null) {
-            if (!token.isEmpty()){
+        if(token != null && !token.isEmpty()) {
                 Jws<Claims> claims = Jwts.parser()
                         .setSigningKey(SECRET)
                         .parseClaimsJws(token.replace(TOKEN_PREFIX + " ", ""));
@@ -56,7 +55,6 @@ public class TokenAuthenticationService {
                 if(username != null) {
                     return new AuthenticatedUser(username,id);
                 }
-            }
         }
 
         return null;

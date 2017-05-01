@@ -1,18 +1,21 @@
 package app.soa4.repository;
 
 import app.soa4.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 
 @Repository
 public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserRepository.class);
 
     public UserRepository(JdbcTemplate jdbc) {
         this.jdbcTemplate = jdbc;
@@ -24,7 +27,7 @@ public class UserRepository {
         try {
             user = this.jdbcTemplate.queryForObject(sql, new Object[]{username}, new UserRowMapper());
         }catch(EmptyResultDataAccessException e){
-            e.printStackTrace();
+            logger.info("log", e);
         }
         return user;
     }
