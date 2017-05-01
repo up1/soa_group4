@@ -20,5 +20,4 @@ public class NotificationController {
         return new ResponseEntity<>("Create notification complete.", HttpStatus.OK);
     }
 
-
 }

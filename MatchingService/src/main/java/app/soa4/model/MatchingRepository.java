@@ -15,7 +15,7 @@ public class MatchingRepository {
 
     
     @Transactional(readOnly = true)
-    public List<Matching> listMatching(int id, double lat, double lon, String sex, String sexual_taste, int min_age, int max_age, double distance) {
+    public List<Matching> listMatching(int id, Searching searchingData) {
         final double P = 0.017453292519943295;
         long dateInMillis = new Date().getTime();
             return this.jdbcTemplate.query("SELECT account_id, account_username, account_name, account_lastname, ((? - account_birthday)/(24*3600000))/365 AS account_age, account_location, account_descriptions, account_sexual_taste, " +
@@ -27,7 +27,11 @@ public class MatchingRepository {
                     " AND account_sexual_taste = ?" +
                     " AND ? <= ((? - account_birthday)/(24*3600000))/365 <= ?" +
                     " AND account_id NOT IN (SELECT matching_account_done " +
-                    "FROM MATCHING WHERE matching_account_do = ?)", new Object[]{dateInMillis,lat,P,P,lat,P,lon,P,id,lat,P,P,lat,P,lon,P,distance,sex,sexual_taste,min_age,dateInMillis,max_age,id}, new MatchingRowMapper());
+                    "FROM MATCHING WHERE matching_account_do = ?)", new Object[]{dateInMillis,searchingData.getLat(),
+                    P,P,searchingData.getLat(),P,searchingData.getLon(),P,id,searchingData.getLat(),P,P,
+                    searchingData.getLat(),P,searchingData.getLon(),P,searchingData.getDistance(),
+                    searchingData.getSex(),searchingData.getSexual_taste(),searchingData.getMin_age(),
+                    dateInMillis,searchingData.getMax_age(),id}, new MatchingRowMapper());
     }
 
     @Transactional
@@ -46,8 +50,9 @@ public class MatchingRepository {
 
     @Transactional
     public void unmatchUpdate(int account_do , int account_done, int status){
-        String sql = "UPDATE MATCHING SET matching_status = ? WHERE matching_account_do = ?, matching_account_done = ?";
+        String sql = "UPDATE MATCHING SET matching_status = ? WHERE matching_account_do = ? AND matching_account_done = ?";
         this.jdbcTemplate.update(sql,status,account_do,account_done);
+        this.jdbcTemplate.update(sql,status,account_done,account_do);
     }
 
     @Transactional
