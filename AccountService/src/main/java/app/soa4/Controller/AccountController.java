@@ -19,7 +19,7 @@ public class AccountController {
     @Autowired
     private RegisterRepository registerRepository;
     private RestTemplate restTemplate = new RestTemplate();
-    private String imageServiceUrl = "http://128.199.211.151:9004/image/profile-image/";
+    private String imageServiceUrl = "http://139.59.117.28:9004/image/profile-image/";
 
     @RequestMapping(value = "/AccountProfile/{userId}", method = RequestMethod.GET)
     public Account getAccount(@PathVariable long userId){
@@ -29,17 +29,11 @@ public class AccountController {
 
     }
 
-    @RequestMapping(value = "/AccountToMatching", method = RequestMethod.GET)
-    public AccountToMatching sentToMatching(@RequestParam(value="id", defaultValue="1") int id){
-        System.err.print(id);
-        return this.accountRepository.accountToMatching((long) id);
-    }
 
     @RequestMapping(value = "/EditAccount", method = RequestMethod.PUT)
     public ResponseEntity<String> updateProfile(@RequestBody Editdata editdata){
         return new ResponseEntity(this.accountRepository.editProfile(
                 editdata.getAccount_email(),
-                editdata.getAccount_password(),
                 editdata.getAccount_name(),
                 editdata.getAccount_lastname(),
                 editdata.getAccount_birthday(),
@@ -47,7 +41,6 @@ public class AccountController {
                 editdata.getAccount_sexual_taste(),
                 editdata.getAccount_latitude(),
                 editdata.getAccount_longtitude(),
-                editdata.getAccount_location(),
                 editdata.getAccount_descriptions(),
                 editdata.getAccount_id(),
                 editdata.getSearch_sex(),
@@ -55,6 +48,14 @@ public class AccountController {
                 editdata.getSearch_min_age(),
                 editdata.getSearch_max_age(),
                 editdata.getSearch_distance()), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/EditPassword", method = RequestMethod.PUT)
+    public ResponseEntity<String> updatePassword(@RequestBody EditPassword editpassword){
+        return new ResponseEntity(this.accountRepository.editPassword(
+                editpassword.getAccount_password(),
+                editpassword.getAccount_id())
+                , HttpStatus.OK);
     }
 
     @RequestMapping(value = "/regis", method = RequestMethod.POST, consumes = "application/json")
