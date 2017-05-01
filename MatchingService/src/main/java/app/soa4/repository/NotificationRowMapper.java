@@ -1,5 +1,6 @@
-package app.soa4.model;
+package app.soa4.repository;
 
+import app.soa4.model.CreateNotification;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
