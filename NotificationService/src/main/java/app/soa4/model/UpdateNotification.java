@@ -1,10 +1,9 @@
 package app.soa4.model;
 
 /**
- * Created by ARMY on 4/16/2017.
+ * Created by Boeing on 4/28/2017.
  */
-public class CreateNotification {
-
+public class UpdateNotification {
     private int account_id1;
     private int account_id2;
     private int read_status;
