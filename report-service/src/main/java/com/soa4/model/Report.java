@@ -1,34 +1,31 @@
 package com.soa4.model;
 
-/**
- * Created by Boeing on 4/28/2017.
- */
 public class Report {
-    private int bannerID;
-    private int bannedAccountID;
-    private String description;
+    private int reporter_id;
+    private int reported_id;
+    private String report_topic;
 
-    public int getBannerID() {
-        return bannerID;
+    public int getReporter_id() {
+        return reporter_id;
     }
 
-    public void setBannerID(int bannerID) {
-        this.bannerID = bannerID;
+    public void setReporter_id(int reporter_id) {
+        this.reporter_id = reporter_id;
     }
 
-    public int getBannedAccountID() {
-        return bannedAccountID;
+    public int getReported_id() {
+        return reported_id;
     }
 
-    public void setBannedAccountID(int bannedAccountID) {
-        this.bannedAccountID = bannedAccountID;
+    public void setReported_id(int reported_id) {
+        this.reported_id = reported_id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getReport_topic() {
+        return report_topic;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setReport_topic(String report_topic) {
+        this.report_topic = report_topic;
     }
 }

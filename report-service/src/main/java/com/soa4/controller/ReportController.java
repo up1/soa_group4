@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by Boeing on 4/28/2017.
  */
@@ -20,8 +22,17 @@ public class ReportController {
     private ReportRepository reportRepository;
 
     @PostMapping("/request")
-    public ResponseEntity<?> requestReport(@RequestBody Report report){
-        this.reportRepository.requestReport(report.getBannerID(), report.getBannedAccountID(), report.getDescription());
+    public ResponseEntity<String> requestReport(@RequestBody Report report){
+        this.reportRepository.requestReport(report.getReporter_id(), report.getReported_id(), report.getReport_topic());
         return new ResponseEntity<>("Request report complete.", HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/ShowReports/{userId}", method = RequestMethod.GET)
+    public ArrayList<Report> getReport(@PathVariable long userId){
+        ArrayList<Report> report = this.reportRepository.showReport(userId);
+        return report;
+
+    }
+
+
 }
