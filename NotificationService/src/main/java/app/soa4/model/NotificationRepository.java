@@ -27,10 +27,19 @@ public class NotificationRepository {
     public void chatNotifiying(int sender_id, int receiver_id, double time, int status){
         String sql = "INSERT INTO CHATNOTIFICATION(sender_id, receiver_id, time, status) values (?,?,?,?)";
         this.jdbcTemplate.update(sql, sender_id, receiver_id, time, status);
-        this.jdbcTemplate.update(sql, sender_id, receiver_id, time, status);
     }
 
-
+    @Transactional
+    public String updateChatNotificationDB(int sender_id, int receiver_id, double time, int status){
+        try {
+            String sql = "UPDATE CHATNOTIFICATION SET status = ?, time = ? WHERE sender_id = ? AND receiver_id = ?";
+            this.jdbcTemplate.update(sql, status, time, sender_id, receiver_id);
+            return "Update database complete";
+        }catch (Exception e){
+            System.err.print(e.getMessage());
+            return "Cannot update database";
+        }
+    }
 
     @Transactional(readOnly = true)
     public List<CreateNotification> selectNotification(int account_id1) {
@@ -49,4 +58,6 @@ public class NotificationRepository {
             return "Cannot update database";
         }
     }
+
+
 }
