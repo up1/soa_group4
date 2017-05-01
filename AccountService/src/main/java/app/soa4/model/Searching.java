@@ -1,5 +1,4 @@
-package app.soa4.Modal;
-
+package app.soa4.model;
 
 public class Searching {
     private String search_sex;

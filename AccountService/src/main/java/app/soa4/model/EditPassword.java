@@ -1,5 +1,4 @@
-package app.soa4.Modal;
-
+package app.soa4.model;
 
 public class EditPassword {
     private long account_id;

@@ -1,6 +1,12 @@
-package app.soa4.Modal;
+package app.soa4.repository;
 
+import app.soa4.model.Account;
+import app.soa4.model.Birthday;
+import app.soa4.model.Editdata;
+import app.soa4.model.Searching;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,10 +14,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
-import static java.lang.Math.floor;
 import org.springframework.web.client.RestTemplate;
 @Repository
 public class AccountRepository {
@@ -19,6 +23,9 @@ public class AccountRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private final RestTemplate restTemplate = new RestTemplate();
+
+    private static final Logger logger = LoggerFactory.getLogger(AccountRepository.class);
+
     @Transactional(readOnly = true)
     public Account accountProfile(long account_id){
         String sql = "SELECT account_uid, account_id, account_email, " +
@@ -49,30 +56,24 @@ public class AccountRepository {
             this.jdbcTemplate.update(sql, password, id);
             return "Edit complete";
         }catch (Exception e){
-            System.err.print(e.getMessage());
+            logger.info("log", e);
             return "Cannot Edit.";
         }
     }
 
     @Transactional
-    public String editProfile(String email,String name,String lastname,long birthday,String sex,String sextaste,float lat,float lon,String des,long id,String search_sex,String search_sextaste,int min_age,int max_age,float distance){
+    public String editProfile(Editdata editdata){
         try {
             Map<String,Object> maps = restTemplate.getForObject("http://maps.googleapis.com/maps/api/geocode/json?latlng=13.179440,100.79361",Map.class);
             JSONObject json = new JSONObject(maps);
             String location = (json.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(2).getString("long_name")+", "+json.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(3).getString("long_name"));
-
             String sql = "UPDATE ACCOUNT SET account_email = ?,account_name = ?,account_lastname = ?, account_birthday = ?, account_sex = ?, account_sexual_taste = ?, account_location = ?, account_latitude = ?,account_longtitude = ?,account_descriptions = ? WHERE account_id = ?";
             String sql2 = "UPDATE SEARCHING SET search_latitude = ?,search_longtitude = ?,search_birthday = ?,search_sex = ?,search_sexual_taste = ?,search_min_age = ?,search_max_age = ?,search_distance = ? WHERE account_id = ?";
-            this.jdbcTemplate.update(sql,email,name,lastname,birthday,sex,sextaste, location,lat,lon,des,id);
-            this.jdbcTemplate.update(sql2,lat,lon,birthday,search_sex,search_sextaste,min_age,max_age,distance,id);
-
-
-
-
-
+            this.jdbcTemplate.update(sql,editdata.getAccount_email(),editdata.getAccount_name(),editdata.getAccount_lastname(),editdata.getAccount_birthday(),editdata.getAccount_sex(),editdata.getAccount_sexual_taste(), location,editdata.getAccount_latitude(),editdata.getAccount_longtitude(),editdata.getAccount_descriptions(),editdata.getAccount_id());
+            this.jdbcTemplate.update(sql2,editdata.getAccount_latitude(),editdata.getAccount_longtitude(),editdata.getAccount_birthday(),editdata.getSearch_sex(),editdata.getSearch_sexual_taste(), editdata.getSearch_min_age(),editdata.getSearch_max_age(), editdata.getSearch_distance(),editdata.getAccount_id());
             return "Edit complete";
         }catch (Exception e){
-            System.err.print(e.getMessage());
+            logger.info("log", e);
             return "Cannot Edit.";
         }
     }
