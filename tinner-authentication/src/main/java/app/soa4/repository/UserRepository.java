@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
-/**
- * Created by DSJIN on 16/4/2560.
- */
 @Repository
 public class UserRepository {
     @Autowired
@@ -24,11 +21,10 @@ public class UserRepository {
     public User accountInformation(String username){
         User user = null;
         String sql = "SELECT account_username, account_id, account_uid FROM ACCOUNT WHERE account_username = ?";
-        System.out.println(jdbcTemplate);
         try {
             user = this.jdbcTemplate.queryForObject(sql, new Object[]{username}, new UserRowMapper());
         }catch(EmptyResultDataAccessException e){
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         return user;
     }
