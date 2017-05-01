@@ -23,6 +23,13 @@ public class NotificationRepository {
         this.jdbcTemplate.update(sql, account_id2, account_id1, 1);
     }
 
+    @Transactional
+    public void chatNotifiying(int sender_id, int receiver_id, double time, int status){
+        String sql = "INSERT INTO CHATNOTIFICATION(sender_id, receiver_id, time, status) values (?,?,?,?)";
+        this.jdbcTemplate.update(sql, sender_id, receiver_id, time, status);
+        this.jdbcTemplate.update(sql, sender_id, receiver_id, time, status);
+    }
+
 
 
     @Transactional(readOnly = true)
