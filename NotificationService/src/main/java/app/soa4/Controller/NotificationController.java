@@ -40,4 +40,10 @@ public class  NotificationController {
         this.notificationRepository.chatNotifiying(chatNotification.getSender_id(), chatNotification.getReciever_id(), chatNotification.getTime(), chatNotification.getStatus());
         return new ResponseEntity<>("Notify user complete", HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/notification/chatupdate", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateChatNotification(@RequestBody ChatNotification chatNotification){
+        return new ResponseEntity(this.notificationRepository.updateChatNotificationDB(
+                chatNotification.getSender_id(), chatNotification.getReciever_id(), chatNotification.getTime(), chatNotification.getStatus()), HttpStatus.OK);
+    }
 }
