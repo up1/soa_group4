@@ -5,12 +5,15 @@ import app.soa4.exception.UnauthorizedException;
 import app.soa4.model.*;
 import app.soa4.repository.ChatRepository;
 import app.soa4.util.TokenParse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -19,35 +22,62 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class ChatController {
     @Autowired
     private ChatRepository chatRepository;
+    private AccountAdapter accountAdapter;
     private static final TokenParse tokenParse = new TokenParse();
+
+    @Autowired
+    public ChatController() {
+        this.accountAdapter = new AccountAdapter();
+    }
 
     @RequestMapping(value = {"/chat"}, method = POST)
     public String postChat(@RequestBody ChatCreate chatCreate){
-        int userOneInt = chatCreate.getUser_one();
-        int userTwoInt = chatCreate.getUser_two();
+        int userOneInt = chatCreate.getAccount_id1();
+        int userTwoInt = chatCreate.getAccount_id2();
         String channel = CreateChannelName(userOneInt, userTwoInt);
         long time = System.currentTimeMillis();
-        int status = 2;
+        int status = 0;
         return chatRepository.addNewChat(userOneInt, userTwoInt, channel, time, status);
     }
 
     @RequestMapping(value = {"/chatlist/{userId}"}, method = GET)
     public List<ChatConversation> getChatList(@PathVariable("userId") int userId){
-        AccountAdapter accountAdapter = new AccountAdapter();
-        String name;
         List<ChatConversation> chatList = chatRepository.getChatList(userId);
+        List<ChatConversation> realChatList = new ArrayList<>();
         for (ChatConversation chatConversation : chatList) {
-            int userOneId = chatConversation.getUser_one();
-            int userTwoId = chatConversation.getUser_two();
-            if (userId == userOneId){
-                name = accountAdapter.getAccountName(userTwoId);
-                chatConversation.setName(name);
-            } else {
-                name = accountAdapter.getAccountName(userOneId);
-                chatConversation.setName(name);
+            int userIdA = Integer.parseInt(chatConversation.getChannel().substring(0,6));
+            int userIdB = Integer.parseInt(chatConversation.getChannel().substring(6));
+            if (userId == userIdA || userId == userIdB) {
+                chatConversation.setName(accountAdapter.getAccountName(chatConversation.getUser_id()));
+                realChatList.add(chatConversation);
             }
         }
-        return chatList;
+        return realChatList;
+    }
+
+    @RequestMapping(value = {"/chat/{channel}"}, method = GET)
+    public ResponseEntity<ChatConversation> getChatOppositeDetailToken(@RequestHeader("Authorization") String token,
+                                              @PathVariable("channel") String channel){
+        int userId;
+        TokenUser tokenUser = tokenParse.parseToken(token);
+        userId = Math.toIntExact(tokenUser.getId());
+        if (tokenUser!=null){
+            return new ResponseEntity<ChatConversation>(getChatOppositeDetail(userId, channel), HttpStatus.OK);
+        } else {
+            throw new UnauthorizedException();
+        }
+    }
+
+    @RequestMapping(value = {"/chatdetail/{channel}/{id}"}, method = GET)
+    public ResponseEntity<ChatConversation> getChatOppositeDetailPath(@PathVariable("id") Integer id,
+                                                                         @PathVariable("channel") String channel){
+        return new ResponseEntity<ChatConversation>(getChatOppositeDetail(id, channel), HttpStatus.OK);
+    }
+
+    private ChatConversation getChatOppositeDetail(int userId, String channel){
+        ChatConversation chatConversation = chatRepository.getConversation(channel, userId);
+        chatConversation.setName(accountAdapter.getAccountName(chatConversation.getUser_id()));
+        return chatConversation;
     }
 
     @RequestMapping(value = {"/chat/{channel}/{offset}"}, method = GET)
@@ -55,55 +85,72 @@ public class ChatController {
                                         @PathVariable("channel") String channel,
                                         @PathVariable("offset") int offset){
         TokenUser tokenUser = tokenParse.parseToken(token);
-        int userId;
         if (tokenUser!=null){
-            userId = Math.toIntExact(tokenUser.getId());
-            ChatConversation chatConversation = chatRepository.getConversation(channel);
-            if (userId == chatConversation.getUser_one() || userId == chatConversation.getUser_two()) {
-                AccountAdapter accountAdapter = new AccountAdapter();
-                List<ChatReply> chatReply = chatRepository.getChatReply(channel, offset);
-                int userOneId = chatConversation.getUser_one();
-                int userTwoId = chatConversation.getUser_two();
-                String userOneName = accountAdapter.getAccountName(userOneId);
-                String userTwoName = accountAdapter.getAccountName(userTwoId);
-                for (ChatReply eachChatReply : chatReply){
-                    if (eachChatReply.getUser_id() == userOneId){
-                        eachChatReply.setName(userOneName);
-                    } else {
-                        eachChatReply.setName(userTwoName);
-                    }
-                }
-                return new ResponseEntity<>(chatReply, HttpStatus.OK);
-            }else{
-                throw new UnauthorizedException();
-            }
+            List<ChatReply> chatReplyList = chatRepository.getChatReply(channel, offset);
+            return new ResponseEntity<List<ChatReply>>(chatReplyList, HttpStatus.OK);
+        } else {
+            throw new UnauthorizedException();
         }
-        throw new UnauthorizedException();
     }
 
     @RequestMapping(value = {"/chat"}, method = PUT)
-    public ResponseEntity<String> updateChatMessageStatus(@RequestHeader("Authorization") String token,
-                                                  @RequestBody ChatUpdateStatus chatUpdateStatus){
-        TokenUser tokenUser = tokenParse.parseToken(token);
-        if (tokenUser!=null){
-            String updateResult = chatRepository.updateChatMessageStatus(chatUpdateStatus);
-            return new ResponseEntity<>(updateResult, HttpStatus.OK);
+    public ResponseEntity<String> updateChatMessageStatus(@RequestBody ChatUpdateStatus chatUpdateStatus){
+        String updateResult;
+        String createNotiResult = "";
+        RestTemplate restTemplate = new RestTemplate();
+        NotificationCreate notificationCreate = new NotificationCreate();
+        if (chatUpdateStatus.getStatus() == 1){
+            String url = "http://localhost:9005/notification/chatupdate";
+            notificationCreate.setSender_id(chatUpdateStatus.getUser_id());
+            ChatConversation oppositeId = chatRepository.getOppositeId(chatUpdateStatus.getUser_id(), chatUpdateStatus.getChannel());
+            notificationCreate.setReciever_id(oppositeId.getUser_id());
+            notificationCreate.setTime(chatUpdateStatus.getTime());
+            notificationCreate.setStatus(0);
+            createNotiResult = restTemplate.postForObject( url, notificationCreate, String.class);
 
+            updateResult = chatRepository.updateChatRead(chatUpdateStatus);
+        } else {
+            String url = "http://localhost:9005/notification/chatting";
+            notificationCreate.setSender_id(chatUpdateStatus.getUser_id());
+            ChatConversation oppositeId = chatRepository.getOppositeId(chatUpdateStatus.getUser_id(), chatUpdateStatus.getChannel());
+            notificationCreate.setReciever_id(oppositeId.getUser_id());
+            notificationCreate.setTime(chatUpdateStatus.getTime());
+            notificationCreate.setStatus(1);
+            createNotiResult = restTemplate.postForObject( url, notificationCreate, String.class);
+
+            updateResult = chatRepository.updateChatNotRead(chatUpdateStatus);
         }
-        return new ResponseEntity<>("unauthorized", HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(updateResult + " " + createNotiResult, HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/chat/{userOne}/{userTwo}"}, method = DELETE)
-    public ResponseEntity<String> deleteChat(@RequestHeader("Authorization") String token,
-                                             @PathVariable("userOne") int userOneInt,
-                                             @PathVariable("userTwo") int userTwoInt){
+    @RequestMapping(value = {"/chatroom"}, method = PUT)
+    public ResponseEntity<String> updateChatRoomStatus(@RequestHeader("Authorization") String token,
+                                                       @RequestBody ChatUpdateChatRoomStatus chatUpdateChatRoomStatus){
+        int userId;
         TokenUser tokenUser = tokenParse.parseToken(token);
         if (tokenUser!=null){
-            String channel = CreateChannelName(userOneInt, userTwoInt);
+            userId = Math.toIntExact(tokenUser.getId());
+            if(chatUpdateChatRoomStatus.getStatus() == 0){
+                chatUpdateChatRoomStatus.setStatus(userId);
+                String updateResult = chatRepository.updateChatRoomStatus(chatUpdateChatRoomStatus);
+                return new ResponseEntity<>(updateResult, HttpStatus.OK);
+            }else if (chatUpdateChatRoomStatus.getStatus() == chatUpdateChatRoomStatus.getUser_id()){
+                chatUpdateChatRoomStatus.setStatus(userId + chatUpdateChatRoomStatus.getUser_id());
+                String updateResult = chatRepository.updateChatRoomStatus(chatUpdateChatRoomStatus);
+                return new ResponseEntity<>(updateResult, HttpStatus.OK);
+            }else{
+                throw new UnauthorizedException();
+            }
+        } else {
+            throw new UnauthorizedException();
+        }
+    }
+
+    @RequestMapping(value = {"/chat"}, method = DELETE)
+    public ResponseEntity<String> deleteChat(@RequestBody ChatDelete chatDelete){
+            String channel = CreateChannelName(chatDelete.getAccount_do(), chatDelete.getAccount_done());
             String deleteResult = chatRepository.deleteChat(channel);
             return new ResponseEntity<>(deleteResult, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("unauthorized", HttpStatus.UNAUTHORIZED);
     }
 
     private String CreateChannelName(int userOneInt, int userTwoInt){

@@ -1,18 +1,9 @@
 package app.soa4.model;
 
-public class ChatUpdateStatus {
-    int user_id;
+public class ChatUpdateChatRoomStatus {
     String channel;
-    double time;
+    int user_id;
     int status;
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
 
     public String getChannel() {
         return channel;
@@ -22,12 +13,12 @@ public class ChatUpdateStatus {
         this.channel = channel;
     }
 
-    public double getTime() {
-        return time;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setTime(double time) {
-        this.time = time;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getStatus() {

@@ -1,22 +1,22 @@
 package app.soa4.model;
 
 public class ChatCreate {
-    int user_one;
-    int user_two;
+    int account_id1;
+    int account_id2;
 
-    public int getUser_one() {
-        return user_one;
+    public int getAccount_id1() {
+        return account_id1;
     }
 
-    public void setUser_one(int user_one) {
-        this.user_one = user_one;
+    public void setAccount_id1(int account_id1) {
+        this.account_id1 = account_id1;
     }
 
-    public int getUser_two() {
-        return user_two;
+    public int getAccount_id2() {
+        return account_id2;
     }
 
-    public void setUser_two(int user_two) {
-        this.user_two = user_two;
+    public void setAccount_id2(int account_id2) {
+        this.account_id2 = account_id2;
     }
 }

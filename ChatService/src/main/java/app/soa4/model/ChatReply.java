@@ -1,21 +1,11 @@
 package app.soa4.model;
 
 public class ChatReply {
-    String name;
     int cr_id;
     int user_id;
     String reply;
     double time;
     String channel;
-    int status;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getCr_id() {
         return cr_id;
@@ -57,11 +47,4 @@ public class ChatReply {
         this.channel = channel;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }

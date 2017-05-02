@@ -1,10 +1,7 @@
 package app.soa4.repository;
 
 import app.soa4.exception.ChatException;
-import app.soa4.model.ChatConversation;
-import app.soa4.model.ChatCreate;
-import app.soa4.model.ChatReply;
-import app.soa4.model.ChatUpdateStatus;
+import app.soa4.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,9 +18,14 @@ public class ChatRepository {
 
     public String addNewChat(int user_one, int user_two, String channel, long time, int status) {
         try {
-            String sql = "INSERT INTO conversation(user_one, user_two, channel, time, status)" +
-                    " values (?,?,?,?,?)";
-            this.jdbcTemplate.update(sql, user_one, user_two, channel, time, status);
+            String createConversationSql = "INSERT INTO conversation(channel, time, status)" +
+                    " values (?,?,?)";
+            this.jdbcTemplate.update(createConversationSql, channel, time, status);
+
+            String createUserStatusSql = "INSERT INTO chat_read_user_status(channel, user_id, time, status)" +
+                    " values (?,?,?,?)";
+            this.jdbcTemplate.update(createUserStatusSql, channel, user_one, time, status);
+            this.jdbcTemplate.update(createUserStatusSql, channel, user_two, time, status);
             return "Created new chat";
         }catch (Exception exception) {
             exception.printStackTrace();
@@ -32,10 +34,10 @@ public class ChatRepository {
     }
 
     @Transactional(readOnly = true)
-    public ChatConversation getConversation(String channel) {
+    public ChatConversation getConversation(String channel, int userId) {
         try {
-            return (ChatConversation) this.jdbcTemplate.queryForObject("SELECT * FROM conversation WHERE channel = ?",
-                    new Object[]{channel}, new BeanPropertyRowMapper(ChatConversation.class));
+            return (ChatConversation) this.jdbcTemplate.queryForObject("SELECT * FROM chat_read_user_status WHERE channel = ? AND user_id <> ?",
+                    new Object[]{channel, userId}, new BeanPropertyRowMapper(ChatConversation.class));
         }catch (Exception exception) {
             exception.printStackTrace();
             throw new ChatException(exception);
@@ -45,8 +47,23 @@ public class ChatRepository {
     @Transactional(readOnly = true)
     public List<ChatConversation> getChatList(int userId) {
         try {
-            return this.jdbcTemplate.query("SELECT * FROM conversation WHERE user_one = ? OR user_two = ?",
-                    new Object[]{userId, userId}, new BeanPropertyRowMapper(ChatConversation.class));
+            String sql = "SELECT conversation.channel, chat_read_user_status.user_id, conversation.status AS room_status, chat_read_user_status.status " +
+                    "FROM conversation " +
+                    "INNER JOIN chat_read_user_status " +
+                    "ON conversation.channel=chat_read_user_status.channel " +
+                    "WHERE user_id <> ?";
+            return this.jdbcTemplate.query(sql, new Object[]{userId}, new BeanPropertyRowMapper(ChatConversation.class));
+        }catch (Exception exception) {
+            exception.printStackTrace();
+            throw new ChatException(exception);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public ChatConversation getOppositeId(int userId, String channel) {
+        try {
+            return (ChatConversation)this.jdbcTemplate.queryForObject("SELECT user_id FROM chat_read_user_status WHERE channel = ? AND user_id <> ? ",
+                    new Object[]{channel, userId}, new BeanPropertyRowMapper(ChatConversation.class));
         }catch (Exception exception) {
             exception.printStackTrace();
             throw new ChatException(exception);
@@ -65,10 +82,32 @@ public class ChatRepository {
         }
     }
 
-    public String updateChatMessageStatus(ChatUpdateStatus chatUpdateStatus){
+    public String updateChatRead(ChatUpdateStatus chatUpdateStatus){
         try {
-            String sql = "UPDATE conversation_reply SET status = 1 WHERE channel = ? AND time <= ?";
-            this.jdbcTemplate.update(sql, chatUpdateStatus.getChannel(), chatUpdateStatus.getTime());
+            String sql = "UPDATE chat_read_user_status SET status = 1, time = ? WHERE channel = ? ";
+            this.jdbcTemplate.update(sql, chatUpdateStatus.getTime(), chatUpdateStatus.getChannel());
+            return "chat updated";
+        }catch (Exception exception) {
+            exception.printStackTrace();
+            throw new ChatException(exception);
+        }
+    }
+
+    public String updateChatNotRead(ChatUpdateStatus chatUpdateStatus){
+        try {
+            String sql = "UPDATE chat_read_user_status SET status = 0, time = ? WHERE channel = ? AND user_id <> ?";
+            this.jdbcTemplate.update(sql, chatUpdateStatus.getTime(), chatUpdateStatus.getChannel(), chatUpdateStatus.getUser_id());
+            return "chat updated";
+        }catch (Exception exception) {
+            exception.printStackTrace();
+            throw new ChatException(exception);
+        }
+    }
+
+    public String updateChatRoomStatus(ChatUpdateChatRoomStatus chatUpdateChatRoomStatus){
+        try {
+            String sql = "UPDATE conversation SET status = ? WHERE channel = ?";
+            this.jdbcTemplate.update(sql, chatUpdateChatRoomStatus.getStatus(), chatUpdateChatRoomStatus.getChannel());
             return "chat updated";
         }catch (Exception exception) {
             exception.printStackTrace();

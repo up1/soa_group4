@@ -1,36 +1,18 @@
 package app.soa4.model;
 
 public class ChatConversation {
-    int c_id;
-    int user_one;
-    int user_two;
     String name;
     String channel;
-    double time;
+    int user_id;
     int status;
+    int room_status;
 
-    public int getC_id() {
-        return c_id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setC_id(int c_id) {
-        this.c_id = c_id;
-    }
-
-    public int getUser_one() {
-        return user_one;
-    }
-
-    public void setUser_one(int user_one) {
-        this.user_one = user_one;
-    }
-
-    public int getUser_two() {
-        return user_two;
-    }
-
-    public void setUser_two(int user_two) {
-        this.user_two = user_two;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -49,19 +31,19 @@ public class ChatConversation {
         this.channel = channel;
     }
 
-    public double getTime() {
-        return time;
-    }
-
-    public void setTime(double time) {
-        this.time = time;
-    }
-
     public int getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getRoom_status() {
+        return room_status;
+    }
+
+    public void setRoom_status(int room_status) {
+        this.room_status = room_status;
     }
 }
