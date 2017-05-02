@@ -128,18 +128,20 @@ public class ChatController {
                                                        @RequestBody ChatUpdateChatRoomStatus chatUpdateChatRoomStatus){
         int userId;
         TokenUser tokenUser = tokenParse.parseToken(token);
+        System.err.println(chatUpdateChatRoomStatus.getUser_id() + "-" + chatUpdateChatRoomStatus.getChannel() + "-" + chatUpdateChatRoomStatus.getStatus());
         if (tokenUser!=null){
             userId = Math.toIntExact(tokenUser.getId());
             if(chatUpdateChatRoomStatus.getStatus() == 0){
+                System.err.println("this is 1");
                 chatUpdateChatRoomStatus.setStatus(userId);
                 String updateResult = chatRepository.updateChatRoomStatus(chatUpdateChatRoomStatus);
                 return new ResponseEntity<>(updateResult, HttpStatus.OK);
-            }else if (chatUpdateChatRoomStatus.getStatus() == chatUpdateChatRoomStatus.getUser_id()){
+            }else{
+                System.err.println("this is 2");
                 chatUpdateChatRoomStatus.setStatus(userId + chatUpdateChatRoomStatus.getUser_id());
                 String updateResult = chatRepository.updateChatRoomStatus(chatUpdateChatRoomStatus);
+                System.err.println("this is status"+chatUpdateChatRoomStatus.getStatus());
                 return new ResponseEntity<>(updateResult, HttpStatus.OK);
-            }else{
-                throw new UnauthorizedException();
             }
         } else {
             throw new UnauthorizedException();
