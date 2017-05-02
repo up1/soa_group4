@@ -52,7 +52,11 @@ public class RegisterRepository {
         String sql = "INSERT INTO ACCOUNT(account_uid, "
                 + "account_email, "
                 + "account_username, "
-                + "account_password) values (?,?,?,?)";
+                + "account_password, "
+                + "account_birthday) values (?,?,?,?,929379600000)";
         this.jdbcTemplate.update(sql, uid, email, userName, pwd);
+        String sql2 = "INSERT INTO SEARCHING(search_birthday, " +
+                "account_id) values (929379600000, (SELECT account_id FROM ACCOUNT WHERE account_username = ?))";
+        this.jdbcTemplate.update(sql2, userName);
     }
 }

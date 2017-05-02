@@ -23,9 +23,9 @@ public class Hash {
     }
     
     private String bytesToHex(byte[] bytes) {
-        ArrayList result = new ArrayList();
+        StringBuffer result = new StringBuffer();
         for (byte b : bytes) {
-            result.add(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+            result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
         }
         return result.toString();
     }
