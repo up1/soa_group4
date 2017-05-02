@@ -47,6 +47,7 @@ public class MatchingController {
         Searching searchingData = this.matchingRepository.getSearchingData(id);
 
         List<Matching> matchingList = this.matchingRepository.listMatching(id,searchingData);
+
         for (Matching matching: matchingList) {
             matching.setImgProfile(restTemplate.getForObject(imageServicePath + matching.getId(), ArrayList.class));
             List<SuperlikeCheck> checkList = this.matchingRepository.checkSuperlike(matching.getId(), id);
