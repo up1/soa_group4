@@ -11,7 +11,7 @@ import '!script-loader!materialize-css/bin/materialize.js'
 
 Vue.config.productionTip = false
 Vue.use(VeeValidate)
-Vue.use(VueSocketio, 'http://localhost:9012')
+Vue.use(VueSocketio, 'http://161.246.131.173:9012')
 Vue.prototype.$URL = URL
 
 new Vue({

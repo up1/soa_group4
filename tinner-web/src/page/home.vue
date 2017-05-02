@@ -1,14 +1,12 @@
 <template>
   <div id="home">
     <Navbar></Navbar>
-    <transition name="fade" mode="out-in">
       <div class="container" v-for="(item, index) in this.matchs">
         <Card :matching="item" :sliderId="index" :profile="showProfile" @value="showProfile = $event" v-if="shows[index]"></Card>
       </div>
       <div class="container" v-if="shows[shows.length-1]">
         <NotFound></NotFound>
       </div>
-    </transition>
     <transition name="fade">
       <div class="container" v-show="matchs.length === 0 && !loading">
         <NotFound></NotFound>

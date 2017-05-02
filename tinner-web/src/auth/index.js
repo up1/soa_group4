@@ -1,6 +1,6 @@
 import router from '@/router/index'
 
-const API_LOGIN = "http://localhost:9011"
+const API_LOGIN = "http://139.59.109.21:9011"
 const URL = "/auth"
 const LOGIN_URL = API_LOGIN+URL
 
@@ -15,7 +15,7 @@ export default {
       localStorage.setItem('user', JSON.stringify(data.body.user))
       this.user.authenticated = true
       if(redirect) {
-        router.go(redirect)
+        router.go('/')
       }
     }, response =>{
       if (response.body) {

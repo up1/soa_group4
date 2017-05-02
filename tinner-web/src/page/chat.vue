@@ -13,11 +13,11 @@
                   </div>
   								<div class="row">
   									<div class="col s12 center">
-                      <transition name="fade" mode="out-in">
-                        <div id="chat-list" class="collection fixbox" v-for="(item, index) in this.chatList">
-                          <ListBox :chat="item" ></ListBox>
+                        <div id="chat-list" class="collection fixbox" v-if="this.chatList.length > 0">
+                          <div v-for="(item, index) in this.chatList">
+                            <ListBox :chat="item" ></ListBox>
+                          </div>
                         </div>
-                      </transition>
                     </div>
                   </div>
                 </div>
@@ -37,7 +37,6 @@
 <script>
   import Navbar from '@/components/navbar'
   import ListBox from '@/components/chat_list_box'
-  import CircularLoading from '@/components/circular_loading'
   export default {
     name:"Chat",
     data(){
@@ -49,17 +48,23 @@
     components:{
       Navbar : Navbar,
       ListBox : ListBox,
-      Loading : CircularLoading
     },
     created(){
-      this.$http.get(this.$URL.CHAT+"/chatlist/"+JSON.parse(this.$localStorage.get('user')).id).then(
-        result => {
-          for (var index = 0; index < result.data.length; ++index) {
-            this.chatList.push(result.data[index])
+      this.fetchData()
+    },
+    methods:{
+      'fetchData': function(){
+        this.$http.get(this.$URL.CHAT+"/chatlist/"+JSON.parse(this.$localStorage.get('user')).id).then(
+          result => {
+            this.chatList = []
+            for (var index = 0; index < result.data.length; ++index) {
+              this.chatList.push(result.data[index])
+            }
+            this.loading = false
+            setTimeout(this.fetchData, 5000);
           }
-          this.loading = false
-        }
-      )
+        )
+      }
     }
   }
 </script>

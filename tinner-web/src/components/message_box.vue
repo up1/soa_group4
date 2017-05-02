@@ -1,6 +1,6 @@
 <template>
-  <li class="message" :class="'message-me':this.data">
-    {{this.data.msg}}
+  <li class="message" v-bind:class="{'message-me':isOwnId}">
+    {{this.data.reply}}
   </li>
 </template>
 <script>
@@ -9,7 +9,7 @@
     props : ['data'],
     computed:{
       'isOwnId': function() {
-        return this.data.id === JSON.parse(this.$localStorage.get('user')).id
+        return this.data.user_id === JSON.parse(this.$localStorage.get('user')).id
       }
     }
   }
@@ -24,7 +24,7 @@
     clear: both;
   }
   .message-me {
-    background: #ff1744;
+    background: #f8bbd0;
     float: right;
   }
 </style>

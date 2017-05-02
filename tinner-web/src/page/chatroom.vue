@@ -21,20 +21,26 @@
     },
     created(){
       this.$socket.emit('subscribe', {
-        username: JSON.parse(this.$localStorage.get('user')).username,
+        username: JSON.parse(this.$localStorage.get('user')).id,
         room: this.$route.params.room
       })
-    },
-    mounted(){
-      this.$http.get(this.$URL.CHAT+"/chat/123/1235").then( data => {
-        console.log(data)
-      } );
     },
     destroyed(){
       this.$socket.emit('unsubscribe', {
-        username: JSON.parse(this.$localStorage.get('user')).username,
+        username: JSON.parse(this.$localStorage.get('user')).id,
         room: this.$route.params.room
       })
+    },
+    beforeRouteUpdate(to, from, next){
+      this.$socket.emit('unsubscribe', {
+        username: JSON.parse(this.$localStorage.get('user')).id,
+        room: from.params.room
+      })
+      this.$socket.emit('subscribe', {
+        username: JSON.parse(this.$localStorage.get('user')).id,
+        room: to.params.room
+      })
+      next();
     }
   }
 </script>

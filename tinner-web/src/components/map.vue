@@ -78,7 +78,7 @@
             maps.setCenter(new google.maps.LatLng(this.$store.getters.getProfile.location.lat,
                                        this.$store.getters.getProfile.location.lng), 12);
             marker.setPosition(new google.maps.LatLng(this.$store.getters.getProfile.location.lat,
-                                       this.$store.getters.getProfile.location.lng))  
+                                       this.$store.getters.getProfile.location.lng))
           }
           this.setLatLng(this.$store.getters.getProfile.location.lat,this.$store.getters.getProfile.location.lng)
         }

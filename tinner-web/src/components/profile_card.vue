@@ -78,7 +78,6 @@
         this.$http.post(this.$URL.MATCHING+'/matching/status',data).then(
           response => {
             this.setShow()
-            console.log("Hello");
           }
         )
       },
@@ -91,6 +90,7 @@
           index : this.matching.index + 1,
           action : true
         })
+        this.$forceUpdate();
       }
     },
     watch:{
