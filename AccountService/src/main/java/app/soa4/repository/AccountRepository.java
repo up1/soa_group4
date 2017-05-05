@@ -64,7 +64,7 @@ public class AccountRepository {
     @Transactional
     public String editProfile(Editdata editdata){
         try {
-            Map<String,Object> maps = restTemplate.getForObject("http://maps.googleapis.com/maps/api/geocode/json?latlng=13.179440,100.79361",Map.class);
+            Map<String,Object> maps = restTemplate.getForObject("http://maps.googleapis.com/maps/api/geocode/json?latlng=" + editdata.getAccount_latitude() + "," + editdata.getAccount_longtitude(),Map.class);
             JSONObject json = new JSONObject(maps);
             String location = (json.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(2).getString("long_name")+", "+json.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(3).getString("long_name"));
             String sql = "UPDATE ACCOUNT SET account_email = ?,account_name = ?,account_lastname = ?, account_birthday = ?, account_sex = ?, account_sexual_taste = ?, account_location = ?, account_latitude = ?,account_longtitude = ?,account_descriptions = ? WHERE account_id = ?";
