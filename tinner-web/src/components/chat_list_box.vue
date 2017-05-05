@@ -55,6 +55,7 @@
               }).then( data => {
               })
           }
+          this.activeChat()
         }
       }
     }

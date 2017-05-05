@@ -7,16 +7,12 @@
       <div class="container" v-if="shows[shows.length-1]">
         <NotFound></NotFound>
       </div>
-    <transition name="fade">
       <div class="container" v-show="matchs.length === 0 && !loading">
         <NotFound></NotFound>
       </div>
-    </transition>
-    <transition name="fade">
       <div class="container" v-show="this.loading">
         <Loading></Loading>
       </div>
-    </transition>
   </div>
 </template>
 <script>

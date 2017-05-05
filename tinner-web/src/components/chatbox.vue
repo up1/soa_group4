@@ -153,8 +153,6 @@
         this.getProfile(0)
         this.getChatInfomation()
         this.$forceUpdate()
-      },
-      'chat':function(){
       }
     },
     sockets:{

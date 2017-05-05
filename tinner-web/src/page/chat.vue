@@ -4,16 +4,13 @@
     <div class="container">
       <div class="row">
         <div class="section col l12 m9 l10">
-          <div class="card card-container-padding fitpage">
+          <div class="card card-container-padding fitpage" v-if="this.chatList.length > 0">
             <div class="row">
   						<div class="col s3">
   							<div class="card">
-                  <div class="progress pink accent-1" v-if="this.loading">
-                      <div class="indeterminate red accent-3"></div>
-                  </div>
   								<div class="row">
   									<div class="col s12 center">
-                        <div id="chat-list" class="collection fixbox" v-if="this.chatList.length > 0">
+                        <div id="chat-list" class="collection fixbox">
                           <div v-for="(item, index) in this.chatList">
                             <ListBox :chat="item" ></ListBox>
                           </div>
@@ -29,6 +26,12 @@
               </div>
             </div>
           </div>
+          <div v-if="this.loading">
+            <Loading></Loading>
+          </div>
+          <div class="card card-container-padding center invalid-color" v-if="this.chatList.length === 0 && !this.loading">
+            <h1>No Chat Avaliable</h1>
+          </div>
         </div>
       </div>
     </div>
@@ -37,6 +40,7 @@
 <script>
   import Navbar from '@/components/navbar'
   import ListBox from '@/components/chat_list_box'
+  import Loading from '@/components/loading'
   export default {
     name:"Chat",
     data(){
@@ -48,6 +52,7 @@
     components:{
       Navbar : Navbar,
       ListBox : ListBox,
+      Loading : Loading
     },
     created(){
       this.fetchData()
