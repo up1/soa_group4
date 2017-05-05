@@ -1,4 +1,4 @@
-package app.soa4.Modal;
+package app.soa4.model;
 
 public class Birthday {
     private long account_birthday;

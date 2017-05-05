@@ -1,5 +1,6 @@
-package app.soa4.Modal;
+package app.soa4.rowmapper;
 
+import app.soa4.model.Account;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

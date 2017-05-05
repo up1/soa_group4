@@ -1,4 +1,4 @@
-package app.soa4.Modal;
+package app.soa4.model;
 
 public class Editdata {
     private Integer account_id;
