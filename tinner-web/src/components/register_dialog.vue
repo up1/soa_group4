@@ -38,23 +38,19 @@
     },
     methods:{
       register(){
-        let formData = new FormData();
-        formData.append('username', this.credentials.registerUsername);
-        formData.append('email', this.credentials.registerEmail);
-        formData.append('password', this.credentials.registerPassword);
         let data = {
           username:this.credentials.registerUsername,
           email:this.credentials.registerEmail,
           password:this.credentials.registerPassword
         }
         if (!this.errors.any()) {
-          this.$http.post("http://128.199.211.151:9008/regis",data).then(
+          this.$http.post(this.$URL.PROFILE+"/regis",data).then(
             data => {
               var credentials = {
                 username: this.credentials.registerUsername,
                 password: this.credentials.registerPassword
               };
-              auth.login(this, credentials, "/");
+              auth.login(this, credentials, "profile");
             },
             response => {
               console.log(response);
@@ -87,7 +83,7 @@
    margin: 0 auto;
    width: 25%;
    padding: 20px;
-   margin-top: 5%;
+   margin-top: 10%;
    background-color: rgba(26, 26, 26, 0.8) !important;
   }
   .signup-box{
@@ -97,7 +93,8 @@
   .img img{
    margin: 0 auto;
    display: block;
-   margin-bottom: 10px
+   margin-bottom: 30px;
+   max-width: 30% !important
   }
   *::-webkit-input-placeholder {
       color: red !important;

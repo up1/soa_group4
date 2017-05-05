@@ -68,3 +68,18 @@ input[type=range] + .thumb {
 .slider .indicators .indicator-item.active {
   background-color: #ff1744 !important;
 }
+.red-button{
+  background-color: #ff1744 !important;
+}
+.collection {
+  margin: 0px;
+}
+
+.collection a.collection-item {
+    color: #ff1744;
+}
+
+.collection .collection-item.active {
+    background-color: #ff1744;
+    color: #eafaf9;
+}

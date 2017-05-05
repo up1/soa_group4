@@ -6,6 +6,7 @@
 </template>
 <script>
   import GoogleMaps from 'google-maps'
+  import { mapGetters } from 'vuex'
   const GOOGLEMAPCONFIG = {
     api : "AIzaSyDJ4Ues7RjOBgw2-854r4_ux104oYt2T6Y",
     geolocate_url : "https://www.googleapis.com/geolocation/v1/geolocate?key="
@@ -17,9 +18,12 @@
     data(){
       return {
         lat : 0,
-        lng : 0
+        lng : 0,
+        gmap: undefined
       }
-    },
+    },computed:mapGetters({
+      profile: 'getProfile'
+    }),
     mounted(){
       this.setLatLng(this.$store.getters.getProfile.location.lat,this.$store.getters.getProfile.location.lng)
       GoogleMaps.KEY = GOOGLEMAPCONFIG.api
@@ -63,6 +67,20 @@
           google.maps.event.addListener(marker, 'dragend', (event) =>{
             this.setLatLng(marker.getPosition().lat(),marker.getPosition().lng())
           })
+        },
+        google(){
+          return maps
+        }
+      },
+      watch:{
+        'profile': function() {
+          if (maps !== undefined && marker !== undefined) {
+            maps.setCenter(new google.maps.LatLng(this.$store.getters.getProfile.location.lat,
+                                       this.$store.getters.getProfile.location.lng), 12);
+            marker.setPosition(new google.maps.LatLng(this.$store.getters.getProfile.location.lat,
+                                       this.$store.getters.getProfile.location.lng))
+          }
+          this.setLatLng(this.$store.getters.getProfile.location.lat,this.$store.getters.getProfile.location.lng)
         }
       }
     }
