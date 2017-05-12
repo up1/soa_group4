@@ -1,4 +1,4 @@
-package app.soa4.Modal;
+package app.soa4.model;
 
 public class ProfileImageCreate {
     String path;

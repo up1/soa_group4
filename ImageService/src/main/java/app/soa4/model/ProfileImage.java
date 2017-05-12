@@ -1,4 +1,4 @@
-package app.soa4.Modal;
+package app.soa4.model;
 public class ProfileImage {
     private long image_id;
     private String image_path;
