@@ -100,7 +100,7 @@ public class ChatController {
         RestTemplate restTemplate = new RestTemplate();
         NotificationCreate notificationCreate = new NotificationCreate();
         if (chatUpdateStatus.getStatus() == 1){
-            String url = "http://128.199.163.168:9005/notification/chatupdate";
+            String url = "http://128.199.122.200:9005/notification/chatupdate";
             notificationCreate.setSender_id(chatUpdateStatus.getUser_id());
             ChatConversation oppositeId = chatRepository.getOppositeId(chatUpdateStatus.getUser_id(), chatUpdateStatus.getChannel());
             notificationCreate.setReciever_id(oppositeId.getUser_id());
@@ -110,7 +110,7 @@ public class ChatController {
 
             updateResult = chatRepository.updateChatRead(chatUpdateStatus);
         } else {
-            String url = "http://128.199.163.168:9005/notification/chatting";
+            String url = "http://128.199.122.200:9005/notification/chatting";
             notificationCreate.setSender_id(chatUpdateStatus.getUser_id());
             ChatConversation oppositeId = chatRepository.getOppositeId(chatUpdateStatus.getUser_id(), chatUpdateStatus.getChannel());
             notificationCreate.setReciever_id(oppositeId.getUser_id());
