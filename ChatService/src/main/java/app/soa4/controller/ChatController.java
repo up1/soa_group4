@@ -30,8 +30,18 @@ public class ChatController {
         this.accountAdapter = new AccountAdapter();
     }
 
+//    @RequestMapping(value = {"/chat"}, method = POST)
+//    public String postChat(@RequestBody Map<String, Object> chatCreate){
+//        for (String e : chatCreate.keySet()){
+//            System.err.println(e + " : " +chatCreate.get(e));
+//        }
+//        return "dsdsdsd";
+//    }
+
+
     @RequestMapping(value = {"/chat"}, method = POST)
     public String postChat(@RequestBody ChatCreate chatCreate){
+        System.err.println(chatCreate.getAccount_id1() + " : " + chatCreate.getAccount_id2());
         int userOneInt = chatCreate.getAccount_id1();
         int userTwoInt = chatCreate.getAccount_id2();
         String channel = CreateChannelName(userOneInt, userTwoInt);
