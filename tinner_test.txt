@@ -1,0 +1,122 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Variables ***
+${SERVER}         http://128.199.133.9/
+${BROWSER}        Chrome
+${DELAY}          0.25
+
+*** Keywords ***
+Start Browser
+    Open Browser            http://128.199.133.9            chrome
+    Get Alert Message
+    Maximize Browser Window
+
+*** Test Cases ***
+
+[1] Open Website
+    Set Selenium Speed        0.5 second
+    Open Browser              http://128.199.133.9/    gc
+    Alert Should Be Present   You not login
+    Maximize Browser Window
+    Title Should Be           Tinner
+
+[2] Register
+    Input Text      xpath=//*[@id="regis-box"]/div/div[2]//*[@id="username"]   robotTestAccount
+    Input Text      xpath=//*[@id="regis-box"]/div/div[3]//*[@id="email"]      robotaccount@testmail.com
+    Input Text      xpath=//*[@id="regis-box"]/div/div[4]//*[@id="password"]   12345678
+    Sleep   3
+    Click Button                      xpath=//*[@id="regis-box"]/div/div[5]/button
+    Wait Until Page Contains      Suggestion
+    Title Should Be               Tinner | Home
+    Close Browser
+
+[3] Login
+    Open Browser                  http://128.199.133.9/    gc
+    Alert Should Be Present       You not login
+    Maximize Browser Window
+    Title Should Be               Tinner
+    Input Text          username  account1
+    Input Password      password  123456
+    Click element                 xpath=//*[@id="navbar"]/div/div/ul/button
+    Wait Until Page Contains      Suggestion
+    Title Should Be               Tinner | Home
+    Close Browser
+
+[4] Edit profile
+    Start Browser
+    Title Should Be               Tinner
+    Input Text                    username    haha
+    Input Password                password    hahahaha
+    Click element                 xpath=//*[@id="navbar"]/div/div/ul/button
+    Wait Until Page Contains      Suggestion
+    Title Should Be               Tinner | Home
+    Click element                 xpath=//*[@id="navbar"]/div/div/ul[2]/li/a/i[2]
+    Click element                 xpath=//*[@id="menu"]/li[1]
+    Input Text                    xpath=//*[@id="first_name"]  plabu
+    Input Text                    xpath=//*[@id="last_name"]  shark
+    Input Text                    xpath=//*[@id="description"]  I'm single
+    Click element                 xpath=//*[@id="edit-profile"]/div[2]/div/div/div/div[8]/div[1]/div[2]
+    Click element                 xpath=//*[@id="edit-profile"]/div[2]/div/div/div/div[12]/div[1]/div[1]
+    Click element                 xpath=//*[@id="edit-profile"]/div[2]/div/div/div/div[15]/div/button
+    Close Browser
+
+[5] Account one(Kanna) enter 'Chat' page
+    Start Browser
+    Title Should Be               Tinner
+    Input Text                    username    Test1
+    Input Password                password    12345678
+    Click element                 xpath=//*[@id="navbar"]/div/div/ul/button
+    Wait Until Page Contains      Suggestion
+    Title Should Be               Tinner | Home
+    Go To                                           http://128.199.133.9/chat
+    Title Should Be                                 Tinner | Chat
+    Wait Until Page Does Not Contain                Loading
+    Page Should Contain                             Hanzo
+
+[6] Account one(Kanna) click on chat with Hanzo
+    Click Element                                   xpath=//*[@id="000017000018"]
+    Sleep                                           1
+    Element Text Should Be                          xpath=//*[@id="title-chatbox"]/p    Hanzo
+
+[7] Account one(Kanna) send message to Hanzo
+    Input Text                                      xpath=//*[@id="textbox-chatbox"]/div/div[1]/input    Hello my name is Kanna
+    Sleep                                           1
+    Click Element                                   xpath=//*[@id="textbox-chatbox"]/div/div[2]/a
+    Sleep                                           1
+    Page Should Contain                             Hello my name is Kanna
+    Click Element                                   xpath=//*[@id="navbar"]/div/div/ul[2]/li/a/i[2]
+    Sleep                                           1
+
+[8] Account one(Kanna) logout
+    Click Element                                   xpath=//*[@id="menu"]/li[3]/a
+    Click Element                                   xpath=//*[@id="navbar"]/div/div/ul[1]/li[3]/a
+    Alert Should Be Present                         You not login
+
+[9] Account two(Hanzo) enter 'Chat' page
+    Input Text                                      username     Test2
+    Input Password                                  password     12345678
+    Click Button                                    xpath=//*[@id="navbar"]/div/div/ul/button
+    Wait Until Page Contains                        Suggestion
+    Go To                                           http://128.199.133.9/chat
+    Title Should Be                                 Tinner | Chat
+    Wait Until Page Does Not Contain                Loading
+    Page Should Contain                             Kanna
+
+[10] Account two(Hanzo) click on chat with Kanna
+    Click Element                                   xpath=//*[@id="000017000018"]
+    Sleep                                           2
+    Element Text Should Be                          xpath=//*[@id="title-chatbox"]/p    Kanna
+    Page Should Contain                             Hello my name is Kanna
+
+[11] Account two(Hanzo) send message to Kanna
+    Input Text                                      xpath=//*[@id="textbox-chatbox"]/div/div[1]/input    Hi my name is Hanzo
+    Sleep                                           1
+    Click Element                                   xpath=//*[@id="textbox-chatbox"]/div/div[2]/a
+    Sleep                                           2
+    Click Element                                   xpath=//*[@id="navbar"]/div/div/ul[2]/li/a/i[2]
+    Sleep                                           1
+    Click Element                                   xpath=//*[@id="menu"]/li[3]/a
+    Click Element                                   xpath=//*[@id="navbar"]/div/div/ul[1]/li[3]/a
+    Alert Should Be Present                         You not login
+    Close Browser
