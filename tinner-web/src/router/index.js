@@ -23,6 +23,14 @@ if (auth.user.authenticated) {
   store.commit('resetProfile')
 }
 
+const title = {
+  "Landing" : "Tinner",
+  "Home" : "Tinner | Home",
+  "EditProfile" : "Tinner | Profile",
+  "Chat" : "Tinner | Chat",
+  "Chatroom" : "Tinner | Chat"
+}
+
 var router = new Router({
   mode:'history',
   routes: [
@@ -79,4 +87,8 @@ router.beforeEach((to, from, next) => {
   }else{
     next();
   }
+})
+
+router.afterEach((toRoute, fromRoute)=> {
+  window.document.title = title[toRoute.name]
 })
